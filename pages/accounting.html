@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Учёт в производстве</title>
+  <meta name="description" content="">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta property="og:image:alt" content="">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../icon.png">
+
+  <link rel="manifest" href="../site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+
+
+  <!-- styles -->
+  <link rel="stylesheet" href="../scss/style.css">
+
+  <!-- libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- scripts -->
+  <script defer src="../js/link-page.js"></script>
+  <script defer src="../js/store.js"></script>
+  <script defer src="../js/open-modal.js"></script>
+  <script defer src="../js/validation.js"></script>
+</head>
+
+<body>
+<header class="header">
+  <h1 class="header__title">Учёт в производстве</h1>
+</header>
+<main class="main">
+  <ul class="main__list">
+    <li class="main__list-item accounting-item">
+      <a href="#">
+        <span>Акты инвентаризации</span>
+      </a>
+    </li>
+    <li class="main__list-item accounting-item">
+      <a href="#">
+        <span>Внутризаводские накладные (Приход)</span>
+      </a>
+    </li>
+    <li class="main__list-item accounting-item">
+      <a href="#" id="consumption-btn">
+        <span>Внутризаводские накладные (Расход)</span>
+      </a>
+    </li>
+    <li class="main__list-item accounting-item">
+      <a href="#">
+        <span>Лимитные карты (Приход)</span>
+      </a>
+    </li>
+    <li class="main__list-item accounting-item">
+      <a href="#">
+        <span>Цеховая номенклатура</span>
+      </a>
+    </li>
+  </ul>
+</main>
+<footer class="footer">
+  <div class="footer__item">
+    <a href="#" id="link-menu">
+      <img src="../img/footer/menu.svg" alt="task">
+      <span>Меню</span>
+    </a>
+  </div>
+  <div class="footer__item">
+    <a href="#" id="link-scanner">
+      <img src="../img/footer/scanner.svg" alt="scanner">
+      <span>Сканер</span>
+    </a>
+  </div>
+  <div class="footer__item">
+    <a href="#" id="link-back">
+      <img src="../img/footer/arrow_back.svg" alt="back">
+      <span>Назад</span>
+    </a>
+  </div>
+</footer>
+
+<!-- modal consumption  -->
+
+<div class="modal" id="consumption">
+  <main class="list-vzn content">
+    <div class="container">
+      <div class="list-vzn__header">
+        <h1 class="list-vzn__title">
+          ВЗН УП (Расход)
+        </h1>
+        <div class="list-vzn__header-btns">
+          <button type="button" class="list-vzn__header-btn" id="filter-btn">
+            <img src="../img/list/search.svg" alt="search">
+            <span>Поиск</span>
+          </button>
+          <button type="submit" class="list-vzn__header-btn">
+            <img src="../img/list/create.svg" alt="create">
+            <span>Создать</span>
+          </button>
+        </div>
+      </div>
+
+      <ul class="list-vzn__block" id="list">
+        <!-- api -->
+      </ul>
+    </div>
+  </main>
+</div>
+
+<!-- modal filter  -->
+
+<div class="modal" id="filter">
+  <main class="filter">
+    <div class="filter__header" >
+      <img class="filter__header-close" src="../img/filter/close.svg" alt="close" id="close-filter">
+      <h1 class="filter__title">
+        Фильтр ВЗН УП
+      </h1>
+    </div>
+
+    <form class="filter__form" action="" id="form">
+      <div class="input-box">
+        <input class="filter__form-field field" type="text" name="vzn-number" id="vzn-number" placeholder="ВЗН №7063041">
+        <label for="vzn-number">Номер ВЗН</label>
+      </div>
+      <div class="input-box">
+        <input class="filter__form-field field" type="text" name="sender" id="sender" placeholder="Цех 01">
+        <label for="sender">Отправитель</label>
+      </div>
+      <div class="input-box">
+        <input class="filter__form-field field" type="text" name="recipient" id="recipient" placeholder="Цех 02">
+        <label for="recipient">Получатель</label>
+      </div>
+      <div class="input-box">
+        <input class="filter__form-field" type="text" name="period" id="period" placeholder="01.01.2020 - 01.01.2024"/>
+        <label for="period">Дата принятия (период)</label>
+      </div>
+      <div class="filter__form-btns">
+        <button type="submit" class="filter__form-search">Поиск</button>
+        <button class="filter__form-cancel" id="cancel-filter">Отмена</button>
+      </div>
+    </form>
+  </main>
+</div>
+
+</body>
+
+</html>
