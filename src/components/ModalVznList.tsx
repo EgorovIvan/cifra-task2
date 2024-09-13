@@ -17,9 +17,10 @@ const ModalVznList: React.FC<{ handleOpenModalFilter: () => void }> = ({handleOp
   const [vznList, setVznList] = useState<List[]>([])
 
   useEffect(() => {
-    const apiUrl = '../../public/api/list.json';
+    const apiUrl = 'api/list.json';
     axios.get(apiUrl).then((response) => {
       setVznList(response.data.list)
+      console.log(response.data.list)
     });
 
   }, []);
