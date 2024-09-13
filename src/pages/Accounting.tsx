@@ -15,9 +15,9 @@ const Accounting: React.FC = () => {
   }
 
   // Закрытие модального окна ВЗН (Расход)
-  const handleOCloseModalVznList = (): void => {
-    setModalVznListVisible(false)
-  }
+  // const handleOCloseModalVznList = (): void => {
+  //   setModalVznListVisible(false)
+  // }
 
   // Открытие модального окна Фильтр ВЗН УП
   const handleOpenModalFilter = (): void => {

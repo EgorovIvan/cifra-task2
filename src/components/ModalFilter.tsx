@@ -108,20 +108,20 @@ const ModalVznList: React.FC<Props> = ({handleCloseModalFilter, handleCloseModal
 
       let arrayStartDate = arrayPeriod[0].split(".");
       let arrayEndDate = arrayPeriod[1].split(".");
-      let arrayStartMonth = arrayStartDate[1] - 1;
-      let arrayEndMonth = arrayEndDate[1] - 1;
-      let d1 = new Date(Number(arrayStartDate[2]), arrayStartMonth, arrayStartDate[0]);
-      let d2 = new Date(Number(arrayEndDate[2]), arrayEndMonth, arrayEndDate[0]);
+      let arrayStartMonth = Number(arrayStartDate[1]) - 1;
+      let arrayEndMonth = Number(arrayEndDate[1]) - 1;
+      let d1 = new Date(Number(arrayStartDate[2]), arrayStartMonth, Number(arrayStartDate[0]));
+      let d2 = new Date(Number(arrayEndDate[2]), arrayEndMonth, Number(arrayEndDate[0]));
 
-      if ((d1.getFullYear() == arrayStartDate[2])
+      if ((d1.getFullYear() == Number(arrayStartDate[2]))
         && (d1.getMonth() == arrayStartMonth)
-        && (d1.getDate() == arrayStartDate[0])
+        && (d1.getDate() == Number(arrayStartDate[0]))
         && (arrayStartDate[2].length == 4)
         && (arrayStartDate[1].length == 2)
         && (arrayStartDate[0].length == 2)
-        && (d2.getFullYear() == arrayEndDate[2])
+        && (d2.getFullYear() == Number(arrayEndDate[2]))
         && (d2.getMonth() == arrayEndMonth)
-        && (d2.getDate() == arrayEndDate[0])
+        && (d2.getDate() == Number(arrayEndDate[0]))
         && (arrayEndDate[2].length == 4)
         && (arrayEndDate[1].length == 2)
         && (arrayEndDate[0].length == 2)) {

@@ -7,7 +7,7 @@ interface Props {
   placeholder: string;
   addClass: string;
   inputValue: string;
-  updateValue: (p: (draft) => void) => void;
+  updateValue: (p: (draft: any) => void) => void;
   validateValue: boolean;
   isNull: boolean;
   textError: string;

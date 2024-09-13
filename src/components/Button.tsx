@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  type: "submit" | "button" | "reset" | "undefined";
+  type: "submit" | "reset" | "button" | undefined;
   classBtn: string;
   text: string;
   onClickBtn: () => void;

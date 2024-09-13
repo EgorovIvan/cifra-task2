@@ -3,9 +3,11 @@ import VznItem from "./VznItem.tsx";
 import axios from "axios";
 import * as React from "react";
 
+
+
 interface List {
   id: number;
-  number: string;
+  vzn_number: string;
   sender: string;
   recipient: string;
   date_issue: string;
