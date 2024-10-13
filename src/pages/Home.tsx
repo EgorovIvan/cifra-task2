@@ -7,7 +7,12 @@ function Home() {
 
   return (
     <>
-      <Header/>
+      <Header
+        headline="Меню"
+        showCloseButton={false}
+        hasBorder={true}
+        isBlueBackground={true}
+      />
       <main className="main">
         <ul className="main__list">
           <li className="main__list-item">

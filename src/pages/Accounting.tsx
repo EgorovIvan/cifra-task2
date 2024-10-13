@@ -37,7 +37,12 @@ const Accounting: React.FC = () => {
 
   return (
     <>
-      <Header/>
+      <Header
+        headline="Учёт в производстве"
+        showCloseButton={false}
+        hasBorder={true}
+        isBlueBackground={true}
+      />
       <main className="main">
         <ul className="main__list">
           <li className="main__list-item accounting-item">

@@ -36,4 +36,4 @@ const Input: React.FC<Props> = (Props) => {
   )
 }
 
-export default Input
+export default Input;

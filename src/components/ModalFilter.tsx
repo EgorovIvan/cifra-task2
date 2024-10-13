@@ -3,6 +3,8 @@ import Button from "./Button.tsx";
 import {useEffect} from "react";
 import {useImmer} from "use-immer";
 import * as React from "react";
+import Header from "./Header.tsx";
+import SelectInput from "./SelectInput.tsx";
 
 interface Props {
   handleCloseModalFilter: () => void;
@@ -171,7 +173,7 @@ const ModalVznList: React.FC<Props> = ({handleCloseModalFilter, handleCloseModal
     }
 
     /* Валидация поля Отправитель */
-    if (inputSender.value.length >= 5) {
+    if (inputSender.value.length >= 50) {
       updateInputSender((draft) => {
         draft.errorField = true
         draft.isNull = false
@@ -186,7 +188,7 @@ const ModalVznList: React.FC<Props> = ({handleCloseModalFilter, handleCloseModal
     }
 
     /* Валидация поля Получатель */
-    if (inputRecipient.value.length >= 5) {
+    if (inputRecipient.value.length >= 50) {
       updateInputRecipient((draft) => {
         draft.errorField = true
         draft.isNull = false
@@ -202,18 +204,16 @@ const ModalVznList: React.FC<Props> = ({handleCloseModalFilter, handleCloseModal
 
   }, [inputVznNumber.value, inputSender.value, inputRecipient.value]);
 
-
   return (
-    <>
+    <>     
       <div className="modal" id="filter">
         <main className="filter">
-          <div className="filter__header">
-            <img className="filter__header-close" src="./img/filter/close.svg" alt="close" id="close-filter"
-                 onClick={handleCloseModalFilter}/>
-            <h1 className="filter__title">
-              Фильтр ВЗН УП
-            </h1>
-          </div>
+          <Header
+            headline="Фильтр ВЗН УП"
+            showCloseButton={true}
+            hasBorder={true}
+            onCloseButtonClick={handleCloseModalFilter}
+          />
 
           <form className="filter__form" action="" id="form">
 
@@ -230,7 +230,7 @@ const ModalVznList: React.FC<Props> = ({handleCloseModalFilter, handleCloseModal
               textError="целое положительное число до 20 знаков"
             />
 
-            <Input
+            <SelectInput
               type="text"
               name="sender"
               title="Отправитель"
@@ -243,7 +243,7 @@ const ModalVznList: React.FC<Props> = ({handleCloseModalFilter, handleCloseModal
               textError="строка до 50 символов"
             />
 
-            <Input
+            <SelectInput
               type="text"
               name="recipient"
               title="Получатель"

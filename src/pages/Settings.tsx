@@ -5,7 +5,12 @@ const Settings: React.FC = () => {
 
   return (
     <>
-      <Header/>
+      <Header
+        headline="Настройки"
+        showCloseButton={true}
+        hasBorder={true}
+        isBlueBackground={true}
+      />
       <main className="main">
         <ul className="main__list">
           <li className="main__list-item">

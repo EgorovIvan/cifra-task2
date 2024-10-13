@@ -7,7 +7,12 @@ const Tasks: React.FC = () => {
 
   return (
     <>
-      <Header/>
+      <Header
+        headline="Задачи"
+        showCloseButton={false}
+        hasBorder={true}
+        isBlueBackground={true}
+      />
       <main className="main">
         <ul className="main__list">
           <li className="main__list-item">
