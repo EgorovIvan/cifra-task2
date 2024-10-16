@@ -1,6 +1,8 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import Header from "../components/Header.tsx";
 import Footer from "../components/Footer.tsx";
+import Icon from "../components/Icon/Icon.tsx";
 
 function Home() {
 
@@ -17,19 +19,19 @@ function Home() {
         <ul className="main__list">
           <li className="main__list-item">
             <Link to="/tasks">
-              <img src="./img/menu/tasks.svg" alt="tasks"/>
+                <Icon src="../../public/img/menu/tasks.svg" />
                 <span>Задачи</span>
             </Link>
           </li>
           <li className="main__list-item">
             <Link to="/settings">
-              <img src="./img/menu/sett.svg" alt="settings"/>
+                <Icon src="../../public/img/menu/sett.svg" />
                 <span>Настройки</span>
             </Link>
           </li>
           <li className="main__list-item">
             <Link to="/">
-              <img src="./img/menu/system.svg" alt="info system"/>
+                <Icon src="../../public/img/menu/system.svg" />
                 <span>О системе</span>
             </Link>
           </li>

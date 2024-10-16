@@ -1,28 +1,26 @@
 import {useState} from 'react'
+import { useModalStore } from '../stores/modalStore.ts';
+
 import Header from "../components/Header.tsx";
 import Footer from "../components/Footer.tsx";
 import ModalVznList from "../components/ModalVznList.tsx";
 import ModalFilter from "../components/ModalFilter.tsx";
+import Modal from '../components/Modal/Modal.tsx';
 
 const Accounting: React.FC = () => {
 
-  const [modalVznListVisible, setModalVznListVisible] = useState<boolean>(false);
+  const { isModalOpen, openModal, closeModal } = useModalStore();
   const [modalFilterVisible, setModalFilterVisible] = useState<boolean>(false);
 
   // Открытие модального окна ВЗН (Расход)
   const handleOpenModalVznList = (): void => {
-    setModalVznListVisible(true)
-  }
-
-  // Закрытие модального окна ВЗН (Расход)
-  // const handleOCloseModalVznList = (): void => {
-  //   setModalVznListVisible(false)
-  // }
+    openModal();
+  };
 
   // Открытие модального окна Фильтр ВЗН УП
-  const handleOpenModalFilter = (): void => {
-    setModalFilterVisible(true)
-  }
+  // const handleOpenModalFilter = (): void => {
+  //   setModalFilterVisible(true)
+  // }
 
   // Закрытие модального окна Фильтр ВЗН УП
   const handleCloseModalFilter = (): void => {
@@ -31,7 +29,6 @@ const Accounting: React.FC = () => {
 
   // Закрытие всех модальных окон
   const handleCloseModals = (): void => {
-    setModalVznListVisible(false)
     setModalFilterVisible(false)
   }
 
@@ -76,8 +73,9 @@ const Accounting: React.FC = () => {
 
       {/*modal consumption */}
 
-      {modalVznListVisible ? <ModalVznList handleOpenModalFilter={handleOpenModalFilter}/> : ''}
-
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalVznList />
+      </Modal>
       {/*modal filter*/}
 
       {modalFilterVisible ? <ModalFilter

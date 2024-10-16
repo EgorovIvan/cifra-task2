@@ -5,9 +5,9 @@ const App: React.FC = () => {
 
 
   return (
-    <>
+    <div className="wrapper">
       <Home/>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,20 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  &__content {
+    flex-grow: 1;
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4px 8px;
+  }
+}

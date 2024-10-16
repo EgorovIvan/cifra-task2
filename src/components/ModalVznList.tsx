@@ -3,6 +3,7 @@ import VznItem from "./VznItem.tsx";
 import axios from "axios";
 import * as React from "react";
 import Header from './Header.tsx';
+import { useModalStore } from "../stores/modalStore";
 
 interface List {
   id: number;
@@ -12,8 +13,9 @@ interface List {
   date_issue: string;
 }
 
-const ModalVznList: React.FC<{ handleOpenModalFilter: () => void }> = ({handleOpenModalFilter}) => {
+const ModalVznList: React.FC = () => {
   const [vznList, setVznList] = useState<List[]>([])
+  const { openModal } = useModalStore();
 
   useEffect(() => {
     const apiUrl = 'api/list.json';
@@ -23,7 +25,7 @@ const ModalVznList: React.FC<{ handleOpenModalFilter: () => void }> = ({handleOp
     });
   }, []);
 
-  const filterButton = <button type="button" className="header header-btn" id="filter-btn" onClick={handleOpenModalFilter}>
+  const filterButton = <button type="button" className="header header-btn" id="filter-btn" onClick={openModal}>
       <img src="./img/list/search.svg" alt="search"/>
       <span>Поиск</span>
     </button>;
@@ -35,7 +37,6 @@ const ModalVznList: React.FC<{ handleOpenModalFilter: () => void }> = ({handleOp
   
   return (
     <>
-      <div className="modal" id="consumption">
         <Header
           headline="ВЗН УП (Расход)"
           showCloseButton={false}
@@ -44,17 +45,12 @@ const ModalVznList: React.FC<{ handleOpenModalFilter: () => void }> = ({handleOp
           centralButton={filterButton}
           rightButton = {createButton}     
         />  
-        <main className="list-vzn content">
-          <div className="container">
-            <ul className="list-vzn__block" id="list">
-              {/*api*/}
-              {vznList.map((item) => (
-                <VznItem key={item?.id} item={item}/>
-              ))}
-            </ul>
-          </div>
-        </main>
-      </div>
+        <ul className="list-vzn__block" id="list">
+          {/*api*/}
+          {vznList.map((item) => (
+            <VznItem key={item?.id} item={item}/>
+          ))}
+        </ul>
     </>
   )
 }
