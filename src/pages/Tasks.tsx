@@ -1,21 +1,19 @@
-import { Link } from "react-router-dom";
-
-import Header from "../components/Header.tsx";
-import Footer from "../components/Footer.tsx";
+import * as React from "react";
 import Icon from "../components/Icon/Icon.tsx";
+import MainLayout from "../layouts/MainLayout.tsx";
+
+import { Link } from "react-router-dom";
 
 const Tasks: React.FC = () => {
 
-
   return (
     <>
-      <Header
-        headline="Задачи"
-        showCloseButton={false}
-        hasBorder={true}
-        isBlueBackground={true}
-      />
-      <main className="main">
+      <MainLayout
+          headline="Задачи"
+          showCloseButton={false}
+          hasBorder={true}
+          isBlueBackground={true}
+      >
         <ul className="main__list">
           <li className="main__list-item">
 
@@ -32,8 +30,7 @@ const Tasks: React.FC = () => {
             </Link>
           </li>
         </ul>
-      </main>
-      <Footer/>
+      </MainLayout>
     </>
   )
 }

@@ -1,0 +1,29 @@
+
+.vzn_item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+  padding: 4px;
+  border-bottom: 0.2px solid $outline-gray-900;
+
+  &:last-child {
+    border: none;
+  }
+
+  p {
+    color: $text-black-200;
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0.25px;
+    text-align: left;
+  }
+
+  p span {
+    font-weight: 500;
+  }
+}
+

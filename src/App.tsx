@@ -1,14 +1,13 @@
-import Home from "./pages/Home.tsx";
-
+import * as React from "react";
+import AppRouter from "./router/AppRouter.tsx";
 
 const App: React.FC = () => {
 
-
-  return (
-    <div className="wrapper">
-      <Home/>
-    </div>
-  )
+    return (
+        <div className='wrapper'>
+            <AppRouter />
+        </div>
+    )
 }
 
 export default App

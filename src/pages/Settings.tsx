@@ -1,18 +1,16 @@
-import Header from "../components/Header.tsx";
-import Footer from "../components/Footer.tsx";
+import * as React from "react";
+import MainLayout from "../layouts/MainLayout.tsx";
 import Icon from "../components/Icon/Icon.tsx";
 
 const Settings: React.FC = () => {
 
   return (
-    <>
-      <Header
-        headline="Настройки"
-        showCloseButton={true}
-        hasBorder={true}
-        isBlueBackground={true}
-      />
-      <main className="main">
+      <MainLayout
+          headline="Настройки"
+          showCloseButton={false}
+          hasBorder={true}
+          isBlueBackground={true}
+      >
         <ul className="main__list">
           <li className="main__list-item">
             <a href="#">
@@ -27,9 +25,7 @@ const Settings: React.FC = () => {
             </a>
           </li>
         </ul>
-      </main>
-      <Footer/>
-    </>
+    </MainLayout>
   )
 }
 

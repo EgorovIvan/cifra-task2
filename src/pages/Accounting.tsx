@@ -1,11 +1,8 @@
+import * as React from "react";
 import {useState} from 'react'
-import { useModalStore } from '../stores/modalStore.ts';
-
-import Header from "../components/Header.tsx";
-import Footer from "../components/Footer.tsx";
-import ModalVznList from "../components/ModalVznList.tsx";
-import ModalFilter from "../components/ModalFilter.tsx";
-import Modal from '../components/Modal/Modal.tsx';
+import ModalVznList from "../components/UI/Modals/ModalVznList.tsx";
+import ModalFilter from "../components/UI/Modals/ModalFilter.tsx";
+import MainLayout from "../layouts/MainLayout.tsx";
 
 const Accounting: React.FC = () => {
 
@@ -34,13 +31,12 @@ const Accounting: React.FC = () => {
 
   return (
     <>
-      <Header
-        headline="Учёт в производстве"
-        showCloseButton={false}
-        hasBorder={true}
-        isBlueBackground={true}
-      />
-      <main className="main">
+      <MainLayout
+          headline="Меню"
+          showCloseButton={false}
+          hasBorder={true}
+          isBlueBackground={true}
+      >
         <ul className="main__list">
           <li className="main__list-item accounting-item">
             <a href="#">
@@ -53,7 +49,7 @@ const Accounting: React.FC = () => {
             </a>
           </li>
           <li className="main__list-item accounting-item">
-            <a href="#" id="consumption-btn" onClick={handleOpenModalVznList}>
+            <a href="#" id="consumption-btn" onClick={handleOpenModalFilter}>
               <span>Внутризаводские накладные (Расход)</span>
             </a>
           </li>
@@ -68,9 +64,8 @@ const Accounting: React.FC = () => {
             </a>
           </li>
         </ul>
-      </main>
-      <Footer/>
 
+      </MainLayout>
       {/*modal consumption */}
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
@@ -79,6 +74,7 @@ const Accounting: React.FC = () => {
       {/*modal filter*/}
 
       {modalFilterVisible ? <ModalFilter
+          handleOpenModalVznList={handleOpenModalVznList}
         handleCloseModalFilter={handleCloseModalFilter}
         handleCloseModals={handleCloseModals}
       /> : ''}
