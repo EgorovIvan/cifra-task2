@@ -1,5 +1,5 @@
 import './pagination.scss';
-import { usePaginationStore } from '../../stores/paginationStore';
+import { usePaginationStore } from '../../../stores/paginationStore';
 import { useState } from 'react';
 
 interface PaginationProps {

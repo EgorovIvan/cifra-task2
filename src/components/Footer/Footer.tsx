@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import './style.scss'
+import Icon from "../Icon/Icon";
 
 const Footer: React.FC = () => {
 
@@ -8,19 +9,19 @@ const Footer: React.FC = () => {
       <footer className="footer">
         <Link to="/">
           <div className="footer__item">
-            <img src="./img/footer/menu.svg" alt="task"/>
+            <Icon src='../../../public/img/footer/menu.svg' />
             <span>Меню</span>
           </div>
         </Link>
         <Link to="/">
           <div className="footer__item">
-            <img src="./img/footer/scanner.svg" alt="scanner"/>
+            <Icon src='../../../public/img/footer/scaner.svg' />
             <span>Сканер</span>
           </div>
         </Link>
         <Link to="/">
           <div className="footer__item">
-            <img src="./img/footer/arrow_back.svg" alt="back"/>
+            <Icon src='../../../public/img/footer/arrow_back.svg' />
             <span>Назад</span>
           </div>
         </Link>

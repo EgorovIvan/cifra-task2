@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout.tsx";
+import Icon from "@/components/Icon/Icon";
 
 const Menu: React.FC = () => {
 
@@ -14,20 +15,20 @@ const Menu: React.FC = () => {
         <ul className="main__list">
           <li className="main__list-item">
             <Link to="/tasks">
-              <img src="./img/menu/tasks.svg" alt="tasks"/>
-                <span>Задачи</span>
+              <Icon src="../../public/img/menu/tasks.svg" />
+              <span>Задачи</span>
             </Link>
           </li>
           <li className="main__list-item">
             <Link to="/settings">
-              <img src="./img/menu/sett.svg" alt="settings"/>
-                <span>Настройки</span>
+              <Icon src="../../public/img/menu/sett.svg" />
+              <span>Настройки</span>
             </Link>
           </li>
           <li className="main__list-item">
             <Link to="/">
-              <img src="./img/menu/system.svg" alt="info system"/>
-                <span>О системе</span>
+              <Icon src="../../public/img/menu/system.svg" />
+              <span>О системе</span>
             </Link>
           </li>
         </ul>

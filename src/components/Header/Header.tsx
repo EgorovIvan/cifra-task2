@@ -1,5 +1,4 @@
 import * as React from 'react';
-import CloseIcon from '/img/filter/close.svg';
 import './style.scss'
 import Icon from '../Icon/Icon';
 

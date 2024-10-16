@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './modal.scss'
-import Footer from '../Footer';
+import Footer from '../../Footer/Footer.tsx';
 
 interface ModalProps {
   isOpen: boolean;

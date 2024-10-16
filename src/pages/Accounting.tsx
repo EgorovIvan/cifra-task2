@@ -3,6 +3,8 @@ import {useState} from 'react'
 import ModalVznList from "../components/UI/Modals/ModalVznList.tsx";
 import ModalFilter from "../components/UI/Modals/ModalFilter.tsx";
 import MainLayout from "../layouts/MainLayout.tsx";
+import Modal from "@/components/UI/Modal/Modal.tsx";
+import { useModalStore } from "@/stores/modalStore.ts";
 
 const Accounting: React.FC = () => {
 
@@ -15,9 +17,9 @@ const Accounting: React.FC = () => {
   };
 
   // Открытие модального окна Фильтр ВЗН УП
-  // const handleOpenModalFilter = (): void => {
-  //   setModalFilterVisible(true)
-  // }
+  const handleOpenModalFilter = (): void => {
+    setModalFilterVisible(true)
+  }
 
   // Закрытие модального окна Фильтр ВЗН УП
   const handleCloseModalFilter = (): void => {
