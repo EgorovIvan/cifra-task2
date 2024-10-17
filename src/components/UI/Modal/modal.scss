@@ -4,14 +4,14 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #FFF;
+  background: $white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
   &__content {
     flex-grow: 1;
-    overflow-y: auto; 
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

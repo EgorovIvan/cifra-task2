@@ -1,5 +1,5 @@
 import * as React from "react";
-import './style.scss'
+import './vzn_list.scss'
 
 interface Props {
   item: {

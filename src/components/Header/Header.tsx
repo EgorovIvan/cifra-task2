@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './style.scss'
+import './header.scss'
 import Icon from '../Icon/Icon';
 
 interface HeaderProps {
@@ -24,18 +24,18 @@ const Header: React.FC<HeaderProps> = ({
   isBlueBackground = false,
 }) => {
   return (
-    <header className={`header-container ${hasBorder ? 'with-border' : ''} ${isBlueBackground ? 'blue-background' : ''}`}>
+    <header className={`header_container ${hasBorder ? 'with_border' : ''} ${isBlueBackground ? 'blue_background' : ''}`}>
       {showCloseButton && (
-          <button className="icon-button" onClick={onCloseButtonClick ?? undefined} >
+          <button className="icon_button" onClick={onCloseButtonClick ?? undefined} >
             <Icon src='../../../public/img/filter/close.svg' />
           </button>
       )}
 
       <div className="content">
         <div className="title">
-          <h1 className="headline-text">{headline}</h1>
+          <h1 className="headline_text">{headline}</h1>
           {supportingText && (
-            <div className="supporting-text">{supportingText}</div>
+            <div className="supporting_text">{supportingText}</div>
           )}
         </div>
 

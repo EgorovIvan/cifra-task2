@@ -1,5 +1,5 @@
 import React from 'react';
-import './Icon.scss';
+import './icon.scss';
 
 interface IconProps {
   src: string;
@@ -9,7 +9,7 @@ interface IconProps {
 }
 
 const Icon: React.FC<IconProps> = ({ src, size = 24, color = 'currentColor', className = '' }) => {
-  
+
   const iconStyle = {
     width: typeof size === 'number' ? `${size}px` : size,
     height: typeof size === 'number' ? `${size}px` : size,

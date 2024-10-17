@@ -1,4 +1,4 @@
-.header-container {
+.header_container {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -11,12 +11,12 @@
   position: relative;
 }
 
-.with-border {
+.with_border {
   border-bottom: 1px solid $outline-gray-900;
 }
 
-.blue-background {
-  background-color: #BAD0E2;
+.blue_background {
+  background-color: $bg-blue-100;
 }
 
 .content {
@@ -32,37 +32,37 @@
   flex-direction: column;
 }
 
-.headline-text {
+.headline_text {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  color: #333333;
+  color: $text-black-300;
 }
 
-.supporting-text {
+.supporting_text {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 10px;
   line-height: 12px;
-  color: #49454F;
+  color: $text-black-200;
 }
 
-.icon-button {
+.icon_button {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
 }
 
-.header-btn {
+.header_btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
   width: 73px;
   height: 21px;
-  color: #FFFFFF;
+  color: $white;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
   font-weight: 500;
@@ -71,12 +71,12 @@
   text-align: left;
   border-radius: 100px;
   border: none;
-  background: #2D609B;
+  background: $primary-400;
   cursor: pointer;
   }
 
-.header-btn:hover,
-.header-btn:focus-visible {
+.header_btn:hover,
+.header_btn:focus-visible {
   filter: brightness(1.25);
   transition: filter .2s;
 }

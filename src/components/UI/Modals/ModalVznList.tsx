@@ -24,12 +24,12 @@ const ModalVznList: React.FC = () => {
     });
   }, []);
 
-  const filterButton = <button type="button" className="header header-btn" id="filter-btn">
+  const filterButton = <button type="button" className="header header_btn" id="filter-btn">
       <img src="./img/list/search.svg" alt="search"/>
       <span>Поиск</span>
     </button>;
 
-  const createButton = <button type="submit" className="header header-btn">
+  const createButton = <button type="submit" className="header header_btn">
       <img src="./img/list/create.svg" alt="create"/>
       <span>Создать</span>
     </button>;

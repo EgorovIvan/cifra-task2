@@ -55,51 +55,51 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
     if(!inputVznNumber.value) {
       updateInputVznNumber((draft) => {
         draft.isNull = true
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
     } else {
       updateInputVznNumber((draft) => {
         draft.isNull = false
-        draft.newClass = draft.newClass.replace(/error-border/g, '')
+        draft.newClass = draft.newClass.replace(/error_border/g, '')
       })
     }
 
     if(!inputSender.value) {
       updateInputSender((draft) => {
         draft.isNull = true
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
 
     } else {
       updateInputSender((draft) => {
         draft.isNull = false
-        draft.newClass = draft.newClass.replace(/error-border/g, '')
+        draft.newClass = draft.newClass.replace(/error_border/g, '')
       })
     }
 
     if(!inputRecipient.value) {
       updateInputRecipient((draft) => {
         draft.isNull = true
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
 
     } else {
       updateInputRecipient((draft) => {
         draft.isNull = false
-        draft.newClass = draft.newClass.replace(/error-border/g, '')
+        draft.newClass = draft.newClass.replace(/error_border/g, '')
       })
     }
 
     if(!inputPeriod.value) {
       updateInputPeriod((draft) => {
         draft.isNull = true
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
 
     } else {
       updateInputPeriod((draft) => {
         draft.isNull = false
-        draft.newClass = draft.newClass.replace(/error-border/g, '')
+        draft.newClass = draft.newClass.replace(/error_border/g, '')
       })
     }
 
@@ -133,13 +133,13 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
         updateInputPeriod((draft) => {
           draft.errorField = false
           draft.isNull = false
-          draft.newClass = draft.newClass.replace(/error-border/g, '')
+          draft.newClass = draft.newClass.replace(/error_border/g, '')
         })
       } else {
         updateInputPeriod((draft) => {
           draft.errorField = true
           draft.isNull = false
-          draft.newClass = draft.newClass.concat(" error-border")
+          draft.newClass = draft.newClass.concat(" error_border")
         })
       }
 
@@ -147,7 +147,7 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
       updateInputPeriod((draft) => {
         draft.errorField = true
         draft.isNull = false
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
     }
   }
@@ -163,13 +163,13 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
       updateInputVznNumber((draft) => {
         draft.errorField = true
         draft.isNull = false
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
     } else {
       updateInputVznNumber((draft) => {
         draft.errorField = false
         draft.isNull = false
-        draft.newClass = draft.newClass.replace(/error-border/g, '')
+        draft.newClass = draft.newClass.replace(/error_border/g, '')
       })
     }
 
@@ -178,13 +178,13 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
       updateInputSender((draft) => {
         draft.errorField = true
         draft.isNull = false
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
     } else {
       updateInputSender((draft) => {
         draft.errorField = false
         draft.isNull = false
-        draft.newClass = draft.newClass.replace(/error-border/g, '')
+        draft.newClass = draft.newClass.replace(/error_border/g, '')
       })
     }
 
@@ -193,13 +193,13 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
       updateInputRecipient((draft) => {
         draft.errorField = true
         draft.isNull = false
-        draft.newClass = draft.newClass.concat(" error-border")
+        draft.newClass = draft.newClass.concat(" error_border")
       })
     } else {
       updateInputRecipient((draft) => {
         draft.errorField = false
         draft.isNull = false
-        draft.newClass = draft.newClass.replace(/error-border/g, '')
+        draft.newClass = draft.newClass.replace(/error_border/g, '')
       })
     }
 
@@ -270,17 +270,17 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
               textError='диапазон дат в формате "dd.mm.yyyy - dd.mm.yyyy"'
             />
 
-            <div className="filter__form-btns">
+            <div className="filter__form_btns">
               <Button
                 type="button"
-                classBtn="filter__form-search"
+                classBtn="filter__form_search"
                 text="Поиск"
                 onClickBtn={handleOpenModalVznList}
               />
 
               <Button
                 type="button"
-                classBtn="filter__form-cancel"
+                classBtn="filter__form_cancel"
                 text="Отмена"
                 onClickBtn={handleCloseModals}
               />

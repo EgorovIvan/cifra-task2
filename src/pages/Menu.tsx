@@ -13,19 +13,19 @@ const Menu: React.FC = () => {
           isBlueBackground={true}
       >
         <ul className="main__list">
-          <li className="main__list-item">
+          <li className="main__list_item">
             <Link to="/tasks">
               <Icon src="../../public/img/menu/tasks.svg" />
               <span>Задачи</span>
             </Link>
           </li>
-          <li className="main__list-item">
+          <li className="main__list_item">
             <Link to="/settings">
               <Icon src="../../public/img/menu/sett.svg" />
               <span>Настройки</span>
             </Link>
           </li>
-          <li className="main__list-item">
+          <li className="main__list_item">
             <Link to="/">
               <Icon src="../../public/img/menu/system.svg" />
               <span>О системе</span>

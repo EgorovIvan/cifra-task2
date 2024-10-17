@@ -40,27 +40,27 @@ const Accounting: React.FC = () => {
           isBlueBackground={true}
       >
         <ul className="main__list">
-          <li className="main__list-item accounting-item">
+          <li className="main__list_item accounting_item">
             <a href="#">
               <span>Акты инвентаризации</span>
             </a>
           </li>
-          <li className="main__list-item accounting-item">
+          <li className="main__list_item accounting_item">
             <a href="#">
               <span>Внутризаводские накладные (Приход)</span>
             </a>
           </li>
-          <li className="main__list-item accounting-item">
+          <li className="main__list_item accounting_item">
             <a href="#" id="consumption-btn" onClick={handleOpenModalFilter}>
               <span>Внутризаводские накладные (Расход)</span>
             </a>
           </li>
-          <li className="main__list-item accounting-item">
+          <li className="main__list_item accounting_item">
             <a href="#">
               <span>Лимитные карты (Приход)</span>
             </a>
           </li>
-          <li className="main__list-item accounting-item">
+          <li className="main__list_item accounting_item">
             <a href="#">
               <span>Цеховая номенклатура</span>
             </a>
