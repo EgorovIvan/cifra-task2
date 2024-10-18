@@ -1,0 +1,84 @@
+.multi_select_container {
+  //position: relative;
+  //width: 100%;
+  //max-width: 300px;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 300px;
+}
+
+.multi_select_input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 8px;
+  cursor: pointer;
+  background-color: #fff;
+  input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+  }
+  .arrow {
+    transition: transform 0.3s;
+  }
+  .arrow.open {
+    transform: rotate(180deg);
+  }
+}
+
+.multi_select_dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 2px 0;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #D3D3D3;
+  border-radius: 4px 0 0 0;
+  background: #F7F2FA;
+  z-index: 10;
+
+  &.up {
+    bottom: 100%;
+    //margin-bottom: 5px;
+  }
+  &.down {
+    top: 100%;
+    //margin-top: 5px;
+  }
+}
+
+.multi_select_options {
+  .multi_select_option {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+    input {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Кастомный scroll
+.multi_select_dropdown::-webkit-scrollbar {
+  width: 5px;
+}
+
+.multi_select_dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.multi_select_dropdown::-webkit-scrollbar-thumb {
+  border-radius: 2.5px;
+  background: #888;
+}
+
+.multi_select_dropdown::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
