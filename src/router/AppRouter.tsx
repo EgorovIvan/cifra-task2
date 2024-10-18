@@ -4,7 +4,7 @@ import Menu from '../pages/Menu.tsx';
 import Tasks from "../pages/Tasks.tsx";
 import Settings from "../pages/Settings.tsx";
 import Accounting from "../pages/Accounting.tsx";
-import Components from "../test/Components.tsx";
+import Test from "../test/Test.tsx";
 
 const AppRouter: React.FC = () => {
 
@@ -15,7 +15,7 @@ const AppRouter: React.FC = () => {
                 <Route path="/tasks" element={<Tasks/>}/>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/accounting" element={<Accounting/>}/>
-                <Route path="/components" element={<Components/>}/>
+                <Route path="/test" element={<Test/>}/>
             </Routes>
         </Router>
     )

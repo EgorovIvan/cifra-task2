@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout.tsx";
 import Icon from "@/components/Icon/Icon";
 import BottomSheet from "@/components/UI/BottomSheet/BottomSheet.tsx";
-import {useBottomSheetStore} from "@/stores/useBottomSheetStore.ts";
 
 const Menu: React.FC = () => {
 
