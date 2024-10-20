@@ -16,16 +16,16 @@ interface MainLayoutProps {
 
 const MainLayout:
     React.FC<MainLayoutProps> = ({
-                                     children,
-                                     headline,
-                                     supportingText,
-                                     showCloseButton = false,
-                                     onCloseButtonClick,
-                                     centralButton,
-                                     rightButton,
-                                     hasBorder = true,
-                                     isBlueBackground = false,
-                                 }) => {
+        children,
+        headline,
+        supportingText,
+        showCloseButton = false,
+        onCloseButtonClick,
+        centralButton,
+        rightButton,
+        hasBorder = true,
+        isBlueBackground = false,
+    }) => {
 
     return (
         <>

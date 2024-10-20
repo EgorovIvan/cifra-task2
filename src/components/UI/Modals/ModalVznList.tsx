@@ -45,14 +45,12 @@ const ModalVznList: React.FC = () => {
           centralButton={filterButton}
           rightButton = {createButton}
         >
-        {/*<main className="list_vzn content">*/}
-            <ul className="list_vzn" id="list">
-              {/*api*/}
-              {vznList.map((item) => (
-                <VznItem key={item?.id} item={item}/>
-              ))}
-            </ul>
-        {/*</main>*/}
+          <ul className="list_vzn" id="list">
+            {/*api*/}
+            {vznList.map((item) => (
+              <VznItem key={item?.id} item={item}/>
+            ))}
+          </ul>
         </MainLayout>
       </div>
     </>
