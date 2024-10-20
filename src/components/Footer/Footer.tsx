@@ -1,38 +1,39 @@
-import './footer.scss'
+import { Link, useNavigate } from "react-router-dom";
 
+import './footer.scss'
 import Icon from "../Icon/Icon";
-import {Link} from "react-router-dom";
-import {useBottomSheetStore} from "@/stores/useBottomSheetStore.ts";
+import { useBottomSheetStore } from "../../stores/useBottomSheetStore.ts";
 
 const Footer: React.FC = () => {
 
   const {appHeight, setYPosition} = useBottomSheetStore();
+  const navigate = useNavigate();
 
   const handleBottomSheetOpen = () => {
     setYPosition(appHeight / 2)
   }
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <>
       <footer className="footer">
-        <Link to="/">
+        <Link to="/menu">
           <div className="footer__item">
-            <Icon src='../../img/footer/menu.svg' />
+            <Icon src='../../../public/img/footer/menu.svg' />
             <span>Меню</span>
           </div>
         </Link>
-        {/*<Link to="/">*/}
-          <div className="footer__item"  onClick={handleBottomSheetOpen}>
-            <Icon src='../../img/footer/scaner.svg' />
-            <span>Сканер</span>
-          </div>
-        {/*</Link>*/}
-        <Link to="/">
-          <div className="footer__item">
-            <Icon src='../../img/footer/arrow_back.svg' />
-            <span>Назад</span>
-          </div>
-        </Link>
+        <div className="footer__item"  onClick={handleBottomSheetOpen}>
+          <Icon src='../../../public/img/footer/scaner.svg' />
+          <span>Сканер</span>
+        </div>
+        <div className="footer__item" onClick={handleBack}>
+          <Icon src='../../../public/img/footer/arrow_back.svg' />
+          <span>Назад</span>
+        </div>
       </footer>
     </>
   )

@@ -1,11 +1,11 @@
-import Input from "../Inputs/Input.tsx";
-import Button from "../Buttons/Button.tsx";
+import Input from "../UI/Inputs/Input.tsx";
+import Button from "../UI/Buttons/Button.tsx";
 import {useEffect} from "react";
 import {useImmer} from "use-immer";
 import * as React from "react";
-import SelectInput from "../Inputs/SelectInput.tsx";
+import SelectInput from "../UI/Inputs/SelectInput.tsx";
 import './filter.scss'
-import MainLayout from "@/layouts/MainLayout.tsx";
+import MainLayout from "../../layouts/MainLayout.tsx";
 
 interface Props {
   handleOpenModalVznList: () => void;
