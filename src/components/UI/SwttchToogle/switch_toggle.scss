@@ -1,0 +1,38 @@
+.tips-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 28px;
+  height: 14px;
+}
+
+.switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px;
+  width: 28px;
+  height: 14px;
+  background: #4680B0;
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+}
+
+.ellipse {
+  width: 10px;
+  height: 10px;
+  background: #F2F2F2;
+  border-radius: 50%;
+  position: relative;
+  left: 0;
+  
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.switch.checked .ellipse {
+  transform: translateX(14px);
+}
