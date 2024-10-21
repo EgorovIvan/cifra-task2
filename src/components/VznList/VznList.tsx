@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import './vzn_list.scss';
 import VznItem from './VznItem/VznItem.tsx';
 import MainLayout from '../../layouts/MainLayout.tsx';
-import { useVznStore } from '../../stores/vznStore';
-import { useAuthStore } from '../../stores/authStore';
+import { useVznStore } from '../../stores/useVznStore.ts';
+import { useAuthStore } from '../../stores/useAuthStore.ts';
 
 const VznList: React.FC = () => {
   const { vznList, loading, error, fetchVznList } = useVznStore();
@@ -31,7 +31,7 @@ const VznList: React.FC = () => {
       >
         {loading ? <p>Загрузка...</p> : null}
         {error ? <p>{error}</p> : null}
-        
+
         {!loading && !error && (
           <ul className="list_vzn" id="list">
             {vznList.map((item) => (

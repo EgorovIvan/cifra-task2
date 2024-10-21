@@ -152,6 +152,18 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
     }
   }
 
+  const handleInputVznNumber = (vznNumber: string): void => {
+    updateInputVznNumber((draft) => {
+      draft.value = vznNumber
+    })
+  }
+
+  const handleInputPeriod = (period: string): void => {
+    updateInputPeriod((draft) => {
+      draft.value = period
+    })
+  }
+
   useEffect(() => {
 
     /* Валидация поля Номер ВЗН */
@@ -208,7 +220,6 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
   return (
     <>
       <div className="modal" id="filter">
-        {/*<div className="filter">*/}
           <MainLayout
             headline="Фильтр ВЗН УП"
             showCloseButton={true}
@@ -223,9 +234,8 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
               name="vzn-number"
               title="Номер ВЗН"
               placeholder="ВЗН №7063041"
-              addClass={inputVznNumber.newClass}
               inputValue ={inputVznNumber.value}
-              updateValue={updateInputVznNumber}
+              updateValue={handleInputVznNumber}
               validateValue={inputVznNumber.errorField}
               isNull={inputVznNumber.isNull}
               textError="целое положительное число до 20 знаков"
@@ -262,9 +272,8 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
               name="period"
               title="Дата принятия (период)"
               placeholder="01.01.2020 - 01.01.2024"
-              addClass={inputPeriod.newClass}
               inputValue ={inputPeriod.value}
-              updateValue={updateInputPeriod}
+              updateValue={handleInputPeriod}
               validateValue={inputPeriod.errorField}
               isNull={inputPeriod.isNull}
               textError='диапазон дат в формате "dd.mm.yyyy - dd.mm.yyyy"'
@@ -273,14 +282,14 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
             <div className="filter__form_btns">
               <Button
                 type="button"
-                classBtn="filter__form_search"
+                classBtn=""
                 text="Поиск"
                 onClickBtn={handleOpenModalVznList}
               />
 
               <Button
                 type="button"
-                classBtn="filter__form_cancel"
+                classBtn="close_btn"
                 text="Отмена"
                 onClickBtn={handleCloseModals}
               />
@@ -288,7 +297,6 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
             </div>
           </form>
           </MainLayout>
-        {/*</div>*/}
       </div>
     </>
   )

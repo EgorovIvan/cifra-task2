@@ -6,9 +6,8 @@ interface Props {
   name: string;
   title: string;
   placeholder: string;
-  addClass: string;
   inputValue: string;
-  updateValue: (p: (draft: any) => void) => void;
+  updateValue: (value: string) => void;
   validateValue: boolean;
   isNull: boolean;
   textError: string;
@@ -18,15 +17,13 @@ const Input: React.FC<Props> = (Props) => {
   return (
     <div className="input_box">
       <input
-        className={'input_field ' + Props.addClass}
+        className={'input_field ' + ((Props.isNull || Props.validateValue) ? 'error_border' : '')}
         type={Props.type}
         name={Props.name}
         id={Props.name}
         placeholder={Props.placeholder}
         value={Props.inputValue}
-        onChange={e => Props.updateValue((draft) => {
-          draft.value = e.target.value
-        })}
+        onChange={(e) => Props.updateValue(e.target.value)}
       />
       <label htmlFor={Props.name}>{Props.title}</label>
 

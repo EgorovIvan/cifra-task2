@@ -5,7 +5,7 @@ import Tasks from "../pages/Tasks.tsx";
 import Settings from "../pages/Settings.tsx";
 import Accounting from "../pages/Accounting.tsx";
 import Test from "../test/Test.tsx";
-import Login from '../pages/Login';
+import Auth from '../pages/Auth/Auth.tsx';
 import ProtectedRoute from './ProtectedRoute';
 
 const AppRouter: React.FC = () => {
@@ -14,7 +14,7 @@ const AppRouter: React.FC = () => {
     <Router>
       <Routes>
         {/* Страница авторизации */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Auth />} />
 
         {/* Защищенные маршруты */}
         <Route

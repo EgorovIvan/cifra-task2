@@ -1,5 +1,5 @@
 import './pagination.scss';
-import { usePaginationStore } from '../../../stores/paginationStore';
+import { usePaginationStore } from '../../../stores/usePaginationStore.ts';
 import { useState } from 'react';
 
 interface PaginationProps {
@@ -43,7 +43,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems }) => {
         className='pagination__button__left'
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
-      > 
+      >
         ➪
       </button>
       <input

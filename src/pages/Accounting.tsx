@@ -1,7 +1,7 @@
 import * as React from "react";
 import MainLayout from "../layouts/MainLayout.tsx";
 import Modal from "../components/UI/Modal/Modal.tsx";
-import { useModalStore } from "../stores/modalStore.ts";
+import { useModalStore } from "../stores/useModalStore.ts";
 import VznList from "../components/VznList/VznList.tsx";
 
 const Accounting: React.FC = () => {

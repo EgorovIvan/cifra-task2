@@ -1,0 +1,31 @@
+.btn {
+  width: 90px;
+  height: 40px;
+  color: $white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  text-align: center;
+  border: none;
+  border-radius: 6.25rem;
+  background: $primary-400;
+  transition: background .2s ease, transform .2s ease;
+
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.25);
+    transition: filter .2s;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.close_btn {
+  color: $primary-400;
+  border: 1px solid $outline-gray-900;
+  background: $bg-gray-100;
+}
