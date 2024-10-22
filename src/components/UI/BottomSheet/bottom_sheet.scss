@@ -16,11 +16,25 @@
   background: $bg-gray-200;
   box-sizing: border-box;
 
-  &__plate {
+  &__wrapper {
+    width: 100%;
+    height: max-content;
+  }
+
+  &__wrapper-plate {
     position: absolute;
     top: 2px;
     left: 50%;
-    transform: translate(0, 50%);
+    transform: translate(-50%, 0);
+    width: 70%;
+    height: 16px;
+  }
+
+  &__plate {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 
   &__header {

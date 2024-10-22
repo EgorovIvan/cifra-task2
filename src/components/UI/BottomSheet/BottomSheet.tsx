@@ -2,12 +2,15 @@ import * as React from 'react';
 import './bottom_sheet.scss'
 import {useEffect, useRef, useState} from "react";
 import {useBottomSheetStore} from "@/stores/useBottomSheetStore.ts";
+import SwitchToggle from "@/components/UI/SwitchToogle/SwitchToggle.tsx";
 
 const BottomSheet: React.FC = () => {
 
-    const {yPosition, appHeight, isTouchUp, setYPosition, setAppHeight, setIsTouchUp} = useBottomSheetStore();
+    const {yPosition, appHeight, wrapperHeight, isTouchUp,
+        setYPosition, setAppHeight, setWrapperHeight, setIsTouchUp} = useBottomSheetStore();
     const [isDragging, setIsDragging] = useState(false);
     const plateRef = useRef<HTMLDivElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
     const handleResize = () => {
         setAppHeight(window.innerHeight);
@@ -27,7 +30,7 @@ const BottomSheet: React.FC = () => {
 
         const newYPosition = e.touches[0]?.clientY;
 
-        if(newYPosition > 0) {
+        if (newYPosition > 0) {
             setYPosition(newYPosition - 15);
         }
 
@@ -43,12 +46,14 @@ const BottomSheet: React.FC = () => {
         } else if (fixedPosition > appHeight * 0.75) {
             setYPosition(appHeight + 10);
         } else {
-            setYPosition(appHeight / 2);
+            setYPosition(wrapperHeight);
         }
         setIsDragging(false);
     };
 
     useEffect(() => {
+        setWrapperHeight(appHeight - wrapperRef.current.clientHeight - 24)
+
         window.addEventListener('resize', handleResize);
         handleResize()
         setYPosition(appHeight);
@@ -75,32 +80,35 @@ const BottomSheet: React.FC = () => {
 
     return (
         <div
-            className={`bottom_sheet ${ isTouchUp ? "bottom_sheet_animation": ''}`}
+            className={`bottom_sheet ${isTouchUp ? "bottom_sheet_animation" : ''}`}
             style={{transform: `translateY(${yPosition}px)`, height: `${appHeight}px`}}
         >
-            <div
-                ref={plateRef}
-
-            >
-                <img
-                    className={'bottom_sheet__plate'}
-                    src={'img/bottomSheet/bottom-sheet.svg'}
+            <div ref={wrapperRef} className="bottom_sheet__wrapper">
+                <div
+                    ref={plateRef}
                     onTouchStart={handleTouchStart}
-                />
-            </div>
+                    className={'bottom_sheet__wrapper-plate'}
+                >
+                    <img
+                        className={'bottom_sheet__plate'}
+                        src={'img/bottomSheet/bottom-sheet.svg'}
 
-            <div className="bottom_sheet__header">
-                <div className="bottom_sheet__title">
-                    <h3>Информация о БО</h3>
-                    <p>Отображать доп. информацию о БО</p>
+                    />
                 </div>
-                <input type="checkbox"/>
+
+                <div className="bottom_sheet__header">
+                    <div className="bottom_sheet__title">
+                        <h3>Информация о БО</h3>
+                        <p>Отображать доп. информацию о БО</p>
+                    </div>
+                    <SwitchToggle/>
+                </div>
+                <ul className="bottom_sheet__list">
+                    <li>Перевод с Утв на Принят</li>
+                    <li>Перевод с Утв на НеУтв</li>
+                    <li>Перевод с Утв на 1С</li>
+                </ul>
             </div>
-            <ul className="bottom_sheet__list">
-                <li>Перевод с Утв на Принят</li>
-                <li>Перевод с Утв на НеУтв</li>
-                <li>Перевод с Утв на 1С</li>
-            </ul>
         </div>
     );
 };
