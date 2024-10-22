@@ -2,12 +2,12 @@ import * as React from "react";
 import MainLayout from "../layouts/MainLayout.tsx";
 import Modal from "../components/UI/Modal/Modal.tsx";
 import { useModalStore } from "../stores/useModalStore.ts";
-import VznList from "../components/VznList/VznList.tsx";
 import Filter from "@/components/Filter/Filter.tsx";
+import VznList from "@/components/VznList/VznList.tsx";
 
 const Accounting: React.FC = () => {
 
-  const { isModalOpen, openModal, closeModal } = useModalStore();
+  const { isModalOpen, isResultsModalOpen, openModal, closeModal, closeResultsModal } = useModalStore();
 
   // Открытие модального окна ВЗН (Расход)
   const handleOpenFilterModal = (): void => {
@@ -77,6 +77,11 @@ const Accounting: React.FC = () => {
 
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           <Filter />
+        </Modal>
+
+        {/* Модальное окно с результатами ВЗН УП */}
+        <Modal isOpen={isResultsModalOpen} onClose={closeResultsModal}>
+          <VznList />
         </Modal>
 
         {/* {modalFilterVisible ? <Filter*/}

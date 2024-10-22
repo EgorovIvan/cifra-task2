@@ -3,23 +3,21 @@ import { useEffect } from 'react';
 import './vzn_list.scss';
 import VznItem from './VznItem/VznItem.tsx';
 import MainLayout from '../../layouts/MainLayout.tsx';
-import { useVznStore } from '../../stores/useVznStore.ts';
+import { useVznListStore } from '../../stores/useVznListStore.ts';
 import { useAuthStore } from '../../stores/useAuthStore.ts';
+import { useDivisionsStore } from '@/stores/useDivisionsStore.ts';
 
 const VznList: React.FC = () => {
-  const { vznList, loading, error, fetchVznList } = useVznStore();
+  const { vznList, loading, error } = useVznListStore();
+  const { divisions, fetchDivisions } = useDivisionsStore();
   const authToken = useAuthStore((state) => state.authToken);
 
   useEffect(() => {
     if (authToken) {
-      const filters = {
-        Codes: [123, 456],        // Коды
-        Num: "123%",              // Маска номера
-        GatheringContCode: 1,     // Код состава КВ
-      };
-      fetchVznList(authToken, filters);
+      fetchDivisions(authToken);
     }
-  }, [authToken, fetchVznList]);
+  }, [authToken,fetchDivisions]);
+
 
   return (
     <div className="modal" id="consumption">
@@ -28,6 +26,8 @@ const VznList: React.FC = () => {
         showCloseButton={false}
         hasBorder={false}
         isBlueBackground={false}
+        centralButton
+        rightButton
       >
         {loading ? <p>Загрузка...</p> : null}
         {error ? <p>{error}</p> : null}
@@ -35,9 +35,7 @@ const VznList: React.FC = () => {
         {!loading && !error && (
           <ul className="list_vzn" id="list">
             {vznList.map((item) => (
-              <li key={item.id}>
-                <VznItem item={item} />
-              </li>
+              <VznItem key={item.Code} item={item} divisions={divisions}/>
             ))}
           </ul>
         )}

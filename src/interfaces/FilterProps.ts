@@ -1,4 +1,4 @@
-export interface Filter {
+export interface FilterProps {
     // Codes?: number[]; // Коды
     Num?: string; // Маска номера
     // Sender?: string;

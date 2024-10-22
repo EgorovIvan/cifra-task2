@@ -1,14 +1,22 @@
 import * as React from "react";
 import './vzn_list.scss';
-import { VznItemProps } from "../../../types/types";
+import { VznItemProps } from "../../../interfaces/VizItemProps";
+import { formatDate } from "@/utils/formatDate";
+import { DivisionsProps } from "@/interfaces/DivisionsProps";
 
-const VznItem: React.FC<{ item: VznItemProps }> = ({ item }) => {
+const VznItem: React.FC<{ item: VznItemProps, divisions: DivisionsProps[] }> = ({ item, divisions }) => {
+
+  const findDivisionName = (code: number): string => {
+    const division = divisions.find((div) => div.Code === code);
+    return division ? division.Name : "Неизвестно";
+  };
+
   return (
     <li className="vzn_item">
-      <h2>{item.vzn_number}</h2>
-      <p><span>Отправитель:</span> {item.sender}</p>
-      <p><span>Получатель:</span> {item.recipient}</p>
-      <p><span>Дата выдачи:</span> {item.date_issue}</p>
+      <h2>ВЗН №{item.Num}</h2>
+      <p><span>Отправитель:</span> {findDivisionName(Number(item.Sender))}</p>
+      <p><span>Получатель:</span> {findDivisionName(Number(item.Receiver))}</p>
+      <p><span>Дата выдачи:</span> {formatDate(item.DocDate)}</p>
     </li>
   );
 };

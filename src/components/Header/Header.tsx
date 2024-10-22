@@ -2,6 +2,8 @@ import * as React from 'react';
 import './header.scss'
 import Icon from '../Icon/Icon';
 import {useBottomSheetStore} from "@/stores/useBottomSheetStore.ts";
+import Button from '../UI/Buttons/Button';
+import { useModalStore } from '@/stores/useModalStore';
 
 interface HeaderProps {
   headline: string;
@@ -27,10 +29,20 @@ const Header: React.FC<HeaderProps> = ({
 
 
   const {wrapperHeight, yPosition, setYPosition} = useBottomSheetStore();
+  const { openModal } = useModalStore();
+
 
   const handleBottomSheetOpen = () => {
     setYPosition(wrapperHeight)
   }
+
+  const handleOpenFilterModal = (): void => {
+    openModal();
+  };
+
+  const handleOpenCreateVznModal = (): void => {
+    openModal();
+  };
 
   return (
     <header className={`header_container ${hasBorder ? 'with_border' : ''} ${isBlueBackground ? 'blue_background' : ''}`}>
@@ -48,10 +60,10 @@ const Header: React.FC<HeaderProps> = ({
           )}
         </div>
 
-        {centralButton && <div>{centralButton}</div>}
+        {centralButton && <Button type='button' text='Поиск' classBtn='header__button_search' onClickBtn={handleOpenFilterModal} />}
       </div>
 
-      {rightButton && <div>{rightButton}</div>}
+      {rightButton && <Button type='button' text='Создать' classBtn='header__button_create' onClickBtn={handleOpenCreateVznModal} />}
     </header>
   );
 };

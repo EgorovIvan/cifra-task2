@@ -2,24 +2,24 @@ import axios from 'axios';
 import { create } from 'zustand';
 import { produce } from 'immer';
 
-import { VznItemProps } from '../types/types';
-import {Filter} from '@/interfaces/Filter.ts'
+import { VznItemProps } from '../interfaces/VizItemProps';
+import {FilterProps} from '@/interfaces/FilterProps'
 
-interface VznState {
+interface VznListState {
   vznList: VznItemProps[];
   loading: boolean;
   error: string | null;
-  fetchVznList: (token: string | null, filters: Filter) => Promise<void>;
+  fetchVznList: (token: string | null, filters: FilterProps) => Promise<void>;
 }
 
-export const useVznStore = create<VznState>((set) => ({
+export const useVznListStore = create<VznListState>((set) => ({
   vznList: [],
   loading: false,
   error: null,
 
-  fetchVznList: async (token: string, filters: Filter) => {
+  fetchVznList: async (token: string | null, filters: FilterProps) => {
     set(
-        produce((state: VznState) => {
+        produce((state: VznListState) => {
           state.loading = true;
           state.error = null;
         })
@@ -33,23 +33,22 @@ export const useVznStore = create<VznState>((set) => ({
           },
       );
 
-      console.log(response)
       const data: VznItemProps[] = response.data.wsInplants || [];
 
       set(
-          produce((state: VznState) => {
+          produce((state: VznListState) => {
             state.vznList = data;
           })
       );
     } catch {
       set(
-          produce((state: VznState) => {
+          produce((state: VznListState) => {
             state.error = 'Ошибка загрузки данных ВЗН УП';
           })
       );
     } finally {
       set(
-          produce((state: VznState) => {
+          produce((state: VznListState) => {
             state.loading = false;
           })
       );
