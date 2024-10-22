@@ -103,19 +103,19 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
       })
     }
 
-    let periodInputValue = inputPeriod.value
-    let separatorPeriod = ' - ';
-    let arrayPeriod = periodInputValue.split(separatorPeriod);
+    const periodInputValue = inputPeriod.value
+    const separatorPeriod = ' - ';
+    const arrayPeriod = periodInputValue.split(separatorPeriod);
 
     /* Валидация при не соответствии формата даты */
     if (arrayPeriod.length == 2) {
 
-      let arrayStartDate = arrayPeriod[0].split(".");
-      let arrayEndDate = arrayPeriod[1].split(".");
-      let arrayStartMonth = Number(arrayStartDate[1]) - 1;
-      let arrayEndMonth = Number(arrayEndDate[1]) - 1;
-      let d1 = new Date(Number(arrayStartDate[2]), arrayStartMonth, Number(arrayStartDate[0]));
-      let d2 = new Date(Number(arrayEndDate[2]), arrayEndMonth, Number(arrayEndDate[0]));
+      const arrayStartDate = arrayPeriod[0].split(".");
+      const arrayEndDate = arrayPeriod[1].split(".");
+      const arrayStartMonth = Number(arrayStartDate[1]) - 1;
+      const arrayEndMonth = Number(arrayEndDate[1]) - 1;
+      const d1 = new Date(Number(arrayStartDate[2]), arrayStartMonth, Number(arrayStartDate[0]));
+      const d2 = new Date(Number(arrayEndDate[2]), arrayEndMonth, Number(arrayEndDate[0]));
 
       if ((d1.getFullYear() == Number(arrayStartDate[2]))
         && (d1.getMonth() == arrayStartMonth)
@@ -215,7 +215,7 @@ const ModalVznList: React.FC<Props> = ({handleOpenModalVznList, handleCloseModal
       })
     }
 
-  }, [inputVznNumber.value, inputSender.value, inputRecipient.value]);
+  }, [inputVznNumber.value, inputSender.value, inputRecipient.value, updateInputSender, updateInputRecipient, updateInputVznNumber]);
 
   return (
     <>

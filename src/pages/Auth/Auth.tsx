@@ -31,19 +31,20 @@ const Auth: React.FC = () => {
         e.preventDefault();
 
         if (!auth.login || !auth.password) {
-            !auth.login ? updateAuth(draft => {
-                    draft.isNullLogin = true
-                }) : ''
-
-            !auth.password ? updateAuth(draft => {
-                    draft.isNullPassword = true
-                }) : ''
-
-            return
-        } else {
-
+            if (!auth.login) {
+                updateAuth(draft => {
+                    draft.isNullLogin = true;
+                });
+            }
+    
+            if (!auth.password) {
+                updateAuth(draft => {
+                    draft.isNullPassword = true;
+                });
+            }
+    
+            return;
         }
-
         updateAuth(draft => {
             draft.error = null
         })
@@ -108,7 +109,6 @@ const Auth: React.FC = () => {
                             name={'login'}
                             title={'Логин'}
                             placeholder={'work'}
-                            addClass={'field'}
                             inputValue={auth.login}
                             updateValue={handleChangeLogin}
                             validateValue={false}
