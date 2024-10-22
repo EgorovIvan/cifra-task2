@@ -36,13 +36,13 @@ const Auth: React.FC = () => {
                     draft.isNullLogin = true;
                 });
             }
-    
+
             if (!auth.password) {
                 updateAuth(draft => {
                     draft.isNullPassword = true;
                 });
             }
-    
+
             return;
         }
         updateAuth(draft => {
@@ -95,15 +95,6 @@ const Auth: React.FC = () => {
                         className={'auth__form'}
                         onSubmit={handleLogin}
                     >
-                        {/*<label>Логин:</label>*/}
-                        {/*<input*/}
-                        {/*    type="text"*/}
-                        {/*    value={login}*/}
-                        {/*    onChange={e => updateAuth((draft) => {*/}
-                        {/*      draft.login = e.target.value*/}
-                        {/*    })}*/}
-                        {/*    required*/}
-                        {/*/>*/}
                         <Input
                             type={'text'}
                             name={'login'}
@@ -115,15 +106,6 @@ const Auth: React.FC = () => {
                             isNull={auth.isNullLogin}
                             textError={''}
                         />
-                        {/*<label>Пароль:</label>*/}
-                        {/*<input*/}
-                        {/*    type="password"*/}
-                        {/*    value={auth.password}*/}
-                        {/*    onChange={e => updateAuth((draft) => {*/}
-                        {/*        draft.password = e.target.value*/}
-                        {/*    })}*/}
-                        {/*    required*/}
-                        {/*/>*/}
                         <Input
                             type={'password'}
                             name={'password'}
@@ -143,7 +125,6 @@ const Auth: React.FC = () => {
                             text={'Войти'}
                             onClickBtn={null}
                         />
-                        {/*<button type="submit">Войти</button>*/}
                     </form>
                 </div>
             </div>

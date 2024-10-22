@@ -7,9 +7,8 @@ interface Props {
   name: string;
   title: string;
   placeholder: string;
-  addClass: string;
   inputValue: string;
-  updateValue: (p: (draft: any) => void) => void;
+  updateValue: (value: string) => void;
   validateValue: boolean;
   isNull: boolean;
   textError: string;
@@ -22,17 +21,19 @@ const SelectInput: React.FC<Props> = (Props) => {
   const [unitsList, setUnitsList] = React.useState<string[]>([]);
   const inputRef = React.useRef<HTMLDivElement | null>(null); // Реф для компонента
 
+  const departmentsList = async () => {
+    try {
+      const response = await axios.get("src/api/units.json")
+      const list = response.data || [];
+      setUnitsList(list);
+      setFilteredSuggestions(list); // Сохраняем все элементы при первой загрузке
+    } catch (error) {
+      console.error("Ошибка при загрузке данных: ", error);
+    }
+  }
+
   React.useEffect(() => {
-    const apiUrl = '/api/units.json'; // путь к API
-    axios.get(apiUrl)
-      .then((response) => {
-        const list = response.data || [];
-        setUnitsList(list);
-        setFilteredSuggestions(list); // Сохраняем все элементы при первой загрузке
-      })
-      .catch((error) => {
-        console.error("Ошибка при загрузке данных: ", error);
-      });
+    departmentsList()
   }, []);
 
   const handleInputFocus = () => {
@@ -43,30 +44,28 @@ const SelectInput: React.FC<Props> = (Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = e.target.value;
 
-    Props.updateValue((draft) => {
-      draft.value = userInput;
-    });
+    Props.updateValue(userInput)
 
     const filtered = unitsList.filter((item) =>
-      item.toLowerCase().includes(userInput.toLowerCase())
+        item.toLowerCase().includes(userInput.toLowerCase())
     );
+
     setFilteredSuggestions(filtered);
     setShowSuggestions(true);
   };
 
   const clearInput = () => {
-    Props.updateValue((draft) => {
-      draft.value = '';
-    });
+
+    Props.updateValue('')
 
     setFilteredSuggestions(unitsList);
     setShowSuggestions(true);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    Props.updateValue((draft) => {
-      draft.value = suggestion;
-    });
+
+    Props.updateValue(suggestion)
+
     setShowSuggestions(false);
     setIsFocused(false);
   };
@@ -86,45 +85,45 @@ const SelectInput: React.FC<Props> = (Props) => {
   }, []);
 
   return (
-    <div className="input_box" style={{ position: "relative" }} ref={inputRef}>
-      <input
-        className={'input_field ' + Props.addClass}
-        type={Props.type}
-        name={Props.name}
-        id={Props.name}
-        placeholder={Props.placeholder}
-        value={Props.inputValue}
-        onChange={handleInputChange}
-        onFocus={handleInputFocus}
-        autoComplete="off"
-      />
-      <label htmlFor={Props.name}>{Props.title}</label>
-
-      {isFocused && Props.inputValue && (
-        <img
-          src={closeIcon}
-          alt="Очистить поле"
-          className="clear-icon"
-          onClick={clearInput}
+      <div className="input_box" style={{ position: "relative" }} ref={inputRef}>
+        <input
+            className={'input_field ' + ((Props.isNull || Props.validateValue) ? 'error_border' : '')}
+            type={Props.type}
+            name={Props.name}
+            id={Props.name}
+            placeholder={Props.placeholder}
+            value={Props.inputValue}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            autoComplete="off"
         />
-      )}
+        <label htmlFor={Props.name}>{Props.title}</label>
 
-      {Props.isNull ? <div className="error">Поле ввода не должно быть пустым</div> : ''}
-      {Props.validateValue ? <div className="error">{Props.textError}</div> : ''}
+        {isFocused && Props.inputValue && (
+            <img
+                src={closeIcon}
+                alt="Очистить поле"
+                className="clear-icon"
+                onClick={clearInput}
+            />
+        )}
 
-      {showSuggestions && filteredSuggestions.length > 0 && (
-        <ul className="suggestions">
-          {filteredSuggestions.map((suggestion, index) => (
-            <li
-              key={index}
-              onClick={() => handleSuggestionClick(suggestion)}
-            >
-              {suggestion}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+        {Props.isNull ? <div className="error">Поле ввода не должно быть пустым</div> : ''}
+        {Props.validateValue ? <div className="error">{Props.textError}</div> : ''}
+
+        {showSuggestions && filteredSuggestions.length > 0 && (
+            <ul className="suggestions">
+              {filteredSuggestions.map((suggestion, index) => (
+                  <li
+                      key={index}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion}
+                  </li>
+              ))}
+            </ul>
+        )}
+      </div>
   );
 };
 

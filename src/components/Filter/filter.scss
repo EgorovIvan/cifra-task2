@@ -32,73 +32,7 @@
     padding: 66px 4px 20px;
   }
 
-//  &__form_btns {
-//    display: flex;
-//    align-items: start;
-//    justify-content: center;
-//    gap: 10px;
-//  }
-//
-//  &__form_search {
-//    width: 90px;
-//    height: 40px;
-//    color: $bg-gray-100;
-//    font-family: 'Roboto', sans-serif;
-//    font-size: 14px;
-//    font-weight: 500;
-//    line-height: 20px;
-//    letter-spacing: 0.1px;
-//    text-align: center;
-//    border: none;
-//    border-radius: 6.25rem;
-//    background: $primary-400;
-//    cursor: pointer;
-//  }
-//
-//  &__form_search:hover,
-//  &__form_search:focus-visible {
-//    filter: brightness(1.25);
-//    transition: filter .2s;
-//  }
-//
-//  &__form_cancel {
-//    width: 90px;
-//    height: 40px;
-//    color: $primary-400;
-//    font-family: 'Roboto', sans-serif;
-//    font-size: 14px;
-//    font-weight: 500;
-//    line-height: 20px;
-//    letter-spacing: 0.1px;
-//    text-align: center;
-//    border: 1px solid $outline-gray-900;
-//    border-radius: 6.25rem;
-//    background: $bg-gray-100;
-//    cursor: pointer;
-//  }
 }
-
-//.input_box {
-//  position: relative;
-//  width: 100%;
-//}
-
-//
-//.clear_icon {
-//  position: absolute;
-//  right: 10px;
-//  top: 50%;
-//  transform: translateY(-50%);
-//  cursor: pointer;
-//  width: 20px;
-//  height: 20px;
-//  opacity: 0.6;
-//  transition: opacity 0.2s ease;
-//}
-//
-//.clear_icon:hover {
-//  opacity: 1;
-//}
 
 .suggestions {
   display: flex;
