@@ -22,7 +22,7 @@ const DateRangeInput: React.FC<Props> = (Props) => {
     // const [endDate, setEndDate] = useState<Date | null>(null);
 
     // Выбор периода дат
-    const handleDateChange = (dates: [Date | null, Date | null]) => {
+    const handleDateChange = (dates: [Date | undefined, Date | undefined]) => {
         const [start, end] = dates;
         Props.setStartDate(start);
         Props.setEndDate(end);
