@@ -20,8 +20,8 @@ interface State {
 
 interface Period {
   value: string;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
   errorField: boolean;
 }
 
@@ -58,8 +58,8 @@ const ModalVznList: React.FC = () => {
 
   const [inputPeriod, updateInputPeriod] = useImmer<Period>({
     value: "",
-    startDate:  null,
-    endDate:  null,
+    startDate:  undefined,
+    endDate:  undefined,
     errorField: false,
   });
 

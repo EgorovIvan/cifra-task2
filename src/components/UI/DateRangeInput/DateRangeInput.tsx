@@ -8,10 +8,10 @@ interface Props {
     name: string;
     title: string;
     placeholder: string;
-    startDate: Date | null;
-    endDate: Date | null;
-    setStartDate: (value: Date | null) => void;
-    setEndDate: (value: Date | null) => void;
+    startDate: Date | undefined;
+    endDate: Date | undefined;
+    setStartDate: (value: Date | undefined) => void;
+    setEndDate: (value: Date | undefined) => void;
     validateValue: boolean;
     textError: string;
 }
