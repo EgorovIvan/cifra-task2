@@ -19,11 +19,11 @@ export const useModalStore = create<ModalState>((set) => ({
   isResultsModalOpen: false,
   isScanModalOpen: false,
   selectedVznId: null,
-  
+
   openVznModal: (VznId: number) => set({ isModalOpen: true, selectedVznId: VznId }),
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false, selectedVznId: null }),
-  
+
   openResultsModal: () => set({ isResultsModalOpen: true }),
   closeResultsModal: () => set({ isResultsModalOpen: false }),
 

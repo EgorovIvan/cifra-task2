@@ -59,7 +59,7 @@ const AppRouter: React.FC = () => {
         />
 
         {/* Если нет токена, по умолчанию переходим на /login */}
-        {/*<Route path="*" element={<Navigate to="/test" replace />} />*/}
+        <Route path="*" element={<Navigate to="/test" replace />} />
       </Routes>
     </Router>
   );
