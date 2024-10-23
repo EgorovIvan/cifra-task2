@@ -3,9 +3,9 @@ import './button.scss'
 
 interface Props {
   type: "submit" | "reset" | "button" | undefined;
-  classBtn: string;
-  text: string;
-  onClickBtn: () => void | null;
+  classBtn?: string;
+  text?: string;
+  onClickBtn?: (() => void);
 }
 
 const Button: React.FC<Props> = ({type, classBtn, text, onClickBtn}: Props) => {

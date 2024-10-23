@@ -13,18 +13,13 @@ const Test2: React.FC = () => {
 
     return (
         <>
-            <MainLayout
-                headline=""
-                showCloseButton={false}
-                hasBorder={true}
-                isBlueBackground={true}
-            >
+
                 <ul className="main__list">
                     <button>Открыть</button>
                 </ul>
-            </MainLayout>
 
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
+
+            <Modal isOpen={true} onClose={closeModal}>
                 <CreateVznConsumption />
             </Modal>
         </>

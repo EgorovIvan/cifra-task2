@@ -11,18 +11,13 @@ import {useAuthStore} from "@/stores/useAuthStore.ts";
 import {useVznListStore} from "@/stores/useVznListStore.ts";
 import {FilterProps} from "@/interfaces/FilterProps.ts";
 import { useModalStore } from "@/stores/useModalStore.ts";
+import {InputState} from "@/interfaces/InputState.tsx";
 
-
-interface State {
-  value: string;
-  errorField: boolean;
-  isNull: boolean;
-}
 
 interface Period {
   value: string;
-  startDate: Date | undefined;
-  endDate: Date | undefined;
+  startDate?: Date;
+  endDate?: Date;
   errorField: boolean;
 }
 
@@ -40,19 +35,19 @@ const Filter: React.FC = () => {
     // Period: ""
   })
 
-  const [inputVznNumber, updateInputVznNumber] = useImmer<State>({
+  const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
     value: "",
     errorField: false,
     isNull: false,
   });
 
-  const [inputSender, updateInputSender] = useImmer<State>({
+  const [inputSender, updateInputSender] = useImmer<InputState>({
     value: "",
     errorField: false,
     isNull: false,
   });
 
-  const [inputRecipient, updateInputRecipient] = useImmer<State>({
+  const [inputRecipient, updateInputRecipient] = useImmer<InputState>({
     value: "",
     errorField: false,
     isNull: false,
@@ -275,7 +270,7 @@ const Filter: React.FC = () => {
                 inputValue ={inputVznNumber.value}
                 updateValue={handleInputVznNumber}
                 validateValue={inputVznNumber.errorField}
-                isNull={inputVznNumber.isNull}
+                isNull={false}
                 textError="целое положительное число до 20 знаков"
             />
 
@@ -287,7 +282,7 @@ const Filter: React.FC = () => {
                 inputValue ={inputSender.value}
                 updateValue={handleInputSender}
                 validateValue={inputSender.errorField}
-                isNull={inputSender.isNull}
+                isNull={false}
                 textError="строка до 50 символов"
             />
 
@@ -299,7 +294,7 @@ const Filter: React.FC = () => {
                 inputValue ={inputRecipient.value}
                 updateValue={handleInputRecipient}
                 validateValue={inputRecipient.errorField}
-                isNull={inputRecipient.isNull}
+                isNull={false}
                 textError="строка до 50 символов"
             />
 

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './date_picker_container.scss'
@@ -8,18 +7,16 @@ interface Props {
     name: string;
     title: string;
     placeholder: string;
-    startDate: Date | undefined;
-    endDate: Date | undefined;
-    setStartDate: (value: Date | undefined) => void;
-    setEndDate: (value: Date | undefined) => void;
+    startDate?: Date;
+    endDate?: Date;
+    setStartDate: (value?: Date) => void;
+    setEndDate: (value?: Date) => void;
     validateValue: boolean;
     textError: string;
 }
 
 const DateRangeInput: React.FC<Props> = (Props) => {
 
-    // const [startDate, setStartDate] = useState<Date | null>(null);
-    // const [endDate, setEndDate] = useState<Date | null>(null);
 
     // Выбор периода дат
     const handleDateChange = (dates: [Date | undefined, Date | undefined]) => {
