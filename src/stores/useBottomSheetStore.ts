@@ -7,6 +7,7 @@ interface BoxState {
     isTouchUp: boolean;
     setYPosition: (y: number) => void;
     setAppHeight: (height: number) => void;
+    setWrapperHeight: (height: number) => void;
     setIsTouchUp: (b: boolean) => void;
 }
 

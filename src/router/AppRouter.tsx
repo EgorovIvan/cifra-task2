@@ -4,9 +4,9 @@ import Menu from '../pages/Menu.tsx';
 import Tasks from "../pages/Tasks.tsx";
 import Settings from "../pages/Settings.tsx";
 import Accounting from "../pages/Accounting.tsx";
-import Test from "../test/Test.tsx";
 import Auth from '../pages/Auth/Auth.tsx';
 import ProtectedRoute from './ProtectedRoute';
+import Test2 from "@/test/Test2.tsx";
 
 const AppRouter: React.FC = () => {
 
@@ -52,8 +52,7 @@ const AppRouter: React.FC = () => {
         <Route
           path="/test"
           element={
-
-              <Test />
+              <Test2 />
           }
         />
 

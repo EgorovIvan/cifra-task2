@@ -3,8 +3,9 @@ import './button.scss';
 
 interface Props {
   type: "submit" | "reset" | "button" | undefined;
-  text: string;
-  onClickBtn: () => void | null;
+  classBtn?: string;
+  text?: string;
+  onClickBtn?: (() => void);
   classBtn?: string;
   isWhite?: boolean;
 }

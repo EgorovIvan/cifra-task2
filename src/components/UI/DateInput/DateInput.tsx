@@ -1,38 +1,31 @@
 import * as React from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import './datepicker_container.scss'
+import '@/components/UI/DateRangeInput/datepicker_container.scss'
 
 interface Props {
     name: string;
     title: string;
     placeholder?: string;
-    startDate?: Date;
-    endDate?: Date;
-    setStartDate: (value?: Date) => void;
-    setEndDate: (value?: Date) => void;
+    date?: Date;
+    setDateChange: (value?: Date) => void;
     validateValue: boolean;
+    isNull: boolean;
     textError: string;
 }
 
-const DateRangeInput: React.FC<Props> = (Props) => {
-
+const DateInput: React.FC<Props> = (Props) => {
 
     // Выбор периода дат
-    const handleDateChange = (dates: [Date | undefined, Date | undefined]) => {
-        const [start, end] = dates;
-        Props.setStartDate(start);
-        Props.setEndDate(end);
+    const handleDateChange = (date: Date ) => {
+        Props.setDateChange(date);
     };
 
     return (
         <div className="datepicker_container">
             <DatePicker
-                selected={Props.startDate}
+                selected={Props.date}
                 onChange={handleDateChange}
-                startDate={Props.startDate}
-                endDate={Props.endDate}
-                selectsRange
                 dateFormat="dd.MM.yyyy"
                 placeholderText={Props.placeholder}
                 className="input"
@@ -40,9 +33,10 @@ const DateRangeInput: React.FC<Props> = (Props) => {
                 name={Props.name}
             />
             <label htmlFor={Props.name}>{Props.title}</label>
+            {Props.isNull ? <div className="error">Поле ввода не должно быть пустым</div> : ''}
             {Props.validateValue ? <div className="error">{Props.textError}</div> : ''}
         </div>
     );
 };
 
-export default DateRangeInput;
+export default DateInput;

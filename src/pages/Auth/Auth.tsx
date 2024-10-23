@@ -57,6 +57,7 @@ const Auth: React.FC = () => {
                 login,
                 password,
             });
+            console.log(response);
             const token = response.data.authToken;
             setAuthToken(token);
             navigate('/menu');
