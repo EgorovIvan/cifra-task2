@@ -43,7 +43,7 @@ const Menu: React.FC = () => {
             <BottomSheet/>
 
 
-            <Modal isOpen={true} onClose={closeScanModal} >
+            <Modal isOpen={isScanModalOpen} onClose={closeScanModal} >
                 <Scan/>
             </Modal>
         </>
