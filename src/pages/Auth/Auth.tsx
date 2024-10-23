@@ -100,7 +100,7 @@ const Auth: React.FC = () => {
                             type={'text'}
                             name={'login'}
                             title={'Логин'}
-                            placeholder={'work'}
+                            placeholder={'GLEK_TEST'}
                             inputValue={auth.login}
                             updateValue={handleChangeLogin}
                             validateValue={false}

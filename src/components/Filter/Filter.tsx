@@ -313,18 +313,18 @@ const Filter: React.FC = () => {
             <div className="filter__form_btns">
               <Button
                   type="button"
-                  classBtn=""
+                  classBtn="btn"
                   text="Поиск"
                   onClickBtn={handleSubmit}
                   // onClickBtn={handleSearch}
               />
 
-              {/*<Button*/}
-              {/*  type="button"*/}
-              {/*  classBtn="close_btn"*/}
-              {/*  text="Отмена"*/}
-              {/*  onClickBtn={handleCloseModals}*/}
-              {/*/>*/}
+              <Button
+                type="button"
+                classBtn="btn--white"
+                text="Отмена"
+                // onClickBtn={handleCloseModals}
+              />
 
             </div>
           </form>

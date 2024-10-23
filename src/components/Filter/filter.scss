@@ -30,8 +30,15 @@
     gap: 10px;
     height: max-content;
     padding: 66px 4px 20px;
+
   }
 
+  &__form_btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
 }
 
 .suggestions {

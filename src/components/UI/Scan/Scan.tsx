@@ -42,17 +42,18 @@ const Scan: React.FC = () => {
               <Button
                   type="button"
                   text="Перейти"
+                  classBtn='btn'
                   onClickBtn={()=>{}}
               />
 
               <Button
                   type="button"
-                  isWhite={true}
                   text="Отмена"
+                  classBtn='btn--white'
                   onClickBtn={()=>{}}
               />
             </div>
-        </form>               
+        </form>
         </MainLayout>
     </div>
   );

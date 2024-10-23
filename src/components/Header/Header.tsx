@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
     <header className={`header_container ${hasBorder ? 'with_border' : ''} ${isBlueBackground ? 'blue_background' : ''}`}>
       {showCloseButton && (
           <button className="icon_button" onClick={onCloseButtonClick ?? undefined} >
-            <Icon src='../../../public/img/filter/close.svg' />
+            <Icon src='public/img/filter/close.svg' />
           </button>
       )}
 
@@ -60,10 +60,26 @@ const Header: React.FC<HeaderProps> = ({
           )}
         </div>
 
-        {centralButton && <Button type='button' text='Поиск' classBtn='header__button_search' onClickBtn={handleOpenFilterModal} />}
+        {centralButton &&
+            <Button
+                type='button'
+                text='Поиск'
+                classBtn='btn_search'
+                onClickBtn={handleOpenFilterModal}
+                iconSrc={'public/img/header/search.svg'}
+                sizeSrc={14}
+            />}
       </div>
 
-      {rightButton && <Button type='button' text='Создать' classBtn='header__button_create' onClickBtn={handleOpenCreateVznModal} />}
+      {rightButton &&
+          <Button
+              type='button'
+              text='Создать'
+              classBtn='btn_create'
+              onClickBtn={handleOpenCreateVznModal}
+              iconSrc={'public/img/header/create.svg'}
+              sizeSrc={16}
+          />}
     </header>
   );
 };

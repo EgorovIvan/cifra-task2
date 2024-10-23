@@ -26,12 +26,86 @@
 
 /* Модификатор для белой кнопки */
 .btn--white {
+  width: 90px;
+  height: 40px;
   color: $primary-400;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  text-align: center;
   background: $white;
   border: 1px solid $primary-400; /* Добавляем обводку для белой кнопки */
-  
+  border-radius: 100px;
+  transition: background .2s ease, transform .2s ease;
+
   &:hover,
   &:focus-visible {
     filter: brightness(0.95); /* Изменяем фильтр при наведении */
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.btn_search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 83px;
+  height: 21px;
+  color: $white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0.1px;
+  text-align: left;
+  border-radius: 100px;
+  border: none;
+  background: $primary-400;
+  transition: background .2s ease, transform .2s ease;
+
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.25);
+    transition: filter .2s;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.btn_create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 83px;
+  height: 21px;
+  color: $white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0.1px;
+  text-align: left;
+  border-radius: 100px;
+  border: none;
+  background: $primary-400;
+  transition: background .2s ease, transform .2s ease;
+
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.25);
+    transition: filter .2s;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
