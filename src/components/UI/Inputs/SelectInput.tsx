@@ -17,16 +17,16 @@ interface Props {
 const SelectInput: React.FC<Props> = (Props) => {
   const [filteredSuggestions, setFilteredSuggestions] = React.useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
-  const [isFocused, setIsFocused] = React.useState<boolean>(false); // Состояние для отслеживания фокуса
+  const [isFocused, setIsFocused] = React.useState<boolean>(false);
   const [unitsList, setUnitsList] = React.useState<string[]>([]);
-  const inputRef = React.useRef<HTMLDivElement | null>(null); // Реф для компонента
+  const inputRef = React.useRef<HTMLDivElement | null>(null);
 
   const departmentsList = async () => {
     try {
       const response = await axios.get("src/api/units.json")
       const list = response.data || [];
       setUnitsList(list);
-      setFilteredSuggestions(list); // Сохраняем все элементы при первой загрузке
+      setFilteredSuggestions(list);
     } catch (error) {
       console.error("Ошибка при загрузке данных: ", error);
     }

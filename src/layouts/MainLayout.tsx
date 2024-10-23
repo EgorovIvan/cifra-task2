@@ -26,7 +26,7 @@ const MainLayout:
         hasBorder = true,
         isBlueBackground = false,
     }) => {
-
+        
     return (
         <>
             <Header

@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import './footer.scss'
 import Icon from "../Icon/Icon";
 
-const Footer: React.FC = () => {
+interface FooterProps{
+  onScanButtonClick?: () => void
+}
 
+const Footer: React.FC<FooterProps> = (props) => {
   const navigate = useNavigate();
-
   const handleBack = () => {
     navigate(-1);
   };
@@ -20,7 +22,7 @@ const Footer: React.FC = () => {
             <span>Меню</span>
           </div>
         </Link>
-        <div className="footer__item">
+        <div className="footer__item" onClick={props.onScanButtonClick}>
           <Icon src='../../../public/img/footer/scaner.svg' />
           <span>Сканер</span>
         </div>

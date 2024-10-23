@@ -1,18 +1,22 @@
 import * as React from "react";
-import './button.scss'
+import './button.scss';
 
 interface Props {
   type: "submit" | "reset" | "button" | undefined;
-  classBtn: string;
   text: string;
   onClickBtn: () => void | null;
+  classBtn?: string;
+  isWhite?: boolean;
 }
 
-const Button: React.FC<Props> = ({type, classBtn, text, onClickBtn}: Props) => {
+const Button: React.FC<Props> = ({type, text, onClickBtn, classBtn = '', isWhite = false}: Props) => {
+  const buttonClass = `btn ${isWhite ? 'btn--white' : ''} ${classBtn}`.trim();
 
   return (
-    <button type={type} className={'btn ' + classBtn} onClick={onClickBtn}>{text}</button>
-  )
-}
+    <button type={type} className={buttonClass} onClick={onClickBtn}>
+      {text}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

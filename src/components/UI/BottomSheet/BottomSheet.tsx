@@ -2,7 +2,7 @@ import * as React from 'react';
 import './bottom_sheet.scss'
 import {useEffect, useRef, useState} from "react";
 import {useBottomSheetStore} from "@/stores/useBottomSheetStore.ts";
-import SwitchToggle from "@/components/UI/SwitchToogle/SwitchToggle.tsx";
+import SwitchToggle from "@/components/UI/SwitchToggle/SwitchToggle";
 
 const BottomSheet: React.FC = () => {
 

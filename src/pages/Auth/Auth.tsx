@@ -123,7 +123,7 @@ const Auth: React.FC = () => {
                             type={'submit'}
                             classBtn={''}
                             text={'Войти'}
-                            onClickBtn={null}
+                            onClickBtn={()=>{}}
                         />
                     </form>
                 </div>

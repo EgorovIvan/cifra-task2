@@ -24,8 +24,14 @@
   }
 }
 
-.close_btn {
+/* Модификатор для белой кнопки */
+.btn--white {
   color: $primary-400;
-  border: 1px solid $outline-gray-900;
-  background: $bg-gray-100;
+  background: $white;
+  border: 1px solid $primary-400; /* Добавляем обводку для белой кнопки */
+  
+  &:hover,
+  &:focus-visible {
+    filter: brightness(0.95); /* Изменяем фильтр при наведении */
+  }
 }

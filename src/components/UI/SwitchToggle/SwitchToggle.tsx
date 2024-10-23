@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './switch_toggle.scss'; // Подключаем стили
+import './switch_toggle.scss';
 
 interface SwitchToggleProps {
   initialChecked?: boolean;

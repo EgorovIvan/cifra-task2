@@ -52,14 +52,13 @@ const AppRouter: React.FC = () => {
         <Route
           path="/test"
           element={
-            <ProtectedRoute>
+
               <Test />
-            </ProtectedRoute>
           }
         />
 
         {/* Если нет токена, по умолчанию переходим на /login */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/test" replace />} />
       </Routes>
     </Router>
   );
