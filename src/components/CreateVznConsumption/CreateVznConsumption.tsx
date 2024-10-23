@@ -3,13 +3,15 @@ import MainLayout from "@/layouts/MainLayout.tsx";
 import Input from "@/components/UI/Inputs/Input.tsx";
 import {useImmer} from "use-immer";
 import {InputState} from "@/interfaces/InputState.tsx";
-import './create_form.scss'
 import SelectInput from "@/components/UI/Inputs/SelectInput.tsx";
 import Button from "@/components/UI/Buttons/Button.tsx";
+import './create_form.scss'
+import '@/components/UI/DateRangeInput/datepicker_container.scss'
+import DateInput from "@/components/UI/DateInput/DateInput.tsx";
 
 interface InputDate {
-    value: string,
-    date:  Date | undefined,
+    date: Date | undefined,
+    isNull: boolean,
     errorField: boolean,
 }
 
@@ -33,10 +35,15 @@ const CreateVznConsumption: React.FC = () => {
         isNull: false,
     });
 
+    const [inputDateIssue, updateInputDateIssue] = useImmer<InputDate>({
+        date: undefined,
+        isNull: false,
+        errorField: false,
+    });
 
-    const [inputDate, updateInputDate] = useImmer<InputDate>({
-        value: "",
-        date:  undefined,
+    const [inputDateAdoption, updateInputDateAdoption] = useImmer<InputDate>({
+        date: undefined,
+        isNull: false,
         errorField: false,
     });
 
@@ -61,9 +68,16 @@ const CreateVznConsumption: React.FC = () => {
         })
     }
 
+    // Ввод данных в поле "Дата выдачи"
+    const handleInputDateIssue = (value: Date): void => {
+        updateInputDateIssue((draft) => {
+            draft.date = value
+        })
+    }
+
     // Ввод данных в поле "Дата принятия"
-    const handleInputDate = (value: Date): void => {
-        updateInputDate((draft) => {
+    const handleInputDateAdoption = (value: Date): void => {
+        updateInputDateAdoption((draft) => {
             draft.date = value
         })
     }
@@ -88,7 +102,7 @@ const CreateVznConsumption: React.FC = () => {
                                 name="vzn-number"
                                 title="№ ВЗН*"
                                 placeholder=""
-                                inputValue ={inputVznNumber.value}
+                                inputValue={inputVznNumber.value}
                                 updateValue={handleInputVznNumber}
                                 validateValue={inputVznNumber.errorField}
                                 isNull={inputVznNumber.isNull}
@@ -100,7 +114,7 @@ const CreateVznConsumption: React.FC = () => {
                                 name="sender"
                                 title="Отправитель"
                                 placeholder="Цех 01"
-                                inputValue ={inputSender.value}
+                                inputValue={inputSender.value}
                                 updateValue={handleInputSender}
                                 validateValue={inputSender.errorField}
                                 isNull={inputSender.isNull}
@@ -112,7 +126,7 @@ const CreateVznConsumption: React.FC = () => {
                                 name="recipient"
                                 title="Получатель"
                                 placeholder="Цех 02"
-                                inputValue ={inputRecipient.value}
+                                inputValue={inputRecipient.value}
                                 updateValue={handleInputRecipient}
                                 validateValue={inputRecipient.errorField}
                                 isNull={inputRecipient.isNull}
@@ -124,28 +138,46 @@ const CreateVznConsumption: React.FC = () => {
                                 name="recipient"
                                 title="Выдал МОЛ*"
                                 placeholder="Иванов И. И."
-                                inputValue ={inputRecipient.value}
+                                inputValue={inputRecipient.value}
                                 updateValue={handleInputRecipient}
                                 validateValue={inputRecipient.errorField}
                                 isNull={inputRecipient.isNull}
                                 textError="строка до 50 символов"
                             />
 
-                            <div>DatePicker</div>
+                            <DateInput
+                                name="datepicker-issue"
+                                title="Дата выдачи*"
+                                placeholder="15.06.2024"
+                                date={inputDateIssue.date}
+                                setDateChange={handleInputDateIssue}
+                                validateValue={inputDateIssue.errorField}
+                                isNull={inputDateIssue.isNull}
+                                textError="некорректный формат"
+                            />
 
                             <SelectInput
                                 type="text"
                                 name="recipient"
                                 title="Принял МОЛ"
                                 placeholder="Иванов И. И."
-                                inputValue ={inputRecipient.value}
+                                inputValue={inputRecipient.value}
                                 updateValue={handleInputRecipient}
                                 validateValue={inputRecipient.errorField}
-                                isNull={inputRecipient.isNull}
+                                isNull={inputDateAdoption.isNull}
                                 textError="строка до 50 символов"
                             />
 
-                            <div>DatePicker</div>
+                            <DateInput
+                                name="datepicker-issue"
+                                title="Дата выдачи*"
+                                placeholder=""
+                                date={inputDateAdoption.date}
+                                setDateChange={handleInputDateAdoption}
+                                validateValue={inputDateAdoption.errorField}
+                                isNull={inputRecipient.isNull}
+                                textError="некорректный формат"
+                            />
 
                             <div>TextField</div>
                         </div>
@@ -159,9 +191,9 @@ const CreateVznConsumption: React.FC = () => {
                             />
 
                             <Button
-                              type="button"
-                              classBtn="close_btn"
-                              text="Отмена"
+                                type="button"
+                                classBtn="close_btn"
+                                text="Отмена"
                             />
 
                         </div>

@@ -299,7 +299,7 @@ const Filter: React.FC = () => {
             />
 
             <DateRangeInput
-                name="date-picker"
+                name="datepicker-range"
                 title="Дата принятия (период)"
                 placeholder="Выберите диапазон дат"
                 startDate={inputPeriod.startDate}
