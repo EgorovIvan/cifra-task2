@@ -14,7 +14,13 @@ import {InputState} from "@/interfaces/InputState.ts";
 import Header from "@/components/Header/Header.tsx";
 import Footer from "@/components/Footer/Footer.tsx";
 import {useNavigate} from "react-router-dom";
+import Modal from "../UI/Modal/Modal.tsx";
+import DivisionsList from "../DivisionsList/DivisionsList.tsx";
 
+export enum DivisionInputType {
+    SENDER = 'sender',
+    RECIPIENT = 'recipient'
+}
 
 interface Period {
     value: string;
@@ -29,7 +35,7 @@ const Filter: React.FC = () => {
 
     const {authToken} = useAuthStore()
     const {fetchVznList} = useVznListStore()
-    const {openResultsModal, closeFilterModal} = useModalStore();
+    const {openResultsModal, closeFilterModal, isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
     // Фильтры
     const [filters, updateFilters] = useImmer<FilterProps>({
@@ -294,6 +300,7 @@ const Filter: React.FC = () => {
                             validateValue={inputSender.errorField}
                             isNull={false}
                             textError="строка до 50 символов"
+                            onFolderIconClick={() => openDivisionsModal(DivisionInputType.SENDER)}
                         />
 
                         <SelectInput
@@ -306,6 +313,7 @@ const Filter: React.FC = () => {
                             validateValue={inputRecipient.errorField}
                             isNull={false}
                             textError="строка до 50 символов"
+                            onFolderIconClick={() => openDivisionsModal(DivisionInputType.RECIPIENT)}
                         />
 
                         <DateRangeInput
@@ -340,6 +348,11 @@ const Filter: React.FC = () => {
                     </form>
                 </main>
                 <Footer/>
+                <Modal isOpen={isDivisionsModalOpen} onClose={closeDivisionsModal} >
+                    <DivisionsList 
+                        onSelectValue={divisionInputType === DivisionInputType.RECIPIENT ? handleInputRecipient : handleInputSender }
+                    />
+                </Modal>
             </div>
         </>
     )

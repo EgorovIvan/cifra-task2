@@ -1,4 +1,4 @@
-.list_vzn {
+.divisions_list {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -10,9 +10,27 @@
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.list_item {
+display: flex;
+flex-direction: column;
+align-items: start;
+justify-content: start;
+width: 100%;
+padding: 4px;
+border-bottom: 0.2px solid $outline-gray-900;
+font-size: 10px;
+
+  &:last-child {
+    border: none;
+  }
+
+  &:hover {
+    background-color: #e1d5e7;
   }
   
-  .list_vzn::-webkit-scrollbar {
-    width: 0;
+  &:active {
+    background-color: #e1d5e7;
   }
-  
+}

@@ -13,6 +13,7 @@ interface Props {
   validateValue: boolean;
   isNull: boolean;
   textError: string;
+  onFolderIconClick?: () => void;
 }
 
 const SelectInput: React.FC<Props> = (props) => {
@@ -57,6 +58,13 @@ const SelectInput: React.FC<Props> = (props) => {
     }
   };
 
+  const handleFolderIconClick = () => {
+    if (props.onFolderIconClick) {
+      setShowSuggestions(false);
+      props.onFolderIconClick();
+    }
+  }
+
   React.useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -83,7 +91,7 @@ const SelectInput: React.FC<Props> = (props) => {
           src={folderIcon}
           alt="Просмотреть список"
           className="folder-icon"
-          onClick={() => setShowSuggestions(!showSuggestions)}  // Открыть/закрыть список
+          onClick={handleFolderIconClick}
         />
       </div>
 
