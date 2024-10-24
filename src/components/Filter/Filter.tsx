@@ -27,9 +27,9 @@ const Filter: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const {authToken} = useAuthStore()
-    const {fetchVznList} = useVznListStore()
-    const {openResultsModal, closeFilterModal} = useModalStore();
+    const { authToken } = useAuthStore()
+    const { fetchVznList } = useVznListStore()
+    const { openResultsModal, closeFilterModal } = useModalStore();
 
     // Фильтры
     const [filters, updateFilters] = useImmer<FilterProps>({
@@ -69,7 +69,7 @@ const Filter: React.FC = () => {
     const handleSubmit = () => {
         fetchVznList(authToken, filters);
         closeFilterModal();
-        navigate("/vzn-expense");
+        navigate("/vzn-list");
         openResultsModal();
     }
 

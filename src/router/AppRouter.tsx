@@ -7,8 +7,8 @@ import Tasks from "@/pages/Tasks.tsx";
 import Accounting from "@/pages/Accounting.tsx";
 import Settings from "@/pages/Settings.tsx";
 import MainLayout from "@/layouts/MainLayout.tsx";
-import VznList from "@/components/VznList/VznList.tsx";
-import VznItemInfo from "@/pages/VznItemInfo.tsx";
+import VznList from "@/pages/VznList/VznList.tsx";
+import VznDetails from "@/pages/VznList/VznItem/VznDetails/VznDetails.tsx";
 
 const AppRouter: React.FC = () => {
 
@@ -25,8 +25,8 @@ const AppRouter: React.FC = () => {
                         <Route path="menu" element={<Menu/>}/>
                         <Route path="tasks" element={<Tasks/>}/>
                         <Route path="accounting" element={<Accounting/>}/>
-                        <Route path="vzn-expense" element={<VznList/>}/>
-                        <Route path="vzn-expense/:vznItemId" element={<VznItemInfo />} />
+                        <Route path="vzn-list" element={<VznList/>}/>
+                        <Route path="vzn-list/:wsInplantCode" element={<VznDetails />} />
                         <Route path="settings" element={<Settings/>}/>
                     </Route>
 

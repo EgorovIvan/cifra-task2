@@ -14,7 +14,7 @@ const VznItem: React.FC<{ item: VznItemProps, divisions: DivisionsProps[] }> = (
 
   return (
     <li className="vzn_item">
-      <Link to={`${item.Code}`}>
+      <Link to={`/vzn-list/${item.Code}`}>
         <h2>ВЗН №{item.Num}</h2>
         <p><span>Отправитель:</span> {findDivisionName(Number(item.Sender))}</p>
         <p><span>Получатель:</span> {findDivisionName(Number(item.Receiver))}</p>

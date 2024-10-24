@@ -16,8 +16,8 @@ const VznDetailModal: React.FC = () => {
     <Modal isOpen={!!selectedItem} onClose={closeModal}>
       <div className="vzn-detail-modal">
         <h2>Детали элемента ВЗН</h2>
-        <p><strong>Номер карточки:</strong> {selectedItem.LeaveCardCode}</p>
-        <p><strong>Обозначение:</strong> {selectedItem.ArticleOfExpense}</p>
+        <p><strong>Номер карточки:</strong> {selectedItem.Code}</p>
+        <p><strong>Обозначение:</strong> {selectedItem.ArticleCode}</p>
         <p><strong>Наименование:</strong> {selectedItem.ArticleName || 'Неизвестно'}</p>
 
         <div>
@@ -30,7 +30,7 @@ const VznDetailModal: React.FC = () => {
         </div>
         <div>
           <label>Номер заказа:</label>
-          <input type="text" defaultValue={selectedItem.OrderCode} />
+          {/* <input type="text" defaultValue={selectedItem.OrderCode} /> */}
         </div>
 
         <Pagination totalItems={vznDetails?.wsInplantContents.length || 1} />

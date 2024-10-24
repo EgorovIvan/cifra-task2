@@ -2,40 +2,40 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { useVznDetailsStore } from '@/stores/useVznDetailsStore'; 
 import { useModalStore } from '@/stores/useModalStore';
-import VznDetailModal from './VznDetailsModal/VznDetailsModal';
+import VznDetailModal from '../../../../components/VznDetailsModal/VznDetailsModal';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { useParams } from 'react-router-dom';
 
 const VznDetails: React.FC = () => {
+  const { wsInplantCode } = useParams<{ wsInplantCode: string }>();
   const { vznDetails, fetchVznDetails } = useVznDetailsStore();
-  const { isModalOpen, openModal, selectedVznId } = useModalStore();
+  const { openVznModal, selectedVznId } = useModalStore();
   const authToken = useAuthStore((state) => state.authToken); 
 
   useEffect(() => {
-    if (authToken && selectedVznId) {
-      fetchVznDetails(authToken, selectedVznId);
+    if (authToken && wsInplantCode) {
+      fetchVznDetails(authToken, Number(wsInplantCode));
     }
-  }, [authToken, selectedVznId, fetchVznDetails]);
+  }, [authToken, wsInplantCode, fetchVznDetails]);
 
-  const handleClick = () => {
-    openModal(); 
+  const handleClick = (vznId: number) => {
+    openVznModal(vznId);
   };
 
   return (
     <div>
-      <h2>Детали ВЗН</h2>
+      <h2>ВЗН №</h2>
       <ul className="vzn-details-list">
         {vznDetails?.wsInplantContents.map((item) => (
-          <li key={item.Code} onClick={() => handleClick()}>
-            <p>Код карточки: {item.Code}</p>
-            <p>Обозначение: {item.ArticleCode}</p>
-            <p>Наименование: {item.ArticleName || 'Неизвестно'}</p>
+          <li key={item.Code} className="vzn_item" onClick={() => handleClick(item.Code)}>
+            <p>{item.ArticleCode || 'Неизвестно'} - {item.ArticleName || 'Неизвестно'}</p>
             <p>Выдано: {item.LeaveQty}</p>
             <p>Получено: {item.ArrivalQty}</p>
           </li>
         ))}
       </ul>
       
-      {isModalOpen && selectedVznId && <VznDetailModal />}
+      { selectedVznId && <VznDetailModal /> }
     </div>
   );
 };
