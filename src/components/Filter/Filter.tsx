@@ -13,7 +13,7 @@ import {useModalStore} from "@/stores/useModalStore.ts";
 import {InputState} from "@/interfaces/InputState.ts";
 import Header from "@/components/Header/Header.tsx";
 import Footer from "@/components/Footer/Footer.tsx";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 interface Period {
@@ -67,6 +67,8 @@ const Filter: React.FC = () => {
 
     // Отправка запроса к серверу
     const handleSubmit = () => {
+        console.log(authToken)
+        console.log(filters)
         fetchVznList(authToken, filters);
         closeModal();
         navigate("/vzn-expense");

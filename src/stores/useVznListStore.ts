@@ -26,15 +26,17 @@ export const useVznListStore = create<VznListState>((set) => ({
     );
 
     try {
-      const response = await axios.post('http://92.55.15.91:8225/stock/wsInplants.loadByFilter',
-          {
-            authToken: token,
-            flt: filters
-          },
+      // const response = await axios.post('http://92.55.15.91:8225/stock/wsInplants.loadByFilter',
+      const response = await axios.post('./src/api/list.json',
+          // {
+          //   authToken: token,
+          //   flt: filters
+          // },
       );
 
-      const data: VznItemProps[] = response.data.wsInplants || [];
-
+      // const data: VznItemProps[] = response.data.wsInplants || [];
+      const data: VznItemProps[] = response.data.list || [];
+        console.log(data)
       set((state) =>
           produce(state, (draft: VznListState) => {
               draft.vznList = data;
