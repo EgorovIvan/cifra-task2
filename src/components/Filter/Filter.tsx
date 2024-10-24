@@ -11,7 +11,7 @@ import {useAuthStore} from "@/stores/useAuthStore.ts";
 import {useVznListStore} from "@/stores/useVznListStore.ts";
 import {FilterProps} from "@/interfaces/FilterProps.ts";
 import { useModalStore } from "@/stores/useModalStore.ts";
-import {InputState} from "@/interfaces/InputState.tsx";
+import {InputState} from "@/interfaces/InputState.ts";
 
 
 interface Period {

@@ -122,7 +122,7 @@ const Auth: React.FC = () => {
                         {auth.error && <p style={{color: 'red'}}>{auth.error}</p>}
                         <Button
                             type={'submit'}
-                            classBtn={''}
+                            classBtn={'btn'}
                             text={'Войти'}
                             onClickBtn={()=>{}}
                         />

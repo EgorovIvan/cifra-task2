@@ -1,13 +1,17 @@
+import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import './footer.scss'
 import Icon from "../Icon/Icon";
+import {useModalStore} from "@/stores/useModalStore.ts";
 
 interface FooterProps{
   onScanButtonClick?: () => void
 }
 
 const Footer: React.FC<FooterProps> = (props) => {
+
+  const {openScanModal} = useModalStore()
+
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
@@ -22,7 +26,7 @@ const Footer: React.FC<FooterProps> = (props) => {
             <span>Меню</span>
           </div>
         </Link>
-        <div className="footer__item" onClick={props.onScanButtonClick}>
+        <div className="footer__item" onClick={openScanModal}>
           <Icon src='../../../public/img/footer/scaner.svg' />
           <span>Сканер</span>
         </div>
