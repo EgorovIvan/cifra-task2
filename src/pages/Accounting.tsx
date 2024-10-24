@@ -2,16 +2,15 @@ import * as React from "react";
 import Modal from "../components/UI/Modal/Modal.tsx";
 import { useModalStore } from "../stores/useModalStore.ts";
 import Filter from "@/components/Filter/Filter.tsx";
-import VznList from "@/components/VznList/VznList.tsx";
 import Header from "@/components/Header/Header.tsx";
 
 const Accounting: React.FC = () => {
 
-  const { isModalOpen, isResultsModalOpen, openModal, closeModal, closeResultsModal } = useModalStore();
+  const { isFilterModalOpen, isResultsModalOpen, openFilterModal, closeFilterModal, closeResultsModal } = useModalStore();
 
   // Открытие модального окна ВЗН (Расход)
   const handleOpenFilterModal = (): void => {
-    openModal();
+      openFilterModal();
   };
 
   // Открытие модального окна Фильтр ВЗН УП
@@ -74,14 +73,14 @@ const Accounting: React.FC = () => {
 
         {/*modal filter*/}
 
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal isOpen={isFilterModalOpen} onClose={closeFilterModal}>
           <Filter />
         </Modal>
 
         {/* Модальное окно с результатами ВЗН УП */}
-        <Modal isOpen={isResultsModalOpen} onClose={closeResultsModal}>
-          <VznList />
-        </Modal>
+        {/*<Modal isOpen={isResultsModalOpen} onClose={closeResultsModal}>*/}
+        {/*  <VznList />*/}
+        {/*</Modal>*/}
 
         {/* {modalFilterVisible ? <Filter*/}
         {/*    handleOpenModalVznList={handleOpenModalVznList}*/}

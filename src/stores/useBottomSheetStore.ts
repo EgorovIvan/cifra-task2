@@ -12,7 +12,7 @@ interface BoxState {
 }
 
 export const useBottomSheetStore = create<BoxState>((set) => ({
-    yPosition: 500,
+    yPosition: 1000,
     appHeight: window.innerHeight + 10,
     wrapperHeight: 0,
     isTouchUp: true,

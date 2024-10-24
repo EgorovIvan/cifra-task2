@@ -29,7 +29,7 @@ const Filter: React.FC = () => {
 
     const {authToken} = useAuthStore()
     const {fetchVznList} = useVznListStore()
-    const {openResultsModal, closeModal} = useModalStore();
+    const {openResultsModal, closeFilterModal} = useModalStore();
 
     // Фильтры
     const [filters, updateFilters] = useImmer<FilterProps>({
@@ -67,12 +67,14 @@ const Filter: React.FC = () => {
 
     // Отправка запроса к серверу
     const handleSubmit = () => {
-        console.log(authToken)
-        console.log(filters)
         fetchVznList(authToken, filters);
-        closeModal();
+        closeFilterModal();
         navigate("/vzn-expense");
         openResultsModal();
+    }
+
+    const handleCloseModal = () => {
+        closeFilterModal();
     }
 
     /* Отправка формы */
@@ -264,6 +266,7 @@ const Filter: React.FC = () => {
                 <Header
                     headline="Фильтр ВЗН УП"
                     showCloseButton={true}
+                    onCloseButtonClick={handleCloseModal}
                     hasBorder={true}
                 />
                 <main className={'main'}>
@@ -330,7 +333,7 @@ const Filter: React.FC = () => {
                                 type="button"
                                 classBtn="btn--white"
                                 text="Отмена"
-                                // onClickBtn={handleCloseModals}
+                                onClickBtn={handleCloseModal}
                             />
 
                         </div>
