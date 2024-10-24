@@ -29,21 +29,21 @@ export const useTypeBoStore = create<TypeBoState>((set) => ({
 
             const data: InfoBo = response.data || {};
             console.log(response.data)
-            set(
-                produce((state: TypeBoState) => {
-                    state.typeBo = data;
+            set((state) =>
+                produce(state, (draft: TypeBoState) => {
+                    draft.typeBo = data;
                 })
             );
         } catch {
-            set(
-                produce((state: TypeBoState) => {
-                    state.error = 'Ошибка загрузки данных ВЗН УП';
+            set((state) =>
+                produce(state, (draft: TypeBoState) => {
+                    draft.error = 'Ошибка загрузки данных ВЗН УП';
                 })
             );
         } finally {
-            set(
-                produce((state: TypeBoState) => {
-                    state.loading = false;
+            set((state) =>
+                produce(state, (draft: TypeBoState) => {
+                    draft.loading = false;
                 })
             );
         }

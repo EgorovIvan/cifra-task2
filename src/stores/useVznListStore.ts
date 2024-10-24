@@ -18,10 +18,10 @@ export const useVznListStore = create<VznListState>((set) => ({
   error: null,
 
   fetchVznList: async (token: string | null, filters: FilterProps) => {
-    set(
-        produce((state: VznListState) => {
-          state.loading = true;
-          state.error = null;
+    set((state) =>
+        produce(state, (draft: VznListState) => {
+            draft.loading = true;
+            draft.error = null;
         })
     );
 
@@ -35,21 +35,21 @@ export const useVznListStore = create<VznListState>((set) => ({
 
       const data: VznItemProps[] = response.data.wsInplants || [];
 
-      set(
-          produce((state: VznListState) => {
-            state.vznList = data;
+      set((state) =>
+          produce(state, (draft: VznListState) => {
+              draft.vznList = data;
           })
       );
     } catch {
-      set(
-          produce((state: VznListState) => {
-            state.error = 'Ошибка загрузки данных ВЗН УП';
+      set((state) =>
+          produce(state, (draft: VznListState) => {
+              draft.error = 'Ошибка загрузки данных ВЗН УП';
           })
       );
     } finally {
-      set(
-          produce((state: VznListState) => {
-            state.loading = false;
+      set((state) =>
+          produce(state, (draft: VznListState) => {
+              draft.loading = false;
           })
       );
     }
