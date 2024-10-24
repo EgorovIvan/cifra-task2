@@ -1,6 +1,7 @@
 import * as React from "react";
-import axios from "axios";
-import closeIcon from '/img/filter/close-input.svg';
+import folderIcon from '/img/filter/folder-input.svg';
+import { useDivisionsStore } from "@/stores/useDivisionsStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 interface Props {
   type: string;
@@ -14,66 +15,45 @@ interface Props {
   textError: string;
 }
 
-const SelectInput: React.FC<Props> = (Props) => {
+const SelectInput: React.FC<Props> = (props) => {
   const [filteredSuggestions, setFilteredSuggestions] = React.useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
-  const [isFocused, setIsFocused] = React.useState<boolean>(false);
-  const [unitsList, setUnitsList] = React.useState<string[]>([]);
+  const {divisions, fetchDivisions} = useDivisionsStore();
+  const authToken = useAuthStore((state) => state.authToken);
   const inputRef = React.useRef<HTMLDivElement | null>(null);
 
-  const departmentsList = async () => {
-    try {
-      const response = await axios.get("src/api/units.json")
-      const list = response.data || [];
-      setUnitsList(list);
-      setFilteredSuggestions(list);
-    } catch (error) {
-      console.error("Ошибка при загрузке данных: ", error);
-    }
-  }
-
   React.useEffect(() => {
-    departmentsList()
-  }, []);
+    if (authToken) {
+        fetchDivisions(authToken);
+    }
+  }, [authToken, fetchDivisions]);
 
   const handleInputFocus = () => {
-    setIsFocused(true);
+    console.log("Input focused");
     setShowSuggestions(true);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = e.target.value;
+    props.updateValue(userInput);
 
-    Props.updateValue(userInput)
-
-    const filtered = unitsList.filter((item) =>
-        item.toLowerCase().includes(userInput.toLowerCase())
-    );
+    const filtered = divisions
+      .map(d => d.Name)
+      .filter(n => n.toLowerCase().includes(userInput.toLowerCase()));
 
     setFilteredSuggestions(filtered);
     setShowSuggestions(true);
   };
 
-  const clearInput = () => {
-
-    Props.updateValue('')
-
-    setFilteredSuggestions(unitsList);
-    setShowSuggestions(true);
-  };
-
   const handleSuggestionClick = (suggestion: string) => {
-
-    Props.updateValue(suggestion)
-
+    props.updateValue(suggestion);
     setShowSuggestions(false);
-    setIsFocused(false);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      console.log("Click outside detected, closing suggestions");
       setShowSuggestions(false);
-      setIsFocused(false);
     }
   };
 
@@ -85,46 +65,48 @@ const SelectInput: React.FC<Props> = (Props) => {
   }, []);
 
   return (
-      <div className="input_box" style={{ position: "relative" }} ref={inputRef}>
+    <div className="input_box" style={{ position: "relative" }} ref={inputRef}>
+      <div className="input-wrapper">
         <input
-            className={'input_field ' + ((Props.isNull || Props.validateValue) ? 'error_border' : '')}
-            type={Props.type}
-            name={Props.name}
-            id={Props.name}
-            placeholder={Props.placeholder}
-            value={Props.inputValue}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-            autoComplete="off"
+          className={'input_field ' + ((props.isNull || props.validateValue) ? 'error_border' : '')}
+          type={props.type}
+          name={props.name}
+          id={props.name}
+          placeholder={props.placeholder}
+          value={props.inputValue}
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+          autoComplete="off"
         />
-        <label htmlFor={Props.name}>{Props.title}</label>
-
-        {isFocused && Props.inputValue && (
-            <img
-                src={closeIcon}
-                alt="Очистить поле"
-                className="clear-icon"
-                onClick={clearInput}
-            />
-        )}
-
-        {Props.isNull ? <div className="error">Поле ввода не должно быть пустым</div> : ''}
-        {Props.validateValue ? <div className="error">{Props.textError}</div> : ''}
-
-        {showSuggestions && filteredSuggestions.length > 0 && (
-            <ul className="suggestions">
-              {filteredSuggestions.map((suggestion, index) => (
-                  <li
-                      key={index}
-                      onClick={() => handleSuggestionClick(suggestion)}
-                  >
-                    {suggestion}
-                  </li>
-              ))}
-            </ul>
-        )}
+        
+        <img
+          src={folderIcon}
+          alt="Просмотреть список"
+          className="folder-icon"
+          onClick={() => setShowSuggestions(!showSuggestions)}  // Открыть/закрыть список
+        />
       </div>
+
+      <label htmlFor={props.name}>{props.title}</label>
+
+      {props.isNull ? <div className="error">Поле ввода не должно быть пустым</div> : ''}
+      {props.validateValue ? <div className="error">{props.textError}</div> : ''}
+
+      {showSuggestions && filteredSuggestions.length > 0 && (
+        <ul className="suggestions">
+          {filteredSuggestions.map((suggestion, index) => (
+            <li
+              key={index}
+              onClick={() => handleSuggestionClick(suggestion)}
+            >
+              {suggestion}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div> 
   );
 };
 
 export default SelectInput;
+

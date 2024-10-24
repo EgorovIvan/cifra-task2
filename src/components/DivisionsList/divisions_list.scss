@@ -1,0 +1,18 @@
+.list_vzn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: calc(100dvh - 115px);
+    border: 1px solid $outline-gray-900;
+    border-radius: 4px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .list_vzn::-webkit-scrollbar {
+    width: 0;
+  }
+  
