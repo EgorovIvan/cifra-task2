@@ -80,8 +80,7 @@ const Scan: React.FC = () => {
                             type="button"
                             text="Отмена"
                             classBtn='btn--white'
-                            onClickBtn={() => {
-                            }}
+                            onClickBtn={closeScanModal}
                         />
                     </div>
                 </form>
