@@ -1,9 +1,9 @@
 import * as React from "react";
-import MainLayout from "../layouts/MainLayout.tsx";
 import Modal from "../components/UI/Modal/Modal.tsx";
 import { useModalStore } from "../stores/useModalStore.ts";
 import Filter from "@/components/Filter/Filter.tsx";
 import VznList from "@/components/VznList/VznList.tsx";
+import Header from "@/components/Header/Header.tsx";
 
 const Accounting: React.FC = () => {
 
@@ -31,12 +31,13 @@ const Accounting: React.FC = () => {
 
   return (
       <>
-        <MainLayout
-            headline="Меню"
+        <Header
+            headline="Учёт в производстве"
             showCloseButton={false}
             hasBorder={true}
             isBlueBackground={true}
-        >
+        />
+        <main className={'main'}>
           <ul className="main__list">
             <li className="main__list_item accounting_item">
               <a href="#">
@@ -64,9 +65,7 @@ const Accounting: React.FC = () => {
               </a>
             </li>
           </ul>
-
-        </MainLayout>
-
+        </main>
         {/*modal consumption */}
 
         {/*<Modal isOpen={isModalOpen} onClose={closeModal}>*/}

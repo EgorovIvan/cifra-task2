@@ -4,17 +4,8 @@ import Icon from '../Icon/Icon';
 import {useBottomSheetStore} from "@/stores/useBottomSheetStore.ts";
 import Button from '../UI/Buttons/Button';
 import { useModalStore } from '@/stores/useModalStore';
+import {HeaderProps} from "@/interfaces/HeaderProps.ts";
 
-interface HeaderProps {
-  headline: string;
-  supportingText?: string;
-  showCloseButton?: boolean;
-  onCloseButtonClick?: () => void,
-  centralButton?: React.ReactNode;
-  rightButton?: React.ReactNode;
-  hasBorder?: boolean;
-  isBlueBackground?: boolean;
-}
 
 const Header: React.FC<HeaderProps> = ({
   headline,

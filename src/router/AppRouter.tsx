@@ -1,68 +1,40 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-
-import Menu from '../pages/Menu.tsx';
-import Tasks from "../pages/Tasks.tsx";
-import Settings from "../pages/Settings.tsx";
-import Accounting from "../pages/Accounting.tsx";
+import * as React from 'react'
+import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import Auth from '../pages/Auth/Auth.tsx';
-import ProtectedRoute from './ProtectedRoute';
-import Test2 from "@/test/Test2.tsx";
+import ProtectedRoute from './ProtectedRoute.tsx';
+import Menu from "@/pages/Menu.tsx";
+import Tasks from "@/pages/Tasks.tsx";
+import Accounting from "@/pages/Accounting.tsx";
+import Settings from "@/pages/Settings.tsx";
+import MainLayout from "@/layouts/MainLayout.tsx";
+import VznList from "@/components/VznList/VznList.tsx";
 
 const AppRouter: React.FC = () => {
 
-  return (
-    <Router>
-      <Routes>
-        {/* Страница авторизации */}
-        <Route path="/login" element={<Auth />} />
+    return (
 
-        {/* Защищенные маршруты */}
-        <Route
-          path="/menu"
-          element={
-            <ProtectedRoute>
-              <Menu />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/tasks"
-          element={
-            <ProtectedRoute>
-              <Tasks />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/accounting"
-          element={
-            <ProtectedRoute>
-              <Accounting />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/test"
-          element={
-              <ProtectedRoute>
-              <Test2 />
-              </ProtectedRoute>
-          }
-        />
+        <Router>
+            <Routes>
+                <Route path="/login" element={<Auth/>}/>
 
-        {/* Если нет токена, по умолчанию переходим на /login */}
-        <Route path="*" element={<Navigate to="/test" replace />} />
-      </Routes>
-    </Router>
-  );
+                {/* Защищённые маршруты */}
+                <Route element={<ProtectedRoute/>}>
+
+                    <Route path="/" element={<MainLayout/>}>
+                        <Route path="menu" element={<Menu/>}/>
+                        <Route path="tasks" element={<Tasks/>}/>
+                        <Route path="accounting" element={<Accounting/>}/>
+                        <Route path="vzn-expense" element={<VznList/>}/>
+                        <Route path="settings" element={<Settings/>}/>
+                    </Route>
+
+                </Route>
+
+                {/* Если нет токена, по умолчанию переходим на /login */}
+                <Route path="*" element={<Navigate to="/test" replace/>}/>
+            </Routes>
+        </Router>
+    );
 };
 
 export default AppRouter;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './scan.scss';
-import MainLayout from '@/layouts/MainLayout';
 import Input from '../Inputs/Input';
 import Button from '../Buttons/Button';
 import {useModalStore} from "@/stores/useModalStore.ts";
@@ -8,6 +7,8 @@ import {useTypeBoStore} from "@/stores/useTypeBoStore.ts";
 import {useAuthStore} from "@/stores/useAuthStore.ts";
 import {useImmer} from "use-immer";
 import {InputState} from "@/interfaces/InputState.ts";
+import Header from "@/components/Header/Header.tsx";
+import Footer from "@/components/Footer/Footer.tsx";
 
 const Scan: React.FC = () => {
 
@@ -35,13 +36,14 @@ const Scan: React.FC = () => {
     }
     return (
         <div className="modal" id="scan">
-            <MainLayout
+            <Header
                 headline="Сканировать номер объекта"
                 showCloseButton={true}
                 hasBorder={true}
                 isBlueBackground={false}
                 onCloseButtonClick={closeScanModal}
-            >
+            />
+            <main className={'main'}>
                 <form className="scan__form" action="" id="form">
                     <label>Сканируйте штрихкод с номером объекта или введите его вручную</label>
                     <Input
@@ -84,7 +86,8 @@ const Scan: React.FC = () => {
                         />
                     </div>
                 </form>
-            </MainLayout>
+            </main>
+            <Footer/>
         </div>
     );
 };
