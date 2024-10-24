@@ -2,7 +2,7 @@ import * as React from "react";
 import MainLayout from "@/layouts/MainLayout.tsx";
 import Input from "@/components/UI/Inputs/Input.tsx";
 import {useImmer} from "use-immer";
-import {InputState} from "@/interfaces/InputState.tsx";
+import {InputState} from "@/interfaces/InputState.ts";
 import SelectInput from "@/components/UI/Inputs/SelectInput.tsx";
 import Button from "@/components/UI/Buttons/Button.tsx";
 import './create_form.scss'
