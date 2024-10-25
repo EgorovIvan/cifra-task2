@@ -1,4 +1,4 @@
-import { DivisionInputType } from '@/components/Filter/Filter';
+import { DivisionInputType } from '@/enum/DivisionInputType.ts';
 import { create } from 'zustand';
 
 interface ModalState {
