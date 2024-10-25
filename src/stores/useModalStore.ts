@@ -3,10 +3,11 @@ import { create } from 'zustand';
 
 interface ModalState {
   isModalOpen: boolean;
-  isModalFilterOpen: boolean
+  isFilterModalOpen: boolean
   isResultsModalOpen: boolean;
   isScanModalOpen: boolean;
   isDivisionsModalOpen: boolean;
+  isCreateVznModalOpen: boolean;
   selectedVznId: number | null;
   openVznModal: (Code: number) => void;
   openFilterModal: () => void;
@@ -18,6 +19,8 @@ interface ModalState {
   openDivisionsModal: (type: DivisionInputType) => void;
   closeDivisionsModal: () => void;
   divisionInputType?: DivisionInputType;
+  openCreateVznModal: () => void;
+  closeCreateVznModal: () => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
@@ -26,14 +29,15 @@ export const useModalStore = create<ModalState>((set) => ({
   isResultsModalOpen: false,
   isScanModalOpen: false,
   isDivisionsModalOpen: false,
+  isCreateVznModalOpen: false,
   selectedVznId: null,
 
   openVznModal: (VznId: number) => set({ isModalOpen: true, selectedVznId: VznId }),
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false, selectedVznId: null }),
 
-  openFilterModal: () => set({ isModalFilterOpen: true }),
-  closeFilterModal: () => set({ isModalFilterOpen: false, selectedVznId: null }),
+  openFilterModal: () => set({ isFilterModalOpen: true }),
+  closeFilterModal: () => set({ isFilterModalOpen: false, selectedVznId: null }),
 
   openResultsModal: () => set({ isResultsModalOpen: true }),
   closeResultsModal: () => set({ isResultsModalOpen: false }),
@@ -42,5 +46,8 @@ export const useModalStore = create<ModalState>((set) => ({
   closeScanModal: () => set({ isScanModalOpen: false }),
 
   openDivisionsModal: (type: DivisionInputType) => set({ isDivisionsModalOpen: true, divisionInputType: type }),
-  closeDivisionsModal: () => set({ isDivisionsModalOpen: false })
+  closeDivisionsModal: () => set({ isDivisionsModalOpen: false }),
+
+  openCreateVznModal: () => set({ isCreateVznModalOpen: true }),
+  closeCreateVznModal: () => set({ isCreateVznModalOpen: false })
 }));
