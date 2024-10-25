@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({
 
 
   const {wrapperHeight, yPosition, setYPosition} = useBottomSheetStore();
-  const { openModal } = useModalStore();
+  const { openFilterModal, openCreateVznModal } = useModalStore();
 
 
   const handleBottomSheetOpen = () => {
@@ -28,11 +28,11 @@ const Header: React.FC<HeaderProps> = ({
   }
 
   const handleOpenFilterModal = (): void => {
-    openModal();
+    openFilterModal();
   };
 
   const handleOpenCreateVznModal = (): void => {
-    openModal();
+    openCreateVznModal();
   };
 
   return (
