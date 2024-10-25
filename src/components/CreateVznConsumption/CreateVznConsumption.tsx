@@ -163,6 +163,41 @@ const CreateVznConsumption: React.FC = () => {
         closeCreateVznModal()
     }
 
+    /* Отправка формы */
+    const handleSearch = (): void => {
+
+        if (!inputVznNumber.value) {
+            updateInputVznNumber((draft) => {
+                draft.isNull = true
+            })
+        } else {
+            updateInputVznNumber((draft) => {
+                draft.isNull = false
+            })
+        }
+
+        if (!inputSender.value) {
+            updateInputSender((draft) => {
+                draft.isNull = true
+            })
+        } else {
+            updateInputSender((draft) => {
+                draft.isNull = false
+            })
+        }
+
+        if (!inputReceiver.value) {
+            updateInputReceiver((draft) => {
+                draft.isNull = true
+            })
+        } else {
+            updateInputReceiver((draft) => {
+                draft.isNull = false
+            })
+        }
+
+    }
+
     // Закрытие модального окна
     const handleCloseModal = () => {
         closeCreateVznModal()
