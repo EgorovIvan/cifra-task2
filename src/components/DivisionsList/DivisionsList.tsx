@@ -6,12 +6,14 @@ import Header from "@/components/Header/Header.tsx";
 import { useModalStore } from "@/stores/useModalStore";
 
 import './divisions_list.scss';
+import {DivisionsProps} from "@/interfaces/DivisionsProps.ts";
 
 interface Props {
     onSelectValue(divisionName: string): void;
+    onSelectCode(divisionCode: number): void;
 }
 
-const DivisionsList: React.FC<Props> = ({onSelectValue}) => {
+const DivisionsList: React.FC<Props> = ({onSelectValue, onSelectCode}) => {
     const {divisions, loading, error, fetchDivisions} = useDivisionsStore();
     const authToken = useAuthStore((state) => state.authToken);
     const {closeDivisionsModal} = useModalStore();
@@ -22,8 +24,9 @@ const DivisionsList: React.FC<Props> = ({onSelectValue}) => {
         }
     }, [authToken, fetchDivisions]);
 
-    const handleItemClick = (divisionName: string) => {
-        onSelectValue(divisionName);
+    const handleItemClick = (divisions: DivisionsProps) => {
+        onSelectValue(divisions.Name);
+        onSelectCode(divisions.Code)
         closeDivisionsModal();
     }
 
@@ -43,9 +46,9 @@ const DivisionsList: React.FC<Props> = ({onSelectValue}) => {
                 {!loading && !error && (
                     <ul className="divisions_list" id="list">
                         {divisions.map((item) => (
-                            <li key={item.Code} className="list_item" onClick={() => handleItemClick(item.Name)}>
+                            <li key={item.Code} className="list_item" onClick={() => handleItemClick(item)}>
                                 {item.Name}
-                            </li> 
+                            </li>
                         ))}
                     </ul>
                 )}

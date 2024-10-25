@@ -8,7 +8,6 @@ import SelectInput from "../UI/Inputs/SelectInput.tsx";
 import DateRangeInput from "@/components/UI/DateRangeInput/DateRangeInput.tsx";
 import {useAuthStore} from "@/stores/useAuthStore.ts";
 import {useVznListStore} from "@/stores/useVznListStore.ts";
-import {FilterProps} from "@/interfaces/FilterProps.ts";
 import {useModalStore} from "@/stores/useModalStore.ts";
 import {InputState} from "@/interfaces/InputState.ts";
 import Header from "@/components/Header/Header.tsx";
@@ -16,11 +15,8 @@ import Footer from "@/components/Footer/Footer.tsx";
 import {useNavigate} from "react-router-dom";
 import Modal from "../UI/Modal/Modal.tsx";
 import DivisionsList from "../DivisionsList/DivisionsList.tsx";
+import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 
-export enum DivisionInputType {
-    SENDER = 'sender',
-    RECIPIENT = 'recipient'
-}
 
 interface Period {
     value: string;
@@ -33,17 +29,25 @@ const Filter: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const { authToken } = useAuthStore()
-    const { fetchVznList } = useVznListStore()
-    const {openResultsModal, closeFilterModal, isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
+    const {authToken} = useAuthStore()
+    const {updateFilters, fetchVznList} = useVznListStore()
+    const {
+        openResultsModal,
+        closeFilterModal,
+        isDivisionsModalOpen,
+        openDivisionsModal,
+        closeDivisionsModal,
+        divisionInputType
+    } = useModalStore();
 
     // Фильтры
-    const [filters, updateFilters] = useImmer<FilterProps>({
-        Num: "",
-        // Sender: "",
-        // Recipient: "",
-        // Period: ""
-    })
+    // const [filters, updateFilters] = useImmer<FilterProps>({
+    //     Codes: [],
+    //     Num: "",
+    //     Sender: 0,
+    //     Receiver: 0,
+    //     Period: ""
+    // })
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
         value: "",
@@ -57,7 +61,7 @@ const Filter: React.FC = () => {
         isNull: false,
     });
 
-    const [inputRecipient, updateInputRecipient] = useImmer<InputState>({
+    const [inputReceiver, updateInputReceiver] = useImmer<InputState>({
         value: "",
         errorField: false,
         isNull: false,
@@ -70,10 +74,9 @@ const Filter: React.FC = () => {
         errorField: false,
     });
 
-
     // Отправка запроса к серверу
     const handleSubmit = () => {
-        fetchVznList(authToken, filters);
+        fetchVznList(authToken);
         closeFilterModal();
         navigate("/vzn-list");
         openResultsModal();
@@ -107,12 +110,12 @@ const Filter: React.FC = () => {
             })
         }
 
-        if (!inputRecipient.value) {
-            updateInputRecipient((draft) => {
+        if (!inputReceiver.value) {
+            updateInputReceiver((draft) => {
                 draft.isNull = true
             })
         } else {
-            updateInputRecipient((draft) => {
+            updateInputReceiver((draft) => {
                 draft.isNull = false
             })
         }
@@ -169,9 +172,7 @@ const Filter: React.FC = () => {
         updateInputVznNumber((draft) => {
             draft.value = value
         })
-        updateFilters((draft) => {
-            draft.Num = value + '%'
-        })
+        updateFilters({ 'Num': `${value}%` });
     }
 
     // Ввод данных в поле "Отправитель"
@@ -185,15 +186,35 @@ const Filter: React.FC = () => {
         // })
     }
 
+    // Открытие списка Sender
+    const handleOpenSenderFolder = (): void => {
+        openDivisionsModal(DivisionInputType.SENDER)
+    }
+
+    // Получение кода Отправителя
+    const handleCodeSender = (code: number): void => {
+        updateFilters({ 'Sender': code });
+    }
+
     // Ввод данных в поле "Получатель"
-    const handleInputRecipient = (value: string): void => {
-        updateInputRecipient((draft) => {
+    const handleInputReceiver = (value: string): void => {
+        updateInputReceiver((draft) => {
             draft.value = value
         })
 
         // updateFilters((draft) => {
-        //   draft.Recipient = value
+        //   draft.Receiver = value
         // })
+    }
+
+    // Открытие списка Receiver
+    const handleOpenReceiverFolder = (): void => {
+        openDivisionsModal(DivisionInputType.RECEIVER)
+    }
+
+    // Получение кода Получателя
+    const handleCodeReceiver = (code: number): void => {
+        updateFilters({ 'Receiver': code });
     }
 
     // Ввод данных в поле "Дата принятия"
@@ -251,21 +272,19 @@ const Filter: React.FC = () => {
         }
 
         /* Валидация поля Получатель */
-        if (inputRecipient.value.length >= 100) {
-            updateInputRecipient((draft) => {
+        if (inputReceiver.value.length >= 100) {
+            updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false
             })
         } else {
-            updateInputRecipient((draft) => {
+            updateInputReceiver((draft) => {
                 draft.errorField = false
                 draft.isNull = false
             })
         }
 
-        console.log(inputSender.value)
-
-    }, [inputVznNumber.value, inputSender.value, inputRecipient.value, updateInputVznNumber, updateInputSender, updateInputRecipient]);
+    }, [inputVznNumber.value, inputSender.value, inputReceiver.value, updateInputVznNumber, updateInputSender, updateInputReceiver]);
 
     return (
         <>
@@ -301,20 +320,20 @@ const Filter: React.FC = () => {
                             validateValue={inputSender.errorField}
                             isNull={false}
                             textError="строка до 100 символов"
-                            onFolderIconClick={() => openDivisionsModal(DivisionInputType.SENDER)}
+                            onFolderIconClick={handleOpenSenderFolder}
                         />
 
                         <SelectInput
                             type="text"
-                            name="recipient"
+                            name="Receiver"
                             title="Получатель"
                             placeholder="Цех 02"
-                            inputValue={inputRecipient.value}
-                            updateValue={handleInputRecipient}
-                            validateValue={inputRecipient.errorField}
+                            inputValue={inputReceiver.value}
+                            updateValue={handleInputReceiver}
+                            validateValue={inputReceiver.errorField}
                             isNull={false}
                             textError="строка до 100 символов"
-                            onFolderIconClick={() => openDivisionsModal(DivisionInputType.RECIPIENT)}
+                            onFolderIconClick={handleOpenReceiverFolder}
                         />
 
                         <DateRangeInput
@@ -349,9 +368,10 @@ const Filter: React.FC = () => {
                     </form>
                 </main>
                 <Footer/>
-                <Modal isOpen={isDivisionsModalOpen} onClose={closeDivisionsModal} >
+                <Modal isOpen={isDivisionsModalOpen} onClose={closeDivisionsModal}>
                     <DivisionsList
-                        onSelectValue={divisionInputType === DivisionInputType.RECIPIENT ? handleInputRecipient : handleInputSender }
+                        onSelectValue={divisionInputType === DivisionInputType.RECEIVER ? handleInputReceiver : handleInputSender}
+                        onSelectCode={divisionInputType === DivisionInputType.RECEIVER ? handleCodeReceiver : handleCodeSender}
                     />
                 </Modal>
             </div>

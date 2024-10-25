@@ -34,7 +34,7 @@ interface NewVznDataState {
 export const useCreateVznStore = create<NewVznDataState>((set, get) => ({
     newVznData: {
         Num: '',
-        DocDate: '',
+        DocDate: formatDateISO8601(Date()),
         Sender: 0,
         SenderSection: 0,
         Receiver: 0,
@@ -72,37 +72,16 @@ export const useCreateVznStore = create<NewVznDataState>((set, get) => ({
 
         const data = get().newVznData
 
-        const newDate = formatDateISO8601(Date())
-
         try {
             const response = await axios.post('http://92.55.15.91:8225/stock/wsInplants.insert',
                 {
                     authToken: token,
-                    data: {
-                        Num: data.Num,
-                        DocDate: newDate,
-                        Sender: data.Sender,
-                        SenderSection: data.SenderSection,
-                        Receiver: data.Receiver,
-                        ReceiverSection: data.ReceiverSection,
-                        LeaveMoveDate: data.LeaveMoveDate,
-                        ArrivalMoveDate: data.ArrivalMoveDate,
-                        bo: {
-                            so: {
-                                attrs: [{
-                                    Code: data.bo.so.attrs[0].Code,
-                                    IsNull: data.bo.so.attrs[0].IsNull,
-                                    MeasCode: data.bo.so.attrs[0].MeasCode,
-                                    Value: data.bo.so.attrs[0].Value
-                                }
-                                ]
-                            }
-                        }
-                    }
+                    data: data
                 },
             );
 
             console.log(response)
+            console.log(data)
         } catch {
             set((state) =>
                 produce(state, (draft: NewVznDataState) => {

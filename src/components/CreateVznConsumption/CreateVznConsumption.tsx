@@ -12,6 +12,9 @@ import Header from "@/components/Header/Header.tsx";
 import Footer from "@/components/Footer/Footer.tsx";
 import {useCreateVznStore} from "@/stores/useCreateVznStore.ts";
 import {useAuthStore} from "@/stores/useAuthStore.ts";
+import {DivisionInputType} from "@/enum/DivisionInputType.ts";
+import DivisionsList from "@/components/DivisionsList/DivisionsList.tsx";
+import Modal from "@/components/UI/Modal/Modal.tsx";
 
 interface InputDate {
     date: Date | undefined,
@@ -24,7 +27,7 @@ const CreateVznConsumption: React.FC = () => {
     const { closeCreateVznModal } = useModalStore()
     const { newVznData, updateNewVznData, createVznItem } = useCreateVznStore()
     const authToken = useAuthStore((state) => state.authToken);
-
+    const {isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
         value: "",
@@ -78,7 +81,16 @@ const CreateVznConsumption: React.FC = () => {
         updateInputSender((draft) => {
             draft.value = value
         })
-        updateNewVznData({ 'Sender': 1 });
+    }
+
+    // Открытие списка Sender
+    const handleOpenSenderFolder = (): void => {
+        openDivisionsModal(DivisionInputType.SENDER)
+    }
+
+    // Получение кода Отправителя
+    const handleCodeSender = (code: number): void => {
+        updateNewVznData({ 'Sender': code });
     }
 
     // Ввод данных в поле "Получатель"
@@ -86,8 +98,16 @@ const CreateVznConsumption: React.FC = () => {
         updateInputReceiver((draft) => {
             draft.value = value
         })
-        updateNewVznData({ 'Receiver': 2 });
-        // console.log(newVznData)
+    }
+
+    // Открытие списка Receiver
+    const handleOpenReceiverFolder = (): void => {
+        openDivisionsModal(DivisionInputType.RECEIVER)
+    }
+
+    // Получение кода Получателя
+    const handleCodeReceiver = (code: number): void => {
+        updateNewVznData({ 'Receiver': code });
     }
 
     // Ввод данных в поле "Выдал МОЛ*"
@@ -104,7 +124,6 @@ const CreateVznConsumption: React.FC = () => {
             draft.value = value
         })
         updateNewVznData({ 'ReceiverSection': 4 });
-
     }
 
     // Ввод данных в поле "Дата выдачи"
@@ -184,11 +203,12 @@ const CreateVznConsumption: React.FC = () => {
                                 validateValue={inputSender.errorField}
                                 isNull={inputSender.isNull}
                                 textError="строка до 50 символов"
+                                onFolderIconClick={handleOpenSenderFolder}
                             />
 
                             <SelectInput
                                 type="text"
-                                name="recipient"
+                                name="receiver"
                                 title="Получатель"
                                 placeholder="Цех 02"
                                 inputValue={inputReceiver.value}
@@ -196,11 +216,12 @@ const CreateVznConsumption: React.FC = () => {
                                 validateValue={inputReceiver.errorField}
                                 isNull={inputReceiver.isNull}
                                 textError="строка до 50 символов"
+                                onFolderIconClick={handleOpenReceiverFolder}
                             />
 
                             <SelectInput
                                 type="text"
-                                name="recipient"
+                                name="sender-section"
                                 title="Выдал МОЛ*"
                                 placeholder="Иванов И. И."
                                 inputValue={inputSenderSection.value}
@@ -208,6 +229,7 @@ const CreateVznConsumption: React.FC = () => {
                                 validateValue={inputSenderSection.errorField}
                                 isNull={inputSenderSection.isNull}
                                 textError="строка до 50 символов"
+                                onFolderIconClick={handleOpenReceiverFolder}
                             />
 
                             <DateInput
@@ -223,7 +245,7 @@ const CreateVznConsumption: React.FC = () => {
 
                             <SelectInput
                                 type="text"
-                                name="recipient"
+                                name="receiver-section"
                                 title="Принял МОЛ"
                                 placeholder="Иванов И. И."
                                 inputValue={inputReceiverSection.value}
@@ -231,6 +253,7 @@ const CreateVznConsumption: React.FC = () => {
                                 validateValue={inputReceiverSection.errorField}
                                 isNull={inputReceiverSection.isNull}
                                 textError="строка до 50 символов"
+                                onFolderIconClick={handleOpenReceiverFolder}
                             />
 
                             <DateInput
@@ -277,6 +300,12 @@ const CreateVznConsumption: React.FC = () => {
                     </form>
                 </main>
                 <Footer/>
+                <Modal isOpen={isDivisionsModalOpen} onClose={closeDivisionsModal} >
+                    <DivisionsList
+                        onSelectValue={divisionInputType === DivisionInputType.RECEIVER ? handleInputReceiver : handleInputSender }
+                        onSelectCode={divisionInputType === DivisionInputType.RECEIVER ? handleCodeReceiver : handleCodeSender}
+                        />
+                </Modal>
             </div>
         </>
     )

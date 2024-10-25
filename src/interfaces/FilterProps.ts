@@ -1,8 +1,8 @@
 export interface FilterProps {
-    // Codes?: number[]; // Коды
+    Codes?: number[]; // Коды
     Num?: string; // Маска номера
-    // Sender?: string;
-    // Recipient?: string;
-    // Period?: string;
-    // GatheringContCode?: number; // Код состава КВ
+    Sender?: number;
+    Receiver?: number;
+    Period?: string;
+    GatheringContCode?: number; // Код состава КВ
 }

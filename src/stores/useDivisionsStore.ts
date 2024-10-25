@@ -31,6 +31,7 @@ export const useDivisionsStore = create<DivisionsState>((set) => ({
 
       const data: DivisionsProps[] = response.data.divisions || [];
 
+      console.log(response)
       set(
         produce((state: DivisionsState) => {
           state.divisions = data;
