@@ -14,7 +14,6 @@ import { formatDate } from '@/utils/formatDate';
 import { findDivisionName } from '@/utils/findDivisionName';
 import { useDivisionsStore } from '@/stores/useDivisionsStore';
 
-
 const VznDetails: React.FC = () => {
   const authToken = useAuthStore((state) => state.authToken); 
   const { wsInplantCode } = useParams<{ wsInplantCode: string }>();
@@ -37,7 +36,7 @@ const VznDetails: React.FC = () => {
 
   return (
     <>
-      <Header headline={'ВЗН №'} hasBorder={false}/>
+      <Header headline={`ВЗН №${selectedVzn}`} hasBorder={false}/>
       <main className='main'>
         {selectedVzn && (
           <div className="vzn_details__summary">

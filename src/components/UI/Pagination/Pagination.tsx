@@ -1,40 +1,17 @@
-import './pagination.scss';
-import { usePaginationStore } from '../../../stores/usePaginationStore.ts';
-import { useState } from 'react';
-import Icon from '@/components/Icon/Icon.tsx';
+import Icon from "@/components/Icon/Icon";
 
 interface PaginationProps {
   totalItems: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalItems }) => {
-  const { currentPage, itemsPerPage, setPage } = usePaginationStore();
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const [inputPage, setInputPage] = useState(currentPage);
-
-  if (currentPage > totalPages && totalPages > 0) {
-    setPage(totalPages);
-  }
+const Pagination: React.FC<PaginationProps> = ({ totalItems, currentPage, onPageChange }) => {
+  const totalPages = Math.ceil(totalItems);
 
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
-      setPage(page);
-      setInputPage(page);
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    if (!isNaN(value)) {
-      setInputPage(value);
-    }
-  };
-
-  const handleInputBlur = () => {
-    if (inputPage > 0 && inputPage <= totalPages) {
-      setPage(inputPage);
-    } else {
-      setInputPage(currentPage);
+      onPageChange(page);
     }
   };
 
@@ -50,9 +27,8 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems }) => {
       <input
         type="number"
         className='pagination__input'
-        value={inputPage}
-        onChange={handleInputChange}
-        onBlur={handleInputBlur}
+        value={currentPage}
+        onChange={(e) => handlePageChange(Number(e.target.value))}
         min={1}
         max={totalPages}
       />
@@ -61,8 +37,8 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems }) => {
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-          <Icon src='../../../../public/img/pagination/arrow.svg' size={9} />
-        </button>
+        <Icon src='../../../../public/img/pagination/arrow.svg' size={9} />
+      </button>
     </div>
   );
 };

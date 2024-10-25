@@ -5,16 +5,24 @@ import Modal from '@/components/UI/Modal/Modal';
 import Pagination from '@/components/UI/Pagination/Pagination';
 
 const VznDetailModal: React.FC = () => {
-  const { closeModal, selectedVznId } = useModalStore();
+  const { closeModal } = useModalStore();
   const { vznDetails } = useVznDetailsStore();
-  
-  const selectedItem = vznDetails?.wsInplantContents.find(item => item.Code === selectedVznId);
-  
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  const totalItems = vznDetails?.wsInplantContents.length || 0;
+
+  const selectedItem = vznDetails?.wsInplantContents[currentPage - 1];
+
   if (!selectedItem) return null;
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <Modal isOpen={!!selectedItem} onClose={closeModal}>
-      <div className="vzn-detail-modal">
+      <div className="vzn_detail__modal">
         <h2>Детали элемента ВЗН</h2>
         <p><strong>Номер карточки:</strong> {selectedItem.Code}</p>
         <p><strong>Обозначение:</strong> {selectedItem.ArticleCode}</p>
@@ -28,12 +36,8 @@ const VznDetailModal: React.FC = () => {
           <label>Получено:</label>
           <input type="number" defaultValue={selectedItem.ArrivalQty} />
         </div>
-        <div>
-          <label>Номер заказа:</label>
-          {/* <input type="text" defaultValue={selectedItem.OrderCode} /> */}
-        </div>
 
-        <Pagination totalItems={vznDetails?.wsInplantContents.length || 1} />
+        <Pagination totalItems={totalItems} onPageChange={handlePageChange} currentPage={currentPage} />
       </div>
     </Modal>
   );
