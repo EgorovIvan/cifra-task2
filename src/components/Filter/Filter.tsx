@@ -40,15 +40,6 @@ const Filter: React.FC = () => {
         divisionInputType
     } = useModalStore();
 
-    // Фильтры
-    // const [filters, updateFilters] = useImmer<FilterProps>({
-    //     Codes: [],
-    //     Num: "",
-    //     Sender: 0,
-    //     Receiver: 0,
-    //     Period: ""
-    // })
-
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
         value: "",
         errorField: false,
@@ -74,99 +65,6 @@ const Filter: React.FC = () => {
         errorField: false,
     });
 
-    // Отправка запроса к серверу
-    const handleSubmit = () => {
-        fetchVznList(authToken);
-        closeFilterModal();
-        navigate("/vzn-list");
-        openResultsModal();
-    }
-
-    // Закрытие модального окна
-    const handleCloseModal = () => {
-        closeFilterModal();
-    }
-
-    /* Отправка формы */
-    const handleSearch = (): void => {
-
-        if (!inputVznNumber.value) {
-            updateInputVznNumber((draft) => {
-                draft.isNull = true
-            })
-        } else {
-            updateInputVznNumber((draft) => {
-                draft.isNull = false
-            })
-        }
-
-        if (!inputSender.value) {
-            updateInputSender((draft) => {
-                draft.isNull = true
-            })
-        } else {
-            updateInputSender((draft) => {
-                draft.isNull = false
-            })
-        }
-
-        if (!inputReceiver.value) {
-            updateInputReceiver((draft) => {
-                draft.isNull = true
-            })
-        } else {
-            updateInputReceiver((draft) => {
-                draft.isNull = false
-            })
-        }
-
-
-        const periodInputValue = inputPeriod.value
-        const separatorPeriod = ' - ';
-        const arrayPeriod = periodInputValue.split(separatorPeriod);
-
-        /* Валидация при не соответствии формата даты */
-        // if (arrayPeriod.length == 2) {
-        //
-        //   const arrayStartDate = arrayPeriod[0].split(".");
-        //   const arrayEndDate = arrayPeriod[1].split(".");
-        //   const arrayStartMonth = Number(arrayStartDate[1]) - 1;
-        //   const arrayEndMonth = Number(arrayEndDate[1]) - 1;
-        //   const d1 = new Date(Number(arrayStartDate[2]), arrayStartMonth, Number(arrayStartDate[0]));
-        //   const d2 = new Date(Number(arrayEndDate[2]), arrayEndMonth, Number(arrayEndDate[0]));
-        //
-        //   if ((d1.getFullYear() == Number(arrayStartDate[2]))
-        //     && (d1.getMonth() == arrayStartMonth)
-        //     && (d1.getDate() == Number(arrayStartDate[0]))
-        //     && (arrayStartDate[2].length == 4)
-        //     && (arrayStartDate[1].length == 2)
-        //     && (arrayStartDate[0].length == 2)
-        //     && (d2.getFullYear() == Number(arrayEndDate[2]))
-        //     && (d2.getMonth() == arrayEndMonth)
-        //     && (d2.getDate() == Number(arrayEndDate[0]))
-        //     && (arrayEndDate[2].length == 4)
-        //     && (arrayEndDate[1].length == 2)
-        //     && (arrayEndDate[0].length == 2)) {
-        //
-        //     updateInputPeriod((draft) => {
-        //       draft.errorField = false
-        //       draft.isNull = false
-        //     })
-        //   } else {
-        //     updateInputPeriod((draft) => {
-        //       draft.errorField = true
-        //       draft.isNull = false
-        //     })
-        //   }
-        //
-        // } else if(inputPeriod.value) {
-        //   updateInputPeriod((draft) => {
-        //     draft.errorField = true
-        //     draft.isNull = false
-        //   })
-        // }
-    }
-
     // Ввод данных в поле "Номер ВЗН"
     const handleInputVznNumber = (value: string): void => {
         updateInputVznNumber((draft) => {
@@ -180,10 +78,6 @@ const Filter: React.FC = () => {
         updateInputSender((draft) => {
             draft.value = value
         })
-
-        // updateFilters((draft) => {
-        //   draft.Sender = value
-        // })
     }
 
     // Открытие списка Sender
@@ -201,10 +95,6 @@ const Filter: React.FC = () => {
         updateInputReceiver((draft) => {
             draft.value = value
         })
-
-        // updateFilters((draft) => {
-        //   draft.Receiver = value
-        // })
     }
 
     // Открытие списка Receiver
@@ -217,26 +107,31 @@ const Filter: React.FC = () => {
         updateFilters({ 'Receiver': code });
     }
 
-    // Ввод данных в поле "Дата принятия"
+    // Ввод данных в поле "Дата от"
     const handleInputStartDate = (value: Date): void => {
         updateInputPeriod((draft) => {
             draft.startDate = value
         })
-
-        // updateFilters((draft) => {
-        //   draft.Period = value
-        // })
     }
 
-    // Ввод данных в поле "Дата принятия"
+    // Ввод данных в поле "Дата до"
     const handleInputEndDate = (value: Date): void => {
         updateInputPeriod((draft) => {
             draft.endDate = value
         })
+    }
 
-        // updateFilters((draft) => {
-        //   draft.Period = value
-        // })
+    // Отправка запроса к серверу
+    const handleSubmit = () => {
+        fetchVznList(authToken);
+        closeFilterModal();
+        navigate("/vzn-list");
+        openResultsModal();
+    }
+
+    // Закрытие модального окна
+    const handleCloseModal = () => {
+        closeFilterModal();
     }
 
     useEffect(() => {
