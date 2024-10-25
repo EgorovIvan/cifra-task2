@@ -1,7 +1,7 @@
 export interface VznItemProps {
   Code: number;
   Num: string;
-  Sender: string;
-  Receiver: string;
+  Sender: number;
+  Receiver: number;
   DocDate: string;
 }

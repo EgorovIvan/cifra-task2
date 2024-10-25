@@ -10,6 +10,8 @@ import DateInput from "@/components/UI/DateInput/DateInput.tsx";
 import {useModalStore} from "@/stores/useModalStore.ts";
 import Header from "@/components/Header/Header.tsx";
 import Footer from "@/components/Footer/Footer.tsx";
+import {useCreateVznStore} from "@/stores/useCreateVznStore.ts";
+import {useAuthStore} from "@/stores/useAuthStore.ts";
 
 interface InputDate {
     date: Date | undefined,
@@ -19,7 +21,10 @@ interface InputDate {
 
 const CreateVznConsumption: React.FC = () => {
 
-    const {closeCreateVznModal} = useModalStore()
+    const { closeCreateVznModal } = useModalStore()
+    const { newVznData, updateNewVznData, createVznItem } = useCreateVznStore()
+    const authToken = useAuthStore((state) => state.authToken);
+
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
         value: "",
@@ -33,7 +38,19 @@ const CreateVznConsumption: React.FC = () => {
         isNull: false,
     });
 
-    const [inputRecipient, updateInputRecipient] = useImmer<InputState>({
+    const [inputReceiver, updateInputReceiver] = useImmer<InputState>({
+        value: "",
+        errorField: false,
+        isNull: false,
+    });
+
+    const [inputSenderSection, updateInputSenderSection] = useImmer<InputState>({
+        value: "",
+        errorField: false,
+        isNull: false,
+    });
+
+    const [inputReceiverSection, updateInputReceiverSection] = useImmer<InputState>({
         value: "",
         errorField: false,
         isNull: false,
@@ -53,9 +70,7 @@ const CreateVznConsumption: React.FC = () => {
 
     // Ввод данных в поле "Номер ВЗН"
     const handleInputVznNumber = (value: string): void => {
-        updateInputVznNumber((draft) => {
-            draft.value = value
-        })
+        updateNewVznData({ 'Num': value });
     }
 
     // Ввод данных в поле "Отправитель"
@@ -63,13 +78,33 @@ const CreateVznConsumption: React.FC = () => {
         updateInputSender((draft) => {
             draft.value = value
         })
+        updateNewVznData({ 'Sender': 1 });
     }
 
     // Ввод данных в поле "Получатель"
-    const handleInputRecipient = (value: string): void => {
-        updateInputRecipient((draft) => {
+    const handleInputReceiver = (value: string): void => {
+        updateInputReceiver((draft) => {
             draft.value = value
         })
+        updateNewVznData({ 'Receiver': 2 });
+        // console.log(newVznData)
+    }
+
+    // Ввод данных в поле "Выдал МОЛ*"
+    const handleInputSenderSection = (value: string): void => {
+        updateInputSenderSection((draft) => {
+            draft.value = value
+        })
+        updateNewVznData({ 'SenderSection': 3 });
+    }
+
+    // Ввод данных в поле "Принял МОЛ"
+    const handleInputReceiverSection = (value: string): void => {
+        updateInputReceiverSection((draft) => {
+            draft.value = value
+        })
+        updateNewVznData({ 'ReceiverSection': 4 });
+
     }
 
     // Ввод данных в поле "Дата выдачи"
@@ -77,6 +112,7 @@ const CreateVznConsumption: React.FC = () => {
         updateInputDateIssue((draft) => {
             draft.date = value
         })
+        updateNewVznData({ 'LeaveMoveDate': String(value) }); // Необходимо откорректировать дату к UTC
     }
 
     // Ввод данных в поле "Дата принятия"
@@ -84,10 +120,27 @@ const CreateVznConsumption: React.FC = () => {
         updateInputDateAdoption((draft) => {
             draft.date = value
         })
+        updateNewVznData({ 'ArrivalMoveDate': String(value) }); // Необходимо откорректировать дату к UTC
+    }
+
+    // Ввод данных в поле "Примечание"
+    const handleInputComment = (value: string): void => {
+
+        updateNewVznData({
+            bo: {
+                so: {
+                    attrs: newVznData.bo.so.attrs.map((attr, i) =>
+                        i === 0 ? { ...attr, Value: value } : attr
+                    ),
+                },
+            },
+        });
+        console.log(newVznData)
     }
 
     // Отправка запроса к серверу
     const handleSubmit = () => {
+        createVznItem(authToken)
         closeCreateVznModal()
     }
 
@@ -114,7 +167,7 @@ const CreateVznConsumption: React.FC = () => {
                                 name="vzn-number"
                                 title="№ ВЗН*"
                                 placeholder=""
-                                inputValue={inputVznNumber.value}
+                                inputValue={newVznData.Num}
                                 updateValue={handleInputVznNumber}
                                 validateValue={inputVznNumber.errorField}
                                 isNull={inputVznNumber.isNull}
@@ -138,10 +191,10 @@ const CreateVznConsumption: React.FC = () => {
                                 name="recipient"
                                 title="Получатель"
                                 placeholder="Цех 02"
-                                inputValue={inputRecipient.value}
-                                updateValue={handleInputRecipient}
-                                validateValue={inputRecipient.errorField}
-                                isNull={inputRecipient.isNull}
+                                inputValue={inputReceiver.value}
+                                updateValue={handleInputReceiver}
+                                validateValue={inputReceiver.errorField}
+                                isNull={inputReceiver.isNull}
                                 textError="строка до 50 символов"
                             />
 
@@ -150,10 +203,10 @@ const CreateVznConsumption: React.FC = () => {
                                 name="recipient"
                                 title="Выдал МОЛ*"
                                 placeholder="Иванов И. И."
-                                inputValue={inputRecipient.value}
-                                updateValue={handleInputRecipient}
-                                validateValue={inputRecipient.errorField}
-                                isNull={inputRecipient.isNull}
+                                inputValue={inputSenderSection.value}
+                                updateValue={handleInputSenderSection}
+                                validateValue={inputSenderSection.errorField}
+                                isNull={inputSenderSection.isNull}
                                 textError="строка до 50 символов"
                             />
 
@@ -173,25 +226,36 @@ const CreateVznConsumption: React.FC = () => {
                                 name="recipient"
                                 title="Принял МОЛ"
                                 placeholder="Иванов И. И."
-                                inputValue={inputRecipient.value}
-                                updateValue={handleInputRecipient}
-                                validateValue={inputRecipient.errorField}
-                                isNull={inputDateAdoption.isNull}
+                                inputValue={inputReceiverSection.value}
+                                updateValue={handleInputReceiverSection}
+                                validateValue={inputReceiverSection.errorField}
+                                isNull={inputReceiverSection.isNull}
                                 textError="строка до 50 символов"
                             />
 
                             <DateInput
                                 name="datepicker-issue"
-                                title="Дата выдачи*"
+                                title="Дата принятия"
                                 placeholder=""
                                 date={inputDateAdoption.date}
                                 setDateChange={handleInputDateAdoption}
                                 validateValue={inputDateAdoption.errorField}
-                                isNull={inputRecipient.isNull}
+                                isNull={inputDateAdoption.isNull}
                                 textError="некорректный формат"
                             />
 
-                            <div>TextField</div>
+                            <Input
+                                type="text"
+                                name="comment"
+                                title="Примечание"
+                                placeholder=""
+                                inputValue={newVznData.bo.so.attrs[0].Value}
+                                updateValue={handleInputComment}
+                                validateValue={false}
+                                isNull={false}
+                                textError="строка до 300 символов"
+                            />
+
                         </div>
 
                         <div className="create_form__btns">

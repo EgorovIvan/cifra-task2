@@ -238,7 +238,7 @@ const Filter: React.FC = () => {
         }
 
         /* Валидация поля Отправитель */
-        if (inputSender.value.length >= 50) {
+        if (inputSender.value.length >= 100) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -251,7 +251,7 @@ const Filter: React.FC = () => {
         }
 
         /* Валидация поля Получатель */
-        if (inputRecipient.value.length >= 50) {
+        if (inputRecipient.value.length >= 100) {
             updateInputRecipient((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -300,7 +300,7 @@ const Filter: React.FC = () => {
                             updateValue={handleInputSender}
                             validateValue={inputSender.errorField}
                             isNull={false}
-                            textError="строка до 50 символов"
+                            textError="строка до 100 символов"
                             onFolderIconClick={() => openDivisionsModal(DivisionInputType.SENDER)}
                         />
 
@@ -313,7 +313,7 @@ const Filter: React.FC = () => {
                             updateValue={handleInputRecipient}
                             validateValue={inputRecipient.errorField}
                             isNull={false}
-                            textError="строка до 50 символов"
+                            textError="строка до 100 символов"
                             onFolderIconClick={() => openDivisionsModal(DivisionInputType.RECIPIENT)}
                         />
 
@@ -350,7 +350,7 @@ const Filter: React.FC = () => {
                 </main>
                 <Footer/>
                 <Modal isOpen={isDivisionsModalOpen} onClose={closeDivisionsModal} >
-                    <DivisionsList 
+                    <DivisionsList
                         onSelectValue={divisionInputType === DivisionInputType.RECIPIENT ? handleInputRecipient : handleInputSender }
                     />
                 </Modal>
