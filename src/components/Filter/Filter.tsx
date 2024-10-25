@@ -73,6 +73,7 @@ const Filter: React.FC = () => {
         openResultsModal();
     }
 
+    // Закрытие модального окна
     const handleCloseModal = () => {
         closeFilterModal();
     }

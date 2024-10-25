@@ -6,27 +6,12 @@ import Header from "@/components/Header/Header.tsx";
 
 const Accounting: React.FC = () => {
 
-  const { isModalFilterOpen, openFilterModal, closeFilterModal } = useModalStore();
+  const { isFilterModalOpen, openFilterModal, closeFilterModal } = useModalStore();
 
   // Открытие модального окна ВЗН (Расход)
   const handleOpenFilterModal = (): void => {
       openFilterModal();
   };
-
-  // Открытие модального окна Фильтр ВЗН УП
-  // const handleOpenModalFilter = (): void => {
-  //   setModalFilterVisible(true)
-  // }
-
-  // Закрытие модального окна Фильтр ВЗН УП
-  // const handleCloseModalFilter = (): void => {
-  //   setModalFilterVisible(false)
-  // }
-
-  // Закрытие всех модальных окон
-  // const handleCloseModals = (): void => {
-  //   setModalFilterVisible(false)
-  // }
 
   return (
       <>
@@ -65,29 +50,11 @@ const Accounting: React.FC = () => {
             </li>
           </ul>
         </main>
-        {/*modal consumption */}
-
-        {/*<Modal isOpen={isModalOpen} onClose={closeModal}>*/}
-        {/*  <VznList />*/}
-        {/*</Modal>*/}
 
         {/*modal filter*/}
-
-        <Modal isOpen={isModalFilterOpen} onClose={closeFilterModal}>
+        <Modal isOpen={isFilterModalOpen} onClose={closeFilterModal}>
           <Filter />
         </Modal>
-
-        {/* Модальное окно с результатами ВЗН УП */}
-        {/*<Modal isOpen={isResultsModalOpen} onClose={closeResultsModal}>*/}
-        {/*  <VznList />*/}
-        {/*</Modal>*/}
-
-        {/* {modalFilterVisible ? <Filter*/}
-        {/*    handleOpenModalVznList={handleOpenModalVznList}*/}
-        {/*  handleCloseModalFilter={handleCloseModalFilter}*/}
-        {/*  handleCloseModals={handleCloseModals}*/}
-        {/*/> : ''}*/}
-
       </>
   )
 }

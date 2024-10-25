@@ -1,5 +1,4 @@
 import * as React from "react";
-import MainLayout from "@/layouts/MainLayout.tsx";
 import Input from "@/components/UI/Inputs/Input.tsx";
 import {useImmer} from "use-immer";
 import {InputState} from "@/interfaces/InputState.ts";
@@ -8,6 +7,9 @@ import Button from "@/components/UI/Buttons/Button.tsx";
 import './create_form.scss'
 import '@/components/UI/DateRangeInput/datepicker_container.scss'
 import DateInput from "@/components/UI/DateInput/DateInput.tsx";
+import {useModalStore} from "@/stores/useModalStore.ts";
+import Header from "@/components/Header/Header.tsx";
+import Footer from "@/components/Footer/Footer.tsx";
 
 interface InputDate {
     date: Date | undefined,
@@ -16,6 +18,8 @@ interface InputDate {
 }
 
 const CreateVznConsumption: React.FC = () => {
+
+    const {closeCreateVznModal} = useModalStore()
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
         value: "",
@@ -84,17 +88,25 @@ const CreateVznConsumption: React.FC = () => {
 
     // Отправка запроса к серверу
     const handleSubmit = () => {
+        closeCreateVznModal()
+    }
+
+    // Закрытие модального окна
+    const handleCloseModal = () => {
+        closeCreateVznModal()
     }
 
     return (
         <>
             <div className="modal">
-                <MainLayout
+                <Header
                     headline="Создание ВЗН (Расход)"
                     showCloseButton={true}
+                    onCloseButtonClick={handleCloseModal}
                     hasBorder={true}
                     isBlueBackground={false}
-                >
+                />
+                <main className={'main'}>
                     <form className="create_form" action="">
                         <div className="create_form__inner">
                             <Input
@@ -185,20 +197,22 @@ const CreateVznConsumption: React.FC = () => {
                         <div className="create_form__btns">
                             <Button
                                 type="button"
-                                classBtn=""
+                                classBtn="btn"
                                 text="Создать"
                                 onClickBtn={handleSubmit}
                             />
 
                             <Button
                                 type="button"
-                                classBtn="close_btn"
+                                classBtn="btn--white"
                                 text="Отмена"
+                                onClickBtn={handleCloseModal}
                             />
 
                         </div>
                     </form>
-                </MainLayout>
+                </main>
+                <Footer/>
             </div>
         </>
     )
