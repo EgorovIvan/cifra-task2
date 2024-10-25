@@ -6,7 +6,7 @@ interface Props {
   name: string;
   title: string;
   placeholder: string;
-  inputValue: string;
+  inputValue?: string;
   updateValue: (value: string) => void;
   validateValue: boolean;
   isNull: boolean;

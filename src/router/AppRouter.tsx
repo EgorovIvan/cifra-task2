@@ -19,7 +19,7 @@ const AppRouter: React.FC = () => {
                 <Route path="/login" element={<Auth/>}/>
 
                 {/* Защищённые маршруты */}
-                <Route element={<ProtectedRoute/>}>
+                {/*<Route element={<ProtectedRoute/>}>*/}
 
                     <Route path="/" element={<MainLayout/>}>
                         <Route path="menu" element={<Menu/>}/>
@@ -30,7 +30,7 @@ const AppRouter: React.FC = () => {
                         <Route path="settings" element={<Settings/>}/>
                     </Route>
 
-                </Route>
+                {/*</Route>*/}
 
                 {/* Если нет токена, по умолчанию переходим на /login */}
                 <Route path="*" element={<Navigate to="/test" replace/>}/>

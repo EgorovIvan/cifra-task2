@@ -23,7 +23,8 @@ export const useVznListStore = create<VznListState>((set, get) => ({
         Num: "23407",
         Sender: 0,
         Receiver: 0,
-        Period: ""
+        fromDate: null,
+        toDate: null
     },
 
     updateFilters: (newFilters): void => {
