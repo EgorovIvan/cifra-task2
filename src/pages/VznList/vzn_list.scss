@@ -1,4 +1,4 @@
-.list_vzn {
+.vzn_list {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,6 @@
   scrollbar-width: none;
 }
 
-.list_vzn::-webkit-scrollbar {
+.vzn_list::-webkit-scrollbar {
   width: 0;
 }

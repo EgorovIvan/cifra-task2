@@ -1,23 +1,30 @@
-import * as React from "react";
-import './vzn_list.scss';
+import { Link } from "react-router-dom";
+
+import './vzn_item.scss';
 import { VznItemProps } from "../../../interfaces/VizItemProps";
 import { formatDate } from "@/utils/formatDate";
 import { DivisionsProps } from "@/interfaces/DivisionsProps";
-import { Link } from "react-router-dom";
+import { findDivisionName } from "@/utils/findDivisionName";
 
 const VznItem: React.FC<{ item: VznItemProps, divisions: DivisionsProps[] }> = ({ item, divisions }) => {
 
-  const findDivisionName = (code: number): string => {
-    const division = divisions.find((div) => div.Code === code);
-    return division ? division.Name : "Неизвестно";
-  };
+  const senderName = findDivisionName(item.Sender, divisions);
+  const receiverName = findDivisionName(item.Receiver, divisions);
 
   return (
     <li className="vzn_item">
-      <Link to={`/vzn-list/${item.Code}`}>
+        <Link
+        to={`/vzn-list/${item.Code}`}
+        state={{
+          sender: senderName,
+          receiver: receiverName,
+          docDate: item.DocDate,
+          status: item.bo?.State || "Неизвестно"
+        }}
+      >
         <h2>ВЗН №{item.Num}</h2>
-        <p><span>Отправитель:</span> {findDivisionName(Number(item.Sender))}</p>
-        <p><span>Получатель:</span> {findDivisionName(Number(item.Receiver))}</p>
+        <p><span>Отправитель:</span> {findDivisionName(item.Sender, divisions)}</p>
+        <p><span>Получатель:</span> {findDivisionName(item.Receiver, divisions)}</p>
         <p><span>Дата выдачи:</span> {formatDate(item.DocDate)}</p>
       </Link>
     </li>
