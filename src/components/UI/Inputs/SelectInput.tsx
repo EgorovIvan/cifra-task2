@@ -8,7 +8,7 @@ interface Props {
   name: string;
   title: string;
   placeholder: string;
-  inputValue: string;
+  inputValue?: string;
   updateValue: (value: string) => void;
   validateValue: boolean;
   isNull: boolean;
@@ -86,7 +86,7 @@ const SelectInput: React.FC<Props> = (props) => {
           onFocus={handleInputFocus}
           autoComplete="off"
         />
-        
+
         <img
           src={folderIcon}
           alt="Просмотреть список"
@@ -112,7 +112,7 @@ const SelectInput: React.FC<Props> = (props) => {
           ))}
         </ul>
       )}
-    </div> 
+    </div>
   );
 };
 

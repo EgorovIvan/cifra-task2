@@ -15,9 +15,10 @@ import {useAuthStore} from "@/stores/useAuthStore.ts";
 import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 import DivisionsList from "@/components/DivisionsList/DivisionsList.tsx";
 import Modal from "@/components/UI/Modal/Modal.tsx";
+import {useEffect} from "react";
 
 interface InputDate {
-    date: Date | undefined,
+    date?: Date,
     isNull: boolean,
     errorField: boolean,
 }
@@ -30,7 +31,6 @@ const CreateVznConsumption: React.FC = () => {
     const {isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
-        value: "",
         errorField: false,
         isNull: false,
     });
@@ -159,17 +159,15 @@ const CreateVznConsumption: React.FC = () => {
 
     // Отправка запроса к серверу
     const handleSubmit = () => {
-        createVznItem(authToken)
-        closeCreateVznModal()
-    }
 
-    /* Отправка формы */
-    const handleSearch = (): void => {
+        let flag: boolean = false
 
-        if (!inputVznNumber.value) {
+        if (!newVznData.Num) {
             updateInputVznNumber((draft) => {
                 draft.isNull = true
             })
+
+            flag = true
         } else {
             updateInputVznNumber((draft) => {
                 draft.isNull = false
@@ -180,6 +178,7 @@ const CreateVznConsumption: React.FC = () => {
             updateInputSender((draft) => {
                 draft.isNull = true
             })
+            flag = true
         } else {
             updateInputSender((draft) => {
                 draft.isNull = false
@@ -190,10 +189,60 @@ const CreateVznConsumption: React.FC = () => {
             updateInputReceiver((draft) => {
                 draft.isNull = true
             })
+            flag = true
         } else {
             updateInputReceiver((draft) => {
                 draft.isNull = false
             })
+        }
+
+        if (!inputSenderSection.value) {
+            updateInputSenderSection((draft) => {
+                draft.isNull = true
+            })
+            flag = true
+        } else {
+            updateInputSenderSection((draft) => {
+                draft.isNull = false
+            })
+        }
+
+        if (!inputReceiverSection.value) {
+            updateInputReceiverSection((draft) => {
+                draft.isNull = true
+            })
+            flag = true
+        } else {
+            updateInputReceiverSection((draft) => {
+                draft.isNull = false
+            })
+        }
+
+        if (!inputDateIssue.date) {
+            updateInputDateIssue((draft) => {
+                draft.isNull = true
+            })
+            flag = true
+        } else {
+            updateInputDateIssue((draft) => {
+                draft.isNull = false
+            })
+        }
+
+        if (!inputDateAdoption.date) {
+            updateInputDateAdoption((draft) => {
+                draft.isNull = true
+            })
+            flag = true
+        } else {
+            updateInputDateAdoption((draft) => {
+                draft.isNull = false
+            })
+        }
+
+        if(!flag) {
+            createVznItem(authToken)
+            closeCreateVznModal()
         }
 
     }
@@ -202,6 +251,111 @@ const CreateVznConsumption: React.FC = () => {
     const handleCloseModal = () => {
         closeCreateVznModal()
     }
+
+    useEffect(() => {
+
+        /* Валидация поля Номер ВЗН */
+        if (Number(newVznData.Num) < 0
+            || !Number.isInteger(Number(newVznData.Num))
+            || newVznData.Num.length > 20
+            || newVznData.Num !== newVznData.Num.replace(/[^\d]/g, "")) {
+
+            updateInputVznNumber((draft) => {
+                draft.errorField = true
+                draft.isNull = false
+            })
+        } else {
+            updateInputVznNumber((draft) => {
+                draft.errorField = false
+                draft.isNull = false
+            })
+        }
+
+    }, [newVznData.Num]);
+
+    useEffect(() => {
+
+        /* Валидация поля Отправитель */
+        if (inputSender.value?.length >= 100) {
+            updateInputSender((draft) => {
+                draft.errorField = true
+                draft.isNull = false
+            })
+        } else {
+            updateInputSender((draft) => {
+                draft.errorField = false
+                draft.isNull = false
+            })
+        }
+
+    }, [inputSender.value, updateInputSender]);
+
+    useEffect(() => {
+
+        /* Валидация поля "Принял МОЛ" */
+        if (inputReceiver.value?.length >= 100) {
+            updateInputReceiver((draft) => {
+                draft.errorField = true
+                draft.isNull = false
+            })
+        } else {
+            updateInputReceiver((draft) => {
+                draft.errorField = false
+                draft.isNull = false
+            })
+        }
+
+    }, [inputReceiver.value,updateInputReceiver]);
+
+    useEffect(() => {
+
+        /* Валидация поля "Выдал МОЛ*" */
+        if (inputSenderSection.value?.length >= 50) {
+            updateInputSenderSection((draft) => {
+                draft.errorField = true
+                draft.isNull = false
+            })
+        } else {
+            updateInputSenderSection((draft) => {
+                draft.errorField = false
+                draft.isNull = false
+            })
+        }
+
+    }, [inputSenderSection.value,updateInputSenderSection]);
+
+    useEffect(() => {
+
+        /* Валидация поля Получатель */
+        if (inputReceiverSection.value?.length >= 50) {
+            updateInputReceiverSection((draft) => {
+                draft.errorField = true
+                draft.isNull = false
+            })
+        } else {
+            updateInputReceiverSection((draft) => {
+                draft.errorField = false
+                draft.isNull = false
+            })
+        }
+
+    }, [inputReceiverSection.value, updateInputReceiverSection]);
+
+    useEffect(() => {
+        if (inputDateIssue.date) {
+            updateInputDateIssue((draft) => {
+                draft.isNull = false
+            })
+        }
+    }, [inputDateIssue.date, updateInputDateIssue]);
+
+    useEffect(() => {
+        if (inputDateAdoption.date) {
+            updateInputDateAdoption((draft) => {
+                draft.isNull = false
+            })
+        }
+    }, [inputDateAdoption.date, updateInputDateAdoption]);
 
     return (
         <>
@@ -237,7 +391,7 @@ const CreateVznConsumption: React.FC = () => {
                                 updateValue={handleInputSender}
                                 validateValue={inputSender.errorField}
                                 isNull={inputSender.isNull}
-                                textError="строка до 50 символов"
+                                textError="строка до 100 символов"
                                 onFolderIconClick={handleOpenSenderFolder}
                             />
 
@@ -250,7 +404,7 @@ const CreateVznConsumption: React.FC = () => {
                                 updateValue={handleInputReceiver}
                                 validateValue={inputReceiver.errorField}
                                 isNull={inputReceiver.isNull}
-                                textError="строка до 50 символов"
+                                textError="строка до 100 символов"
                                 onFolderIconClick={handleOpenReceiverFolder}
                             />
 

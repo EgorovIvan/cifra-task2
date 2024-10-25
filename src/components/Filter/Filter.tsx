@@ -19,7 +19,7 @@ import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 
 
 interface Period {
-    value: string;
+    value?: string;
     startDate?: Date;
     endDate?: Date;
     errorField: boolean;
@@ -112,6 +112,7 @@ const Filter: React.FC = () => {
         updateInputPeriod((draft) => {
             draft.startDate = value
         })
+        updateFilters({ 'fromDate': String(value) });
     }
 
     // Ввод данных в поле "Дата до"
@@ -119,6 +120,7 @@ const Filter: React.FC = () => {
         updateInputPeriod((draft) => {
             draft.endDate = value
         })
+        updateFilters({ 'toDate': String(value) });
     }
 
     // Отправка запроса к серверу
@@ -139,8 +141,8 @@ const Filter: React.FC = () => {
         /* Валидация поля Номер ВЗН */
         if (Number(inputVznNumber.value) < 0
             || !Number.isInteger(Number(inputVznNumber.value))
-            || inputVznNumber.value.length > 20
-            || inputVznNumber.value !== inputVznNumber.value.replace(/[^\d]/g, "")) {
+            || inputVznNumber.value?.length > 20
+            || inputVznNumber.value !== inputVznNumber.value?.replace(/[^\d]/g, "")) {
 
             updateInputVznNumber((draft) => {
                 draft.errorField = true
@@ -152,9 +154,13 @@ const Filter: React.FC = () => {
                 draft.isNull = false
             })
         }
+
+    }, [inputVznNumber.value, updateInputVznNumber]);
+
+    useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value.length >= 100) {
+        if (inputSender.value?.length >= 5) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -165,9 +171,13 @@ const Filter: React.FC = () => {
                 draft.isNull = false
             })
         }
+
+    }, [inputSender.value, updateInputSender]);
+
+    useEffect(() => {
 
         /* Валидация поля Получатель */
-        if (inputReceiver.value.length >= 100) {
+        if (inputReceiver.value?.length >= 5) {
             updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -179,7 +189,7 @@ const Filter: React.FC = () => {
             })
         }
 
-    }, [inputVznNumber.value, inputSender.value, inputReceiver.value, updateInputVznNumber, updateInputSender, updateInputReceiver]);
+    }, [inputReceiver.value, updateInputReceiver]);
 
     return (
         <>

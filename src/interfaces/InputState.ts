@@ -1,5 +1,5 @@
 export interface InputState {
-    value: string;
+    value?: string;
     errorField: boolean;
     isNull: boolean;
 }
