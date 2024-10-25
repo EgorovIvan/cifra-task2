@@ -44,6 +44,7 @@ export const useVznDetailsStore = create<VznDetailsState>((set) => ({
         flt: { WsInplantCode: wsInplantCode },
       });
 
+      
       const data = response.data.wsInplantContents.map((item: WsInplantContent) => ({
         Code: item.Code,
         ArticleCode: item.ArticleCode,    // Обозначение
@@ -51,7 +52,8 @@ export const useVznDetailsStore = create<VznDetailsState>((set) => ({
         LeaveQty: item.LeaveQty,
         ArrivalQty: item.ArrivalQty,
       }));
-
+      
+      console.log(data);
       set(
         produce((state: VznDetailsState) => {
           state.vznDetails = {

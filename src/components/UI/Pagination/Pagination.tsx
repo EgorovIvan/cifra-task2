@@ -1,6 +1,7 @@
 import './pagination.scss';
 import { usePaginationStore } from '../../../stores/usePaginationStore.ts';
 import { useState } from 'react';
+import Icon from '@/components/Icon/Icon.tsx';
 
 interface PaginationProps {
   totalItems: number;
@@ -44,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems }) => {
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        ➪
+        <Icon src='../../../../public/img/pagination/arrow.svg' size={9} />
       </button>
       <input
         type="number"
@@ -60,8 +61,8 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems }) => {
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        ➪
-      </button>
+          <Icon src='../../../../public/img/pagination/arrow.svg' size={9} />
+        </button>
     </div>
   );
 };

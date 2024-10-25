@@ -6,7 +6,7 @@ import Header from "@/components/Header/Header.tsx";
 
 const Accounting: React.FC = () => {
 
-  const { isFilterModalOpen, isResultsModalOpen, openFilterModal, closeFilterModal, closeResultsModal } = useModalStore();
+  const { isModalFilterOpen, openFilterModal, closeFilterModal } = useModalStore();
 
   // Открытие модального окна ВЗН (Расход)
   const handleOpenFilterModal = (): void => {
@@ -73,7 +73,7 @@ const Accounting: React.FC = () => {
 
         {/*modal filter*/}
 
-        <Modal isOpen={isFilterModalOpen} onClose={closeFilterModal}>
+        <Modal isOpen={isModalFilterOpen} onClose={closeFilterModal}>
           <Filter />
         </Modal>
 
