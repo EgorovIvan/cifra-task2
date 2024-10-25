@@ -19,10 +19,10 @@ const VznList: React.FC = () => {
 
 
     useEffect(() => {
-        if (authToken) {
+        if (authToken && divisions.length === 0) {
             fetchDivisions(authToken);
         }
-    }, [authToken, fetchDivisions]);
+    }, [authToken, fetchDivisions, divisions.length]);
 
     return (
         <>
@@ -39,7 +39,7 @@ const VznList: React.FC = () => {
                 {error ? <p>{error}</p> : null}
 
                 {!loading && !error && (
-                    <ul className="list_vzn" id="list">
+                    <ul className="vzn_list" id="list">
                         {vznList.map((item) => (
                             <VznItem key={item.Code} item={item} divisions={divisions}/>
                         ))}

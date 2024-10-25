@@ -53,7 +53,7 @@ export const useVznDetailsStore = create<VznDetailsState>((set) => ({
         ArrivalQty: item.ArrivalQty,
       }));
       
-      console.log(data);
+      console.log ('Респонс отделы:', response);
       set(
         produce((state: VznDetailsState) => {
           state.vznDetails = {

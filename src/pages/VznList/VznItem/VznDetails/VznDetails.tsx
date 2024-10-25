@@ -12,28 +12,28 @@ import Header from '@/components/Header/Header';
 import { useVznListStore } from '@/stores/useVznListStore';
 import { formatDate } from '@/utils/formatDate';
 import { findDivisionName } from '@/utils/findDivisionName';
-import { DivisionsProps } from '@/interfaces/DivisionsProps';
+import { useDivisionsStore } from '@/stores/useDivisionsStore';
 
-const VznDetails: React.FC<{ divisions: DivisionsProps[] }> = ({ divisions }) => {
+
+const VznDetails: React.FC = () => {
+  const authToken = useAuthStore((state) => state.authToken); 
   const { wsInplantCode } = useParams<{ wsInplantCode: string }>();
   const { vznList } = useVznListStore();
-  const { vznDetails, fetchVznDetails } = useVznDetailsStore();
+  const { vznDetails } = useVznDetailsStore();
   const { openVznModal, selectedVznId } = useModalStore();
-  const authToken = useAuthStore((state) => state.authToken); 
+  const { divisions, fetchDivisions } = useDivisionsStore();
 
   useEffect(() => {
-    if (authToken && wsInplantCode) {
-      fetchVznDetails(authToken, Number(wsInplantCode));
+    if (authToken && divisions.length === 0) {
+      fetchDivisions(authToken);
     }
-  }, [authToken, wsInplantCode, fetchVznDetails]);
+  }, [authToken, divisions, fetchDivisions]);
 
   const selectedVzn = vznList.find((vzn) => vzn.Code === Number(wsInplantCode));
 
   const handleClick = (vznId: number) => {
     openVznModal(vznId);
   };
-
-  console.log("Список отделов" ,divisions);
 
   return (
     <>

@@ -3,5 +3,8 @@ export interface VznItemProps {
   Num: string;
   Sender: number;
   Receiver: number;
-  DocDate: string;
+  DocDate: string;  
+  bo?: {
+    State: number;
+  };
 }
