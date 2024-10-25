@@ -11,7 +11,7 @@ interface TypeBoState {
     typeBo: InfoBo;
     loading: Boolean;
     error: string | null;
-    fetchTypeBo: (token: string | null, boCode: string) => Promise<void>;
+    fetchTypeBo: (token: string | null, boCode?: string) => Promise<void>;
 }
 
 export const useTypeBoStore = create<TypeBoState>((set) => ({

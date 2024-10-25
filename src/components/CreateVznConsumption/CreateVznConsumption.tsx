@@ -25,8 +25,8 @@ interface InputDate {
 
 const CreateVznConsumption: React.FC = () => {
 
-    const { closeCreateVznModal } = useModalStore()
-    const { newVznData, updateNewVznData, createVznItem } = useCreateVznStore()
+    const {closeCreateVznModal} = useModalStore()
+    const {newVznData, updateNewVznData, createVznItem} = useCreateVznStore()
     const authToken = useAuthStore((state) => state.authToken);
     const {isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
@@ -73,7 +73,7 @@ const CreateVznConsumption: React.FC = () => {
 
     // Ввод данных в поле "Номер ВЗН"
     const handleInputVznNumber = (value: string): void => {
-        updateNewVznData({ 'Num': value });
+        updateNewVznData({'Num': value});
     }
 
     // Ввод данных в поле "Отправитель"
@@ -90,7 +90,7 @@ const CreateVznConsumption: React.FC = () => {
 
     // Получение кода Отправителя
     const handleCodeSender = (code: number): void => {
-        updateNewVznData({ 'Sender': code });
+        updateNewVznData({'Sender': code});
     }
 
     // Ввод данных в поле "Получатель"
@@ -107,7 +107,7 @@ const CreateVznConsumption: React.FC = () => {
 
     // Получение кода Получателя
     const handleCodeReceiver = (code: number): void => {
-        updateNewVznData({ 'Receiver': code });
+        updateNewVznData({'Receiver': code});
     }
 
     // Ввод данных в поле "Выдал МОЛ*"
@@ -115,7 +115,7 @@ const CreateVznConsumption: React.FC = () => {
         updateInputSenderSection((draft) => {
             draft.value = value
         })
-        updateNewVznData({ 'SenderSection': 3 });
+        updateNewVznData({'SenderSection': 3});
     }
 
     // Ввод данных в поле "Принял МОЛ"
@@ -123,7 +123,7 @@ const CreateVznConsumption: React.FC = () => {
         updateInputReceiverSection((draft) => {
             draft.value = value
         })
-        updateNewVznData({ 'ReceiverSection': 4 });
+        updateNewVznData({'ReceiverSection': 4});
     }
 
     // Ввод данных в поле "Дата выдачи"
@@ -131,7 +131,7 @@ const CreateVznConsumption: React.FC = () => {
         updateInputDateIssue((draft) => {
             draft.date = value
         })
-        updateNewVznData({ 'LeaveMoveDate': String(value) }); // Необходимо откорректировать дату к UTC
+        updateNewVznData({'LeaveMoveDate': String(value)}); // Необходимо откорректировать дату к UTC
     }
 
     // Ввод данных в поле "Дата принятия"
@@ -139,7 +139,7 @@ const CreateVznConsumption: React.FC = () => {
         updateInputDateAdoption((draft) => {
             draft.date = value
         })
-        updateNewVznData({ 'ArrivalMoveDate': String(value) }); // Необходимо откорректировать дату к UTC
+        updateNewVznData({'ArrivalMoveDate': String(value)}); // Необходимо откорректировать дату к UTC
     }
 
     // Ввод данных в поле "Примечание"
@@ -149,7 +149,7 @@ const CreateVznConsumption: React.FC = () => {
             bo: {
                 so: {
                     attrs: newVznData.bo.so.attrs.map((attr, i) =>
-                        i === 0 ? { ...attr, Value: value } : attr
+                        i === 0 ? {...attr, Value: value} : attr
                     ),
                 },
             },
@@ -162,85 +162,42 @@ const CreateVznConsumption: React.FC = () => {
 
         let flag: boolean = false
 
-        if (!newVznData.Num) {
-            updateInputVznNumber((draft) => {
-                draft.isNull = true
-            })
+        updateInputVznNumber((draft) => {
+            draft.isNull = !newVznData.Num
+            !newVznData.Num ? flag = true : ''
+        })
 
-            flag = true
-        } else {
-            updateInputVznNumber((draft) => {
-                draft.isNull = false
-            })
-        }
+        updateInputSender((draft) => {
+            draft.isNull = !inputSender.value
+            !inputSender.value ? flag = true : ''
+        })
 
-        if (!inputSender.value) {
-            updateInputSender((draft) => {
-                draft.isNull = true
-            })
-            flag = true
-        } else {
-            updateInputSender((draft) => {
-                draft.isNull = false
-            })
-        }
+        updateInputReceiver((draft) => {
+            draft.isNull = !inputReceiver.value
+            !inputReceiver.value ? flag = true : ''
+        })
 
-        if (!inputReceiver.value) {
-            updateInputReceiver((draft) => {
-                draft.isNull = true
-            })
-            flag = true
-        } else {
-            updateInputReceiver((draft) => {
-                draft.isNull = false
-            })
-        }
+        updateInputSenderSection((draft) => {
+            draft.isNull = !inputSenderSection.value
+            !inputSenderSection.value ? flag = true : ''
+        })
 
-        if (!inputSenderSection.value) {
-            updateInputSenderSection((draft) => {
-                draft.isNull = true
-            })
-            flag = true
-        } else {
-            updateInputSenderSection((draft) => {
-                draft.isNull = false
-            })
-        }
+        updateInputReceiverSection((draft) => {
+            draft.isNull = !inputReceiverSection.value
+            !inputReceiverSection.value ? flag = true : ''
+        })
 
-        if (!inputReceiverSection.value) {
-            updateInputReceiverSection((draft) => {
-                draft.isNull = true
-            })
-            flag = true
-        } else {
-            updateInputReceiverSection((draft) => {
-                draft.isNull = false
-            })
-        }
+        updateInputDateIssue((draft) => {
+            draft.isNull = !inputDateIssue.date
+            !inputDateIssue.date ? flag = true : ''
+        })
 
-        if (!inputDateIssue.date) {
-            updateInputDateIssue((draft) => {
-                draft.isNull = true
-            })
-            flag = true
-        } else {
-            updateInputDateIssue((draft) => {
-                draft.isNull = false
-            })
-        }
+        updateInputDateAdoption((draft) => {
+            draft.isNull = !inputDateAdoption.date
+            !inputDateAdoption.date ? flag = true : ''
+        })
 
-        if (!inputDateAdoption.date) {
-            updateInputDateAdoption((draft) => {
-                draft.isNull = true
-            })
-            flag = true
-        } else {
-            updateInputDateAdoption((draft) => {
-                draft.isNull = false
-            })
-        }
-
-        if(!flag) {
+        if (!flag) {
             createVznItem(authToken)
             closeCreateVznModal()
         }
@@ -305,7 +262,7 @@ const CreateVznConsumption: React.FC = () => {
             })
         }
 
-    }, [inputReceiver.value,updateInputReceiver]);
+    }, [inputReceiver.value, updateInputReceiver]);
 
     useEffect(() => {
 
@@ -322,7 +279,7 @@ const CreateVznConsumption: React.FC = () => {
             })
         }
 
-    }, [inputSenderSection.value,updateInputSenderSection]);
+    }, [inputSenderSection.value, updateInputSenderSection]);
 
     useEffect(() => {
 
@@ -489,11 +446,11 @@ const CreateVznConsumption: React.FC = () => {
                     </form>
                 </main>
                 <Footer/>
-                <Modal isOpen={isDivisionsModalOpen} onClose={closeDivisionsModal} >
+                <Modal isOpen={isDivisionsModalOpen} onClose={closeDivisionsModal}>
                     <DivisionsList
-                        onSelectValue={divisionInputType === DivisionInputType.RECEIVER ? handleInputReceiver : handleInputSender }
+                        onSelectValue={divisionInputType === DivisionInputType.RECEIVER ? handleInputReceiver : handleInputSender}
                         onSelectCode={divisionInputType === DivisionInputType.RECEIVER ? handleCodeReceiver : handleCodeSender}
-                        />
+                    />
                 </Modal>
             </div>
         </>

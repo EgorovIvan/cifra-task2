@@ -2,14 +2,9 @@ import * as React from "react";
 import {Link} from "react-router-dom";
 import Icon from "@/components/Icon/Icon";
 import BottomSheet from "@/components/UI/BottomSheet/BottomSheet.tsx";
-import Modal from "@/components/UI/Modal/Modal.tsx";
-import Scan from "@/components/UI/Scan/Scan.tsx";
-import {useModalStore} from "@/stores/useModalStore.ts";
 import Header from "@/components/Header/Header.tsx";
 
 const Menu: React.FC = () => {
-
-    const {isScanModalOpen, closeScanModal} = useModalStore()
 
     return (
         <>
@@ -42,10 +37,6 @@ const Menu: React.FC = () => {
                 </ul>
             </main>
             <BottomSheet/>
-
-            <Modal isOpen={isScanModalOpen} onClose={closeScanModal} >
-                <Scan/>
-            </Modal>
         </>
     )
 }
