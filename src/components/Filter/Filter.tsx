@@ -108,7 +108,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата от"
-    const handleInputStartDate = (value: | null): void => {
+    const handleInputStartDate = (value: Date | null): void => {
         updateInputPeriod((draft) => {
             draft.startDate = value
         })
