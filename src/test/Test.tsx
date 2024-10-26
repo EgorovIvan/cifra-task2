@@ -1,6 +1,4 @@
 import * as React from "react";
-import MainLayout from "@/layouts/MainLayout.tsx";
-import MultiSelect from "@/components/UI/MultiSelect/MultiSelect.tsx";
 import Scan from "@/components/UI/Scan/Scan";
 
 const options = [

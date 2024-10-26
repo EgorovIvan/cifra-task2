@@ -4,11 +4,7 @@ import './footer.scss'
 import Icon from "../Icon/Icon";
 import {useModalStore} from "@/stores/useModalStore.ts";
 
-interface FooterProps{
-  onScanButtonClick?: () => void
-}
-
-const Footer: React.FC<FooterProps> = (props) => {
+const Footer: React.FC = () => {
 
   const {openScanModal} = useModalStore()
 

@@ -108,7 +108,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата от"
-    const handleInputStartDate = (value: Date): void => {
+    const handleInputStartDate = (value?: Date): void => {
         updateInputPeriod((draft) => {
             draft.startDate = value
         })
@@ -116,7 +116,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата до"
-    const handleInputEndDate = (value: Date): void => {
+    const handleInputEndDate = (value?: Date): void => {
         updateInputPeriod((draft) => {
             draft.endDate = value
         })
@@ -259,7 +259,6 @@ const Filter: React.FC = () => {
                                 classBtn="btn"
                                 text="Поиск"
                                 onClickBtn={handleSubmit}
-                                // onClickBtn={handleSearch}
                             />
 
                             <Button

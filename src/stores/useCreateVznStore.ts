@@ -45,7 +45,7 @@ export const useCreateVznStore = create<NewVznDataState>((set, get) => ({
             so: {
                 attrs: [{
                     Code: 0,
-                    IsNull: 0,
+                    IsNull: false,
                     MeasCode: 0,
                     Value: ''
                 }]

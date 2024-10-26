@@ -10,6 +10,8 @@ interface ModalState {
   isCreateVznModalOpen: boolean;
   selectedVznId: number | null;
   openVznModal: (Code: number) => void;
+  openModal: () => void;
+  closeModal: () => void;
   openFilterModal: () => void;
   closeFilterModal: () => void;
   openResultsModal: () => void;
@@ -25,7 +27,7 @@ interface ModalState {
 
 export const useModalStore = create<ModalState>((set) => ({
   isModalOpen: false,
-  isModalFilterOpen: false,
+  isFilterModalOpen: false,
   isResultsModalOpen: false,
   isScanModalOpen: false,
   isDivisionsModalOpen: false,

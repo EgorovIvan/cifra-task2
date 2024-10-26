@@ -15,7 +15,10 @@ interface TypeBoState {
 }
 
 export const useTypeBoStore = create<TypeBoState>((set) => ({
-    typeBo: {},
+    typeBo: {
+        soCode: 0,
+        soType: 0
+    },
 
     fetchTypeBo: async (token: string | null, soNum: string) => {
 

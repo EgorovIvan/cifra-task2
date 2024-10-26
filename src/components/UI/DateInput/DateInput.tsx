@@ -17,7 +17,7 @@ interface Props {
 const DateInput: React.FC<Props> = (Props) => {
 
     // Выбор периода дат
-    const handleDateChange = (date: Date ) => {
+    const handleDateChange = (date?: Date ) => {
         Props.setDateChange(date);
     };
 

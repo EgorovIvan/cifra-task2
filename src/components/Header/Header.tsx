@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
 
 
-  const {wrapperHeight, yPosition, setYPosition} = useBottomSheetStore();
+  const {wrapperHeight, setYPosition} = useBottomSheetStore();
   const { openFilterModal, openCreateVznModal } = useModalStore();
 
 

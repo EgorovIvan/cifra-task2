@@ -31,6 +31,7 @@ const CreateVznConsumption: React.FC = () => {
     const {isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
+        value: "",
         errorField: false,
         isNull: false,
     });
@@ -127,7 +128,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата выдачи"
-    const handleInputDateIssue = (value: Date): void => {
+    const handleInputDateIssue = (value?: Date): void => {
         updateInputDateIssue((draft) => {
             draft.date = value
         })
@@ -135,7 +136,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата принятия"
-    const handleInputDateAdoption = (value: Date): void => {
+    const handleInputDateAdoption = (value?: Date): void => {
         updateInputDateAdoption((draft) => {
             draft.date = value
         })
