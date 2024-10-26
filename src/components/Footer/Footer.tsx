@@ -18,16 +18,16 @@ const Footer: React.FC = () => {
       <footer className="footer">
         <Link to="/menu">
           <div className="footer__item">
-            <Icon src='../../../public/img/footer/menu.svg' />
+            <Icon src='./public/img/footer/menu.svg' />
             <span>Меню</span>
           </div>
         </Link>
         <div className="footer__item" onClick={openScanModal}>
-          <Icon src='../../../public/img/footer/scaner.svg' />
+          <Icon src='./public/img/footer/scaner.svg' />
           <span>Сканер</span>
         </div>
         <div className="footer__item" onClick={handleBack}>
-          <Icon src='../../../public/img/footer/arrow_back.svg' />
+          <Icon src='./public/img/footer/arrow_back.svg' />
           <span>Назад</span>
         </div>
       </footer>
