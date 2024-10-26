@@ -7,8 +7,8 @@ interface Props {
     name: string;
     title: string;
     placeholder?: string;
-    date: Date  | null | undefined;
-    setDateChange: (value: Date | null | undefined) => void;
+    date?: Date | null;
+    setDateChange: (value?: Date) => void;
     validateValue: boolean;
     isNull: boolean;
     textError: string;

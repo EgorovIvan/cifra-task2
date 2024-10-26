@@ -5,12 +5,12 @@ interface Props {
   type: string;
   name: string;
   title: string;
-  placeholder: string;
-  inputValue?: string;
-  updateValue: (value?: string) => void;
-  validateValue: boolean;
-  isNull: boolean;
-  textError: string;
+  placeholder?: string;
+  inputValue?: string | number;
+  updateValue?: (value?: string) => void;
+  validateValue?: boolean;
+  isNull?: boolean;
+  textError?: string;
 }
 const Input: React.FC<Props> = (Props) => {
 
@@ -23,7 +23,11 @@ const Input: React.FC<Props> = (Props) => {
         id={Props.name}
         placeholder={Props.placeholder}
         value={Props.inputValue}
-        onChange={(e) => Props.updateValue(e.target.value)}
+        onChange={(e) => {
+          if (Props.updateValue) {
+            Props.updateValue(e.target.value);  // Вызываем только если передано
+          }
+        }}
       />
       <label htmlFor={Props.name}>{Props.title}</label>
 
