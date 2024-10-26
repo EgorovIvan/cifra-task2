@@ -7,13 +7,14 @@ import './vzn_details.scss';
 import { useVznDetailsStore } from '@/stores/useVznDetailsStore';
 import { useModalStore } from '@/stores/useModalStore';
 import {AuthState, useAuthStore} from '@/stores/useAuthStore';
-import VznDetailModal from '../../../../components/VznDetailsModal/VznDetailsModal';
+import VznDetailModal from '@/components/VznDetailsModal/VznDetailsModal';
 import Header from '@/components/Header/Header';
 import { useVznListStore } from '@/stores/useVznListStore';
 import { formatDate } from '@/utils/formatDate';
 import { findDivisionName } from '@/utils/findDivisionName';
 import { useDivisionsStore } from '@/stores/useDivisionsStore';
 import { useStockStore } from '@/stores/useStockStore';
+import BottomSheet from "@/components/UI/BottomSheet/BottomSheet.tsx";
 
 
 const VznDetails: React.FC = () => {
@@ -63,6 +64,7 @@ const VznDetails: React.FC = () => {
       </main>
 
       { selectedVznId && <VznDetailModal vznNum={selectedVzn?.Num}/> }
+      <BottomSheet/>
     </>
   );
 };

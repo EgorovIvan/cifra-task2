@@ -96,7 +96,7 @@ const BottomSheet: React.FC = () => {
                 >
                     <img
                         className={'bottom_sheet__plate'}
-                        src={'img/bottomSheet/bottom-sheet.svg'}
+                        src='../../../img/bottomSheet/bottom-sheet.svg'
 
                     />
                 </div>
