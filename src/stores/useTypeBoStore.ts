@@ -11,17 +11,24 @@ interface TypeBoState {
     typeBo: InfoBo;
     loading: Boolean;
     error: string | null;
+    updateTypeBo: (newTypeBo: { soCode: null; soType: number }) => void;
     fetchTypeBo: (token: string | null, boCode?: string) => Promise<void>;
 }
 
 export const useTypeBoStore = create<TypeBoState>((set) => ({
     typeBo: {
-        soCode: 0,
+        soCode: null,
         soType: 0
     },
     loading: false,
     error: null,
-
+    updateTypeBo: (newTypeBo): void => {
+        set((state) =>
+            produce(state, (draft: TypeBoState) => {
+                draft.typeBo = {...draft.typeBo, ...newTypeBo};
+            })
+        )
+    },
     fetchTypeBo: async (token: string | null, soNum?: string ) => {
 
         try {
@@ -33,7 +40,7 @@ export const useTypeBoStore = create<TypeBoState>((set) => ({
             );
 
             const data: InfoBo = response.data || {};
-            console.log(response.data)
+            console.log(response)
             set((state) =>
                 produce(state, (draft: TypeBoState) => {
                     draft.typeBo = data;

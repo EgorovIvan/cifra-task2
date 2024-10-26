@@ -9,12 +9,13 @@ import {useImmer} from "use-immer";
 import {InputState} from "@/interfaces/InputState.ts";
 import Header from "@/components/Header/Header.tsx";
 import Footer from "@/components/Footer/Footer.tsx";
+import {useEffect} from "react";
 
 const Scan: React.FC = () => {
 
     const {authToken} = useAuthStore()
     const {closeScanModal} = useModalStore()
-    const {typeBo, fetchTypeBo} = useTypeBoStore()
+    const {typeBo, updateTypeBo, fetchTypeBo} = useTypeBoStore()
 
     const [inputBoNum, updateInputBoNum] = useImmer<InputState>({
         value: "",
@@ -22,18 +23,39 @@ const Scan: React.FC = () => {
         isNull: false,
     });
 
+    const [inputTypeBO, updateInputTypeBO] = useImmer<InputState>({
+        value: "",
+        errorField: false,
+        isNull: false,
+    });
+
     const handleSubmit = () => {
-        fetchTypeBo(authToken, inputBoNum.value);
+
         // closeScanModal();
         // openResultsModal();
+        updateInputTypeBO((draft) => {
+            if(inputBoNum.value) {
+                draft.value =  ` Запрос прошел успешно, получен soCode: ${String(typeBo.soCode)}`
+            } else {
+                updateTypeBo({'soType': 0, 'soCode': null})
+                draft.value = 'Ошибка запроса'
+            }
+        })
+
         console.log(typeBo.soCode)
     }
 
     const handleInputBoNum = (value?: string): void => {
+
         updateInputBoNum((draft) => {
-            draft.value = value
+                draft.value = value
         })
+
     }
+
+    useEffect(() => {
+        fetchTypeBo(authToken, inputBoNum.value);
+    }, [inputBoNum])
     return (
         <div className="modal" id="scan">
             <Header
@@ -62,7 +84,7 @@ const Scan: React.FC = () => {
                         name="item-number"
                         title="Тип объекта БО"
                         placeholder=""
-                        inputValue={Object.keys(typeBo).length ? String(typeBo.soCode) : ''}
+                        inputValue={inputTypeBO.value}
                         updateValue={() => {
                         }}
                         validateValue={false}
