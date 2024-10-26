@@ -10,9 +10,8 @@ import Header from '../Header/Header';
 import Input from '../UI/Inputs/Input';
 
 interface VznDetailModalProps {
-  vznNum?: string; // Передаем номер ВЗН как необязательный пропс
+  vznNum?: string; 
 }
-
 
 const VznDetailModal: React.FC<VznDetailModalProps> = ({ vznNum }) => {
   const { closeModal } = useModalStore();
@@ -36,10 +35,7 @@ const VznDetailModal: React.FC<VznDetailModalProps> = ({ vznNum }) => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  };
-
-  console.log(selectedItem);
-  
+  };  
 
   return (
     <Modal isOpen={!!selectedItem} onClose={closeModal}>
