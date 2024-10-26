@@ -13,6 +13,7 @@ import { useVznListStore } from '@/stores/useVznListStore';
 import { formatDate } from '@/utils/formatDate';
 import { findDivisionName } from '@/utils/findDivisionName';
 import { useDivisionsStore } from '@/stores/useDivisionsStore';
+import { useStockStore } from '@/stores/useStockStore';
 
 
 const VznDetails: React.FC = () => {
@@ -22,14 +23,17 @@ const VznDetails: React.FC = () => {
   const { vznDetails, fetchVznDetails } = useVznDetailsStore();
   const { openVznModal, selectedVznId } = useModalStore();
   const { divisions, fetchDivisions } = useDivisionsStore();
+  const { stockObject, fetchStockObject } = useStockStore();
 
   useEffect(() => {
     if (authToken && wsInplantCode) {
       fetchDivisions(authToken);
       fetchVznDetails(authToken, Number(wsInplantCode));
+      fetchStockObject(authToken, vznDetails?.wsInplantContents.find(item => item)?.Code);
     }
   }, [authToken, wsInplantCode, fetchDivisions, fetchVznDetails]);
 
+  
   console.log('VznDetails:', vznDetails);
 
   const selectedVzn = vznList.find((vzn) => vzn.Code === Number(wsInplantCode));
@@ -37,6 +41,7 @@ const VznDetails: React.FC = () => {
   const handleClick = (vznId: number) => {
     openVznModal(vznId);
   };
+
 
   return (
     <>
@@ -53,7 +58,7 @@ const VznDetails: React.FC = () => {
         <ul className="vzn_list">
           {vznDetails?.wsInplantContents.map((item) => (
             <li key={item.Code} className="vzn_item" onClick={() => handleClick(item.Code)}>
-              <p>{item.ArticleCode || 'Неизвестно'} - {item.ArticleName || 'Неизвестно'}</p>
+              <p>{stockObject?.NomNum || '556-47825-01'} - {stockObject?.Description || 'Гайка М12х2,5 ГОСТ 48975-87'}</p>
               <p>Выдано: {item.LeaveQty}</p>
               <p>Получено: {item.ArrivalQty}</p>
             </li>

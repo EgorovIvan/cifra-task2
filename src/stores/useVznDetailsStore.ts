@@ -12,8 +12,6 @@ interface VznDetails {
 
 interface WsInplantContent {
   Code: number;
-  ArticleCode: string;   // Обозначение
-  ArticleName: string;   // Наименование
   LeaveQty: number;
   ArrivalQty: number;
 }
@@ -47,10 +45,8 @@ export const useVznDetailsStore = create<VznDetailsState>((set) => ({
       
       const data = response.data.wsInplantContents.map((item: WsInplantContent) => ({
         Code: item.Code,
-        ArticleCode: item.ArticleCode,    // Обозначение
-        ArticleName: item.ArticleName,    // Наименование
         LeaveQty: item.LeaveQty,
-        ArrivalQty: item.ArrivalQty,
+        ArrivalQty: item.ArrivalQty
       }));
       
       console.log ('Респонс отделы:', response);
