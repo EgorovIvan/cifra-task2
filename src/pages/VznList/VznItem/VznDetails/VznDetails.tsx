@@ -63,7 +63,7 @@ const VznDetails: React.FC = () => {
         </ul>
       </main>
 
-      { selectedVznId && <VznDetailModal /> }
+      { selectedVznId && <VznDetailModal vznNum={selectedVzn?.Num}/> }
     </>
   );
 };

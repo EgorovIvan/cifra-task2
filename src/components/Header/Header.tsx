@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
     <header className={`header_container ${hasBorder ? 'with_border' : ''} ${isBlueBackground ? 'blue_background' : ''}`}>
       {showCloseButton && (
           <button className="icon_button" onClick={onCloseButtonClick ?? undefined} >
-            <Icon src='public/img/filter/close.svg' />
+            <Icon src='../public/img/filter/close.svg' />
           </button>
       )}
 

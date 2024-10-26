@@ -1,20 +1,35 @@
 .vzn_details__modal {
   display: flex;
+  padding: 4px 8px;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  p {
-    margin-bottom: 2px;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 14px;
-    letter-spacing: 0.5px;
-    text-align: left;
+  &__summary {
+    align-self: flex-start;
+
+    p {
+      margin-bottom: .2rem;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: 0.5px;
+      text-align: left;
+  
+      &:last-child {
+        margin-bottom: 1rem;
+      }
+  
+      span {
+        font-weight: 700;
+      }
+    }
   }
 
-  span {
-    font-weight: 400;
+  &__qty {
+    display: flex;
+    gap: .2rem;
+    margin-bottom: .5rem;
   }
 }

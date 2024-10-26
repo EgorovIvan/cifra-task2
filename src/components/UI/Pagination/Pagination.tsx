@@ -1,5 +1,7 @@
-import Icon from "@/components/Icon/Icon";
 import { useState, useEffect } from "react";
+
+import './pagination.scss'
+import Icon from "@/components/Icon/Icon";
 
 interface PaginationProps {
   totalItems: number;
@@ -17,7 +19,6 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, currentPage, onPage
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // Обновляем inputPage даже если значение временно пустое
     setInputPage(value);
   };
 
@@ -26,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, currentPage, onPage
     if (page >= 1 && page <= totalPages) {
       onPageChange(page);
     } else {
-      setInputPage(currentPage.toString()); // Сбрасываем к текущей странице, если значение некорректное
+      setInputPage(currentPage.toString());
     }
   };
 
@@ -45,11 +46,11 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, currentPage, onPage
   return (
     <div className='pagination'>
       <button
-        className='pagination__button__left'
+        className={`pagination__button pagination__button__left ${currentPage === 1 ? 'pagination__button--inactive' : 'pagination__button--active'}`}
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        <Icon src='../../../../public/img/pagination/arrow.svg' size={9} />
+        <Icon src='../../../../public/img/pagination/arrow.svg' size={10} />
       </button>
       <input
         type="text"
@@ -63,6 +64,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalItems, currentPage, onPage
       />
       <span className='pagination__text'>из {totalPages}</span>
       <button
+        className={`pagination__button ${currentPage === totalPages ? 'pagination__button--inactive' : 'pagination__button--active'}`}
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >

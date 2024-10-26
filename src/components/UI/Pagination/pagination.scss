@@ -4,14 +4,26 @@
   justify-content: center;
   align-items: center;
 
-  & button {
+  &__button {
     font-size: 1em;
     padding: .3rem .5rem;
+    border: none;
+    border-radius: 4px;
   }
 
   &__button__left {
     transform: rotate(180deg);
     margin-right: 5px;
+  }
+
+  &__button--active {
+    background-color: #4680B0;
+  }
+
+  &__button--inactive {
+    background-color: #DCD8E0;
+    ;
+    cursor: not-allowed;
   }
 
   &__input {
@@ -22,6 +34,7 @@
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: transparent;
   }
 
   &__text {

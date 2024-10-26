@@ -9,7 +9,12 @@ import Pagination from '@/components/UI/Pagination/Pagination';
 import Header from '../Header/Header';
 import Input from '../UI/Inputs/Input';
 
-const VznDetailModal: React.FC = () => {
+interface VznDetailModalProps {
+  vznNum?: string; // Передаем номер ВЗН как необязательный пропс
+}
+
+
+const VznDetailModal: React.FC<VznDetailModalProps> = ({ vznNum }) => {
   const { closeModal } = useModalStore();
   const { vznDetails } = useVznDetailsStore();
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +22,6 @@ const VznDetailModal: React.FC = () => {
   const totalItems = vznDetails?.wsInplantContents.length || 0;
   const selectedItem = vznDetails?.wsInplantContents[currentPage - 1];
 
-  // Хранение значений инпутов для "Выдано" и "Получено"
   const [leaveQty, setLeaveQty] = useState(selectedItem?.LeaveQty || 0);
   const [arrivalQty, setArrivalQty] = useState(selectedItem?.ArrivalQty || 0);
 
@@ -34,17 +38,22 @@ const VznDetailModal: React.FC = () => {
     setCurrentPage(page);
   };
 
+  console.log(selectedItem);
+  
+
   return (
     <Modal isOpen={!!selectedItem} onClose={closeModal}>
 
-      <Header headline='Элемент ВЗН №' />
+      <Header headline={`Элемент ВЗН №${vznNum}`} showCloseButton={true} onCloseButtonClick={closeModal}/>
       <main className='vzn_details__modal'>
-        <div className="vzn_details__summary">
-          <p><strong>№ карточки:</strong> {selectedItem.Code}</p>
-          <p><strong>Обозначение:</strong> {selectedItem.ArticleCode}</p>
-          <p><strong>Наименование:</strong> {selectedItem.ArticleName || 'Неизвестно'}</p>
+        <div className="vzn_details__modal__summary">
+          <p><span>№ карточки: </span>{selectedItem.Code}</p>
+          <p><span>Обозначение: </span>{selectedItem.ArticleCode}</p>
+          <p><span>Наименование: </span>{selectedItem.ArticleName || 'Неизвестно'}</p>
+        </div>
 
-          <div>
+        <div className="vzn_details__modal__qty">
+          <div className="vzn_details__modal__qty__item">
             <Input
               type="text"
               name="sender"
@@ -52,7 +61,7 @@ const VznDetailModal: React.FC = () => {
               inputValue={leaveQty} 
             />
           </div>
-          <div>
+          <div className="vzn_details__modal__qty__item">
             <Input
               type="text"
               name="sender"
@@ -60,9 +69,14 @@ const VznDetailModal: React.FC = () => {
               inputValue={arrivalQty} 
             />
           </div>
-
-          <Pagination totalItems={totalItems} onPageChange={handlePageChange} currentPage={currentPage} />
         </div>
+        <Input
+            type="text"
+            name="sender"
+            title="№ заказа"
+            inputValue='' 
+          />
+        <Pagination totalItems={totalItems} onPageChange={handlePageChange} currentPage={currentPage} />
       </main>
     </Modal>
   );
