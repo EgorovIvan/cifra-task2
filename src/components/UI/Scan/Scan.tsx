@@ -29,7 +29,7 @@ const Scan: React.FC = () => {
         console.log(typeBo.soCode)
     }
 
-    const handleInputBoNum = (value: string): void => {
+    const handleInputBoNum = (value?: string): void => {
         updateInputBoNum((draft) => {
             draft.value = value
         })

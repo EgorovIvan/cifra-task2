@@ -1,11 +1,11 @@
 import * as React from "react";
 import Scan from "@/components/UI/Scan/Scan";
 
-const options = [
-    { label: 'Выбрать все', value: '100' },
-    { label: 'Опция 1', value: '1' },
-    { label: 'Опция 2', value: '2' },
-    { label: 'Опция 3', value: '3' },
+// const options = [
+//     { label: 'Выбрать все', value: '100' },
+//     { label: 'Опция 1', value: '1' },
+//     { label: 'Опция 2', value: '2' },
+//     { label: 'Опция 3', value: '3' },
     // { label: 'Option 2', value: '2' },
     // { label: 'Option 3', value: '3' },
     // { label: 'Option 4', value: '4' },
@@ -21,7 +21,7 @@ const options = [
     // { label: 'Option 14', value: '14' },
     // { label: 'Option 15', value: '15' },
     // { label: 'Option 16', value: '16' },
-];
+// ];
 
 const Test: React.FC = () => {
 

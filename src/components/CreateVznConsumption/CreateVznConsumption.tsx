@@ -16,6 +16,7 @@ import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 import DivisionsList from "@/components/DivisionsList/DivisionsList.tsx";
 import Modal from "@/components/UI/Modal/Modal.tsx";
 import {useEffect} from "react";
+import {i} from "vite/dist/node/types.d-aGj9QkWt";
 
 interface InputDate {
     date?: Date,
@@ -144,7 +145,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Примечание"
-    const handleInputComment = (value: string): void => {
+    const handleInputComment = (value?: string): void => {
 
         updateNewVznData({
             bo: {
@@ -153,7 +154,7 @@ const CreateVznConsumption: React.FC = () => {
                         i === 0 ? {...attr, Value: value} : attr
                     ),
                 },
-            },
+            }
         });
         console.log(newVznData)
     }

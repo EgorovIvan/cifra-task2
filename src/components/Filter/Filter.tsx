@@ -66,7 +66,7 @@ const Filter: React.FC = () => {
     });
 
     // Ввод данных в поле "Номер ВЗН"
-    const handleInputVznNumber = (value: string): void => {
+    const handleInputVznNumber = (value?: string): void => {
         updateInputVznNumber((draft) => {
             draft.value = value
         })
@@ -74,7 +74,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Отправитель"
-    const handleInputSender = (value: string): void => {
+    const handleInputSender = (value?: string): void => {
         updateInputSender((draft) => {
             draft.value = value
         })
@@ -91,7 +91,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Получатель"
-    const handleInputReceiver = (value: string): void => {
+    const handleInputReceiver = (value?: string): void => {
         updateInputReceiver((draft) => {
             draft.value = value
         })
@@ -108,7 +108,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата от"
-    const handleInputStartDate = (value?: Date): void => {
+    const handleInputStartDate = (value: Date | null): void => {
         updateInputPeriod((draft) => {
             draft.startDate = value
         })
@@ -141,7 +141,7 @@ const Filter: React.FC = () => {
         /* Валидация поля Номер ВЗН */
         if (Number(inputVznNumber.value) < 0
             || !Number.isInteger(Number(inputVznNumber.value))
-            || inputVznNumber.value?.length > 20
+            || (inputVznNumber.value && inputVznNumber.value?.length > 20)
             || inputVznNumber.value !== inputVznNumber.value?.replace(/[^\d]/g, "")) {
 
             updateInputVznNumber((draft) => {
@@ -160,7 +160,7 @@ const Filter: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value?.length >= 5) {
+        if (inputSender.value && inputSender.value?.length >= 5) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -177,7 +177,7 @@ const Filter: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Получатель */
-        if (inputReceiver.value?.length >= 5) {
+        if (inputReceiver.value && inputReceiver.value?.length >= 5) {
             updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false

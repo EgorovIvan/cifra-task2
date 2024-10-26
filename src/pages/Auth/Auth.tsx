@@ -69,16 +69,20 @@ const Auth: React.FC = () => {
         }
     };
 
-    const handleChangeLogin = (login: string): void => {
+    const handleChangeLogin = (login?: string): void => {
         updateAuth((draft) => {
-            draft.login = login.trim()
+            if (login != null) {
+                draft.login = login.trim()
+            }
             draft.isNullLogin = false
         })
     }
 
-    const handleChangePassword = (password: string): void => {
+    const handleChangePassword = (password?: string): void => {
         updateAuth((draft) => {
-            draft.password = password
+            if (password != null) {
+                draft.password = password
+            }
             draft.isNullPassword = false
         })
     }

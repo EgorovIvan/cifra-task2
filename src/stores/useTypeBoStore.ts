@@ -20,7 +20,7 @@ export const useTypeBoStore = create<TypeBoState>((set) => ({
         soType: 0
     },
 
-    fetchTypeBo: async (token: string | null, soNum: string) => {
+    fetchTypeBo: async (token: string | null, soNum?: string ) => {
 
         try {
             const response = await axios.post('http://92.55.15.91:8225/so.findOmpObject',
