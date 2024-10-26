@@ -19,6 +19,8 @@ export const useTypeBoStore = create<TypeBoState>((set) => ({
         soCode: 0,
         soType: 0
     },
+    loading: false,
+    error: null,
 
     fetchTypeBo: async (token: string | null, soNum?: string ) => {
 

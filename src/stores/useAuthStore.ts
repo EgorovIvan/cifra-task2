@@ -7,7 +7,7 @@ export interface AuthState {
     clearAuthToken: () => void;
 }
 
-export const useAuthStore = create<AuthState>(
+export const useAuthStore = create<AuthState, [], [["zustand/persist", unknown]]>(
     persist((set) => ({
         authToken: null,
         setAuthToken: (token?: string) => {
