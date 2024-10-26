@@ -37,7 +37,7 @@ const CreateVznConsumption: React.FC = () => {
     });
 
     const [inputSender, updateInputSender] = useImmer<InputState>({
-        value: null,
+        value: undefined,
         errorField: false,
         isNull: false,
     });
@@ -234,7 +234,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value?.length >= 100) {
+        if (inputSender.value && inputSender.value?.length >= 100) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
