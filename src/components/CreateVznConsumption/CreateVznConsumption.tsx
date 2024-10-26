@@ -16,7 +16,6 @@ import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 import DivisionsList from "@/components/DivisionsList/DivisionsList.tsx";
 import Modal from "@/components/UI/Modal/Modal.tsx";
 import {useEffect} from "react";
-import {i} from "vite/dist/node/types.d-aGj9QkWt";
 
 interface InputDate {
     date?: Date,
