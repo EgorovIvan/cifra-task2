@@ -60,7 +60,9 @@ const Auth: React.FC = () => {
             });
             console.log(response);
             const token = response.data.authToken;
-            setAuthToken(token);
+            if (setAuthToken) {
+                setAuthToken(token);
+            }
             navigate('/menu');
         } catch {
             updateAuth(draft => {
@@ -105,7 +107,7 @@ const Auth: React.FC = () => {
                             type={'text'}
                             name={'login'}
                             title={'Логин'}
-                            placeholder={'GLEK_TEST'}
+                            placeholder={'work'}
                             inputValue={auth.login}
                             updateValue={handleChangeLogin}
                             validateValue={false}
