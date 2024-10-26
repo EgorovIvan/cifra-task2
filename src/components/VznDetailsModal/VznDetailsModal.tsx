@@ -44,8 +44,8 @@ const VznDetailModal: React.FC<VznDetailModalProps> = ({ vznNum }) => {
       <main className='vzn_details__modal'>
         <div className="vzn_details__modal__summary">
           <p><span>№ карточки: </span>{selectedItem.Code}</p>
-          <p><span>Обозначение: </span>{selectedItem.ArticleCode}</p>
-          <p><span>Наименование: </span>{selectedItem.ArticleName || 'Неизвестно'}</p>
+          <p><span>Обозначение: </span>Гайка М12х2,5 ГОСТ 48975-87</p>
+          <p><span>Наименование: </span>556-47825-01</p>
         </div>
 
         <div className="vzn_details__modal__qty">
