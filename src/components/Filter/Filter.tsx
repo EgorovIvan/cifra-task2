@@ -20,8 +20,8 @@ import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 
 interface Period {
     value?: string;
-    startDate: Date | null;
-    endDate: Date | null;
+    startDate?: Date | undefined;
+    endDate?: Date | undefined;
     errorField: boolean;
 }
 
@@ -60,8 +60,8 @@ const Filter: React.FC = () => {
 
     const [inputPeriod, updateInputPeriod] = useImmer<Period>({
         value: "",
-        startDate: null,
-        endDate: null,
+        startDate: undefined,
+        endDate: undefined,
         errorField: false,
     });
 
@@ -108,7 +108,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата от"
-    const handleInputStartDate = (value: Date | null): void => {
+    const handleInputStartDate = (value?: Date | undefined): void => {
         updateInputPeriod((draft) => {
             if(value) {
                 draft.startDate = value
@@ -118,7 +118,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата до"
-    const handleInputEndDate = (value: Date | null): void => {
+    const handleInputEndDate = (value?: Date | undefined): void => {
         updateInputPeriod((draft) => {
             if(value) {
                 draft.endDate = value
@@ -129,10 +129,17 @@ const Filter: React.FC = () => {
 
     // Отправка запроса к серверу
     const handleSubmit = () => {
-        fetchVznList(authToken);
-        closeFilterModal();
-        navigate("/vzn-list");
-        openResultsModal();
+
+        if(!inputVznNumber.errorField &&
+            !inputSender.errorField &&
+            !inputReceiver.errorField
+        ) {
+            fetchVznList(authToken);
+            closeFilterModal();
+            navigate("/vzn-list");
+            openResultsModal();
+        }
+
     }
 
     // Закрытие модального окна
