@@ -7,7 +7,7 @@ interface Props {
     name: string;
     title: string;
     placeholder?: string;
-    date?: Date;
+    date?: Date | null;
     setDateChange: (value?: Date) => void;
     validateValue: boolean;
     isNull: boolean;
