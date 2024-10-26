@@ -61,13 +61,13 @@ const CreateVznConsumption: React.FC = () => {
     });
 
     const [inputDateIssue, updateInputDateIssue] = useImmer<InputDate>({
-        date: undefined,
+        date: null,
         isNull: false,
         errorField: false,
     });
 
     const [inputDateAdoption, updateInputDateAdoption] = useImmer<InputDate>({
-        date: undefined,
+        date: null,
         isNull: false,
         errorField: false,
     });
@@ -130,7 +130,9 @@ const CreateVznConsumption: React.FC = () => {
     // Ввод данных в поле "Дата выдачи"
     const handleInputDateIssue = (value?: Date): void => {
         updateInputDateIssue((draft) => {
-            draft.date = value
+            if(value) {
+                draft.date = value
+            }
         })
         updateNewVznData({'LeaveMoveDate': String(value)}); // Необходимо откорректировать дату к UTC
     }
@@ -138,7 +140,9 @@ const CreateVznConsumption: React.FC = () => {
     // Ввод данных в поле "Дата принятия"
     const handleInputDateAdoption = (value?: Date): void => {
         updateInputDateAdoption((draft) => {
-            draft.date = value
+            if(value) {
+                draft.date = value
+            }
         })
         updateNewVznData({'ArrivalMoveDate': String(value)}); // Необходимо откорректировать дату к UTC
     }
