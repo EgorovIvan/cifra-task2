@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import * as React from "react";
 import '../../vzn_list.scss';
 import '../vzn_item.scss';
 import './vzn_details.scss';
-import { useVznDetailsStore } from '@/stores/useVznDetailsStore'; 
+import { useVznDetailsStore } from '@/stores/useVznDetailsStore';
 import { useModalStore } from '@/stores/useModalStore';
-import { useAuthStore } from '@/stores/useAuthStore';
+import {AuthState, useAuthStore} from '@/stores/useAuthStore';
 import VznDetailModal from '../../../../components/VznDetailsModal/VznDetailsModal';
 import Header from '@/components/Header/Header';
 import { useVznListStore } from '@/stores/useVznListStore';
@@ -14,8 +14,9 @@ import { formatDate } from '@/utils/formatDate';
 import { findDivisionName } from '@/utils/findDivisionName';
 import { useDivisionsStore } from '@/stores/useDivisionsStore';
 
+
 const VznDetails: React.FC = () => {
-  const authToken = useAuthStore((state) => state.authToken); 
+  const authToken = useAuthStore((state: AuthState) => state?.authToken);
   const { wsInplantCode } = useParams<{ wsInplantCode: string }>();
   const { vznList } = useVznListStore();
   const { vznDetails } = useVznDetailsStore();
@@ -56,7 +57,7 @@ const VznDetails: React.FC = () => {
           ))}
         </ul>
       </main>
-      
+
       { selectedVznId && <VznDetailModal /> }
     </>
   );

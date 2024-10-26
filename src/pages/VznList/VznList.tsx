@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import './vzn_list.scss';
 import VznItem from './VznItem/VznItem.tsx';
 import {useVznListStore} from '@/stores/useVznListStore.ts';
-import {useAuthStore} from '@/stores/useAuthStore.ts';
+import {AuthState, useAuthStore} from '@/stores/useAuthStore.ts';
 import {useDivisionsStore} from '@/stores/useDivisionsStore.ts';
 import Header from "@/components/Header/Header.tsx";
 import Modal from "@/components/UI/Modal/Modal.tsx";
@@ -14,7 +14,7 @@ import {useModalStore} from "@/stores/useModalStore.ts";
 const VznList: React.FC = () => {
     const {vznList, loading, error} = useVznListStore();
     const {divisions, fetchDivisions} = useDivisionsStore();
-    const authToken = useAuthStore((state) => state.authToken);
+    const authToken = useAuthStore((state: AuthState) => state.authToken);
     const { isFilterModalOpen, isCreateVznModalOpen, closeFilterModal, closeCreateVznModal } = useModalStore();
 
 

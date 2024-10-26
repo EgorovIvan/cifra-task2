@@ -20,7 +20,7 @@ const SelectInput: React.FC<Props> = (props) => {
   const [filteredSuggestions, setFilteredSuggestions] = React.useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
   const {divisions, fetchDivisions} = useDivisionsStore();
-  const authToken = useAuthStore((state) => state.authToken);
+  const authToken = useAuthStore((state) => state?.authToken);
   const inputRef = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {

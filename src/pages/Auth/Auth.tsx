@@ -25,7 +25,7 @@ const Auth: React.FC = () => {
         isNullPassword: false,
     })
 
-    const setAuthToken = useAuthStore((state) => state.setAuthToken);
+    const setAuthToken = useAuthStore((state) => state?.setAuthToken);
     const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {

@@ -52,7 +52,12 @@ const BottomSheet: React.FC = () => {
     };
 
     useEffect(() => {
-        setWrapperHeight(appHeight - wrapperRef?.current?.clientHeight - 24)
+        if(wrapperRef.current) {
+            setWrapperHeight(appHeight - wrapperRef.current?.clientHeight - 24)
+        } else {
+            setWrapperHeight(appHeight)
+        }
+
 
         window.addEventListener('resize', handleResize);
         handleResize()

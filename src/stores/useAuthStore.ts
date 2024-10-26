@@ -1,16 +1,16 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from "zustand/middleware";
 
-interface AuthState {
+export interface AuthState {
     authToken: string | null;
-    setAuthToken: (token: string) => void;
+    setAuthToken: (token?: string) => void;
     clearAuthToken: () => void;
 }
 
-export const useAuthStore = create()<AuthState>(
+export const useAuthStore = create<AuthState>(
     persist((set) => ({
         authToken: null,
-        setAuthToken: (token: string) => {
+        setAuthToken: (token?: string) => {
             set({authToken: token});
         },
         clearAuthToken: () => {

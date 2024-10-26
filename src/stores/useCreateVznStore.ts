@@ -18,7 +18,7 @@ interface VznItemData {
                 Code: number;
                 IsNull: boolean;
                 MeasCode: number;
-                Value: string;
+                Value?: string;
             }[]
         }
     }
