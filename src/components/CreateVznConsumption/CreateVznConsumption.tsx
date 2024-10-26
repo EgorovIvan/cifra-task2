@@ -11,7 +11,7 @@ import {useModalStore} from "@/stores/useModalStore.ts";
 import Header from "@/components/Header/Header.tsx";
 import Footer from "@/components/Footer/Footer.tsx";
 import {useCreateVznStore} from "@/stores/useCreateVznStore.ts";
-import {useAuthStore} from "@/stores/useAuthStore.ts";
+import {AuthState, useAuthStore} from "@/stores/useAuthStore.ts";
 import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 import DivisionsList from "@/components/DivisionsList/DivisionsList.tsx";
 import Modal from "@/components/UI/Modal/Modal.tsx";
@@ -27,7 +27,7 @@ const CreateVznConsumption: React.FC = () => {
 
     const {closeCreateVznModal} = useModalStore()
     const {newVznData, updateNewVznData, createVznItem} = useCreateVznStore()
-    const authToken = useAuthStore((state) => state.authToken);
+    const authToken = useAuthStore((state: AuthState) => state.authToken);
     const {isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
