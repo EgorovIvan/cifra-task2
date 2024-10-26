@@ -7,8 +7,8 @@ interface Props {
     name: string;
     title: string;
     placeholder?: string;
-    date: Date | null | undefined;
-    setDateChange: (value: Date | null | undefined) => void;
+    date?: Date;
+    setDateChange: (value?: Date) => void;
     validateValue: boolean;
     isNull: boolean;
     textError: string;
@@ -17,8 +17,10 @@ interface Props {
 const DateInput: React.FC<Props> = (Props) => {
 
     // Выбор периода дат
-    const handleDateChange = (date: Date | null | undefined) => {
-        Props.setDateChange(date);
+    const handleDateChange = (date?: Date) => {
+        if(date) {
+            Props.setDateChange(date);
+        }
     };
 
     return (

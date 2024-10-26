@@ -128,7 +128,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата выдачи"
-    const handleInputDateIssue = (value: Date | null | undefined): void => {
+    const handleInputDateIssue = (value?: Date): void => {
         updateInputDateIssue((draft) => {
             draft.date = value
         })
@@ -136,7 +136,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата принятия"
-    const handleInputDateAdoption = (value: Date | null | undefined): void => {
+    const handleInputDateAdoption = (value?: Date): void => {
         updateInputDateAdoption((draft) => {
             draft.date = value
         })
