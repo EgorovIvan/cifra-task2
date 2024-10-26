@@ -30,7 +30,7 @@ const DateInput: React.FC<Props> = (Props) => {
                 onChange={handleDateChange}
                 dateFormat="dd.MM.yyyy"
                 placeholderText={Props.placeholder}
-                className="input"
+                className={'input ' + ((Props.isNull || Props.validateValue) ? 'error_border' : '')}
                 isClearable
                 name={Props.name}
             />
