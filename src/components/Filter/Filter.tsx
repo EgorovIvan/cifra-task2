@@ -110,7 +110,9 @@ const Filter: React.FC = () => {
     // Ввод данных в поле "Дата от"
     const handleInputStartDate = (value: Date | null): void => {
         updateInputPeriod((draft) => {
-            draft.startDate = value
+            if(value) {
+                draft.startDate = value
+            }
         })
         updateFilters({ 'fromDate': String(value) });
     }
@@ -118,7 +120,9 @@ const Filter: React.FC = () => {
     // Ввод данных в поле "Дата до"
     const handleInputEndDate = (value: Date | null): void => {
         updateInputPeriod((draft) => {
-            draft.endDate = value
+            if(value) {
+                draft.endDate = value
+            }
         })
         updateFilters({ 'toDate': String(value) });
     }
