@@ -23,13 +23,12 @@ const VznDetails: React.FC = () => {
   const { vznDetails, fetchVznDetails } = useVznDetailsStore();
   const { openVznModal, selectedVznId } = useModalStore();
   const { divisions, fetchDivisions } = useDivisionsStore();
-  const { stockObject, fetchStockObject } = useStockStore();
+  const { stockObject } = useStockStore();
 
   useEffect(() => {
     if (authToken && wsInplantCode) {
       fetchDivisions(authToken);
       fetchVznDetails(authToken, Number(wsInplantCode));
-      fetchStockObject(authToken, vznDetails?.wsInplantContents.find(item => item)?.Code);
     }
   }, [authToken, wsInplantCode, fetchDivisions, fetchVznDetails]);
 
@@ -42,7 +41,7 @@ const VznDetails: React.FC = () => {
 
   return (
     <>
-      <Header headline={`ВЗН №${selectedVzn?.Num}`} hasBorder={false}/>
+      <Header headline={`ВЗН №${selectedVzn?.Num}`} hasBorder={false} showMoreButton={true}/>
       <main className='main'>
         {selectedVzn && (
           <div className="vzn_details__summary">

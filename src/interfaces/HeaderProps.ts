@@ -4,6 +4,7 @@ export interface HeaderProps {
     headline: string;
     supportingText?: string;
     showCloseButton?: boolean;
+    showMoreButton?: boolean;
     onCloseButtonClick?: () => void,
     centralButton?: React.ReactNode;
     rightButton?: React.ReactNode;

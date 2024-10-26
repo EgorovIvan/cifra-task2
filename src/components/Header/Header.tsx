@@ -11,6 +11,7 @@ const Header: React.FC<HeaderProps> = ({
   headline,
   supportingText,
   showCloseButton = false,
+  showMoreButton = false,
   onCloseButtonClick,
   centralButton,
   rightButton,
@@ -71,6 +72,12 @@ const Header: React.FC<HeaderProps> = ({
               iconSrc={'public/img/header/create.svg'}
               sizeSrc={16}
           />}
+
+        {showMoreButton && (
+          <button className="icon_button" onClick={handleBottomSheetOpen} >
+            <Icon src='../public/img/header/more.svg' />
+          </button>
+      )}
     </header>
   );
 };
