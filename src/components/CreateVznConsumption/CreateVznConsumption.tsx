@@ -202,7 +202,14 @@ const CreateVznConsumption: React.FC = () => {
             !inputDateAdoption.date ? flag = true : ''
         })
 
-        if (!flag) {
+        if (!inputVznNumber.errorField &&
+            !inputSender.errorField &&
+            !inputReceiver.errorField &&
+            !inputSenderSection.errorField &&
+            !inputReceiverSection.errorField &&
+            !inputDateIssue.errorField &&
+            !inputDateAdoption.errorField &&
+            !flag) {
             createVznItem(authToken)
             closeCreateVznModal()
         }
@@ -238,7 +245,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value && inputSender.value?.length >= 100) {
+        if (inputSender.value && inputSender.value?.length >= 10) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -255,7 +262,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля "Принял МОЛ" */
-        if (inputReceiver.value && inputReceiver.value?.length >= 100) {
+        if (inputReceiver.value && inputReceiver.value?.length >= 10) {
             updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -272,7 +279,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля "Выдал МОЛ*" */
-        if (inputSenderSection.value && inputSenderSection.value?.length >= 50) {
+        if (inputSenderSection.value && inputSenderSection.value?.length >= 5) {
             updateInputSenderSection((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -289,7 +296,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Получатель */
-        if (inputReceiverSection.value && inputReceiverSection.value?.length >= 50) {
+        if (inputReceiverSection.value && inputReceiverSection.value?.length >= 5) {
             updateInputReceiverSection((draft) => {
                 draft.errorField = true
                 draft.isNull = false

@@ -171,7 +171,7 @@ const Filter: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value && inputSender.value?.length >= 5) {
+        if (inputSender.value && inputSender.value?.length >= 100) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -188,7 +188,7 @@ const Filter: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Получатель */
-        if (inputReceiver.value && inputReceiver.value?.length >= 5) {
+        if (inputReceiver.value && inputReceiver.value?.length >= 100) {
             updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false
