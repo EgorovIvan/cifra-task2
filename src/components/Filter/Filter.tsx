@@ -20,8 +20,8 @@ import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 
 interface Period {
     value?: string;
-    startDate?: Date;
-    endDate?: Date;
+    startDate: Date | null | undefined;
+    endDate: Date | null | undefined;
     errorField: boolean;
 }
 
@@ -60,8 +60,8 @@ const Filter: React.FC = () => {
 
     const [inputPeriod, updateInputPeriod] = useImmer<Period>({
         value: "",
-        startDate: undefined,
-        endDate: undefined,
+        startDate: null,
+        endDate: null,
         errorField: false,
     });
 
@@ -108,7 +108,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата от"
-    const handleInputStartDate = (value: Date | null): void => {
+    const handleInputStartDate = (value: | null | undefined): void => {
         updateInputPeriod((draft) => {
             draft.startDate = value
         })
@@ -116,7 +116,7 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата до"
-    const handleInputEndDate = (value: Date | null): void => {
+    const handleInputEndDate = (value: Date | null | undefined): void => {
         updateInputPeriod((draft) => {
             draft.endDate = value
         })
