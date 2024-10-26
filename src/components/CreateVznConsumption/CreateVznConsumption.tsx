@@ -31,13 +31,13 @@ const CreateVznConsumption: React.FC = () => {
     const {isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
-        value: null,
+        value: "",
         errorField: false,
         isNull: false,
     });
 
     const [inputSender, updateInputSender] = useImmer<InputState>({
-        value: "",
+        value: null,
         errorField: false,
         isNull: false,
     });
