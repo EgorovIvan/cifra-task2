@@ -7,10 +7,10 @@ interface Props {
     name: string;
     title: string;
     placeholder?: string;
-    startDate?: Date;
-    endDate?: Date;
-    setStartDate: (value: Date | null) => void;
-    setEndDate: (value: Date | null) => void;
+    startDate: Date | null | undefined;
+    endDate: Date | null | undefined;
+    setStartDate: (value: Date | null | undefined) => void;
+    setEndDate: (value: Date | null | undefined) => void;
     validateValue: boolean;
     textError: string;
 }
@@ -19,7 +19,7 @@ const DateRangeInput: React.FC<Props> = (Props) => {
 
 
     // Выбор периода дат
-    const handleDateChange = (dates: [Date | null, Date | null]) => {
+    const handleDateChange = (dates: [ Date | null | undefined,  Date | null | undefined]) => {
         const [start, end] = dates;
         Props.setStartDate(start);
         Props.setEndDate(end);
