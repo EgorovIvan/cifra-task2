@@ -33,9 +33,6 @@ const VznDetails: React.FC = () => {
     }
   }, [authToken, wsInplantCode, fetchDivisions, fetchVznDetails]);
 
-  
-  console.log('VznDetails:', vznDetails);
-
   const selectedVzn = vznList.find((vzn) => vzn.Code === Number(wsInplantCode));
 
   const handleClick = (vznId: number) => {

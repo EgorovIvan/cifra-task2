@@ -20,8 +20,8 @@ import {DivisionInputType} from "@/enum/DivisionInputType.ts";
 
 interface Period {
     value?: string;
-    startDate?: Date;
-    endDate?: Date;
+    startDate?: Date | undefined;
+    endDate?: Date | undefined;
     errorField: boolean;
 }
 
@@ -108,27 +108,38 @@ const Filter: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата от"
-    const handleInputStartDate = (value: Date | null): void => {
+    const handleInputStartDate = (value?: Date | undefined): void => {
         updateInputPeriod((draft) => {
-            draft.startDate = value
+            if(value) {
+                draft.startDate = value
+            }
         })
         updateFilters({ 'fromDate': String(value) });
     }
 
     // Ввод данных в поле "Дата до"
-    const handleInputEndDate = (value: Date | null): void => {
+    const handleInputEndDate = (value?: Date | undefined): void => {
         updateInputPeriod((draft) => {
-            draft.endDate = value
+            if(value) {
+                draft.endDate = value
+            }
         })
         updateFilters({ 'toDate': String(value) });
     }
 
     // Отправка запроса к серверу
     const handleSubmit = () => {
-        fetchVznList(authToken);
-        closeFilterModal();
-        navigate("/vzn-list");
-        openResultsModal();
+
+        if(!inputVznNumber.errorField &&
+            !inputSender.errorField &&
+            !inputReceiver.errorField
+        ) {
+            fetchVznList(authToken);
+            closeFilterModal();
+            navigate("/vzn-list");
+            openResultsModal();
+        }
+
     }
 
     // Закрытие модального окна
@@ -160,7 +171,7 @@ const Filter: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value && inputSender.value?.length >= 5) {
+        if (inputSender.value && inputSender.value?.length >= 100) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -177,7 +188,7 @@ const Filter: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Получатель */
-        if (inputReceiver.value && inputReceiver.value?.length >= 5) {
+        if (inputReceiver.value && inputReceiver.value?.length >= 100) {
             updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false

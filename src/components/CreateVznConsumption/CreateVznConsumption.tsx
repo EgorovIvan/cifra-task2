@@ -18,7 +18,7 @@ import Modal from "@/components/UI/Modal/Modal.tsx";
 import {useEffect} from "react";
 
 interface InputDate {
-    date?: Date,
+    date: Date | null | undefined,
     isNull: boolean,
     errorField: boolean,
 }
@@ -61,13 +61,13 @@ const CreateVznConsumption: React.FC = () => {
     });
 
     const [inputDateIssue, updateInputDateIssue] = useImmer<InputDate>({
-        date: undefined,
+        date: null,
         isNull: false,
         errorField: false,
     });
 
     const [inputDateAdoption, updateInputDateAdoption] = useImmer<InputDate>({
-        date: undefined,
+        date: null,
         isNull: false,
         errorField: false,
     });
@@ -130,7 +130,9 @@ const CreateVznConsumption: React.FC = () => {
     // Ввод данных в поле "Дата выдачи"
     const handleInputDateIssue = (value: Date | null | undefined): void => {
         updateInputDateIssue((draft) => {
-            draft.date = value
+            if(value) {
+                draft.date = value
+            }
         })
         updateNewVznData({'LeaveMoveDate': String(value)}); // Необходимо откорректировать дату к UTC
     }
@@ -138,7 +140,9 @@ const CreateVznConsumption: React.FC = () => {
     // Ввод данных в поле "Дата принятия"
     const handleInputDateAdoption = (value: Date | null | undefined): void => {
         updateInputDateAdoption((draft) => {
-            draft.date = value
+            if(value) {
+                draft.date = value
+            }
         })
         updateNewVznData({'ArrivalMoveDate': String(value)}); // Необходимо откорректировать дату к UTC
     }
@@ -198,7 +202,14 @@ const CreateVznConsumption: React.FC = () => {
             !inputDateAdoption.date ? flag = true : ''
         })
 
-        if (!flag) {
+        if (!inputVznNumber.errorField &&
+            !inputSender.errorField &&
+            !inputReceiver.errorField &&
+            !inputSenderSection.errorField &&
+            !inputReceiverSection.errorField &&
+            !inputDateIssue.errorField &&
+            !inputDateAdoption.errorField &&
+            !flag) {
             createVznItem(authToken)
             closeCreateVznModal()
         }
@@ -234,7 +245,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value && inputSender.value?.length >= 100) {
+        if (inputSender.value && inputSender.value?.length >= 10) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -251,7 +262,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля "Принял МОЛ" */
-        if (inputReceiver.value && inputReceiver.value?.length >= 100) {
+        if (inputReceiver.value && inputReceiver.value?.length >= 10) {
             updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -268,7 +279,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля "Выдал МОЛ*" */
-        if (inputSenderSection.value && inputSenderSection.value?.length >= 50) {
+        if (inputSenderSection.value && inputSenderSection.value?.length >= 5) {
             updateInputSenderSection((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -285,7 +296,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Получатель */
-        if (inputReceiverSection.value && inputReceiverSection.value?.length >= 50) {
+        if (inputReceiverSection.value && inputReceiverSection.value?.length >= 5) {
             updateInputReceiverSection((draft) => {
                 draft.errorField = true
                 draft.isNull = false
