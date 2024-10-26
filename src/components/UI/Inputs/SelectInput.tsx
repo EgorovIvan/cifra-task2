@@ -9,7 +9,7 @@ interface Props {
   title: string;
   placeholder: string;
   inputValue?: string;
-  updateValue: (value: string) => void;
+  updateValue: (value?: string) => void;
   validateValue: boolean;
   isNull: boolean;
   textError: string;

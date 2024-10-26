@@ -31,7 +31,7 @@ const CreateVznConsumption: React.FC = () => {
     const {isDivisionsModalOpen, openDivisionsModal, closeDivisionsModal, divisionInputType} = useModalStore();
 
     const [inputVznNumber, updateInputVznNumber] = useImmer<InputState>({
-        value: "",
+        value: null,
         errorField: false,
         isNull: false,
     });
@@ -234,7 +234,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value.length >= 100) {
+        if (inputSender.value?.length >= 100) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
