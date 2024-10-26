@@ -18,7 +18,7 @@ import Modal from "@/components/UI/Modal/Modal.tsx";
 import {useEffect} from "react";
 
 interface InputDate {
-    date?: Date,
+    date: Date | null | undefined,
     isNull: boolean,
     errorField: boolean,
 }
@@ -128,7 +128,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата выдачи"
-    const handleInputDateIssue = (value?: Date): void => {
+    const handleInputDateIssue = (value: Date | null | undefined): void => {
         updateInputDateIssue((draft) => {
             if(value) {
                 draft.date = value
@@ -138,7 +138,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Дата принятия"
-    const handleInputDateAdoption = (value?: Date): void => {
+    const handleInputDateAdoption = (value: Date | null | undefined): void => {
         updateInputDateAdoption((draft) => {
             if(value) {
                 draft.date = value
