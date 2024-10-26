@@ -234,7 +234,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value && inputSender.value?.length >= 100) {
+        if (inputSender.value?.length >= 100) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
