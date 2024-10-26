@@ -37,7 +37,7 @@ const CreateVznConsumption: React.FC = () => {
     });
 
     const [inputSender, updateInputSender] = useImmer<InputState>({
-        value: undefined,
+        value: "",
         errorField: false,
         isNull: false,
     });
@@ -73,12 +73,12 @@ const CreateVznConsumption: React.FC = () => {
     });
 
     // Ввод данных в поле "Номер ВЗН"
-    const handleInputVznNumber = (value: string): void => {
+    const handleInputVznNumber = (value?: string): void => {
         updateNewVznData({'Num': value});
     }
 
     // Ввод данных в поле "Отправитель"
-    const handleInputSender = (value: string): void => {
+    const handleInputSender = (value?: string): void => {
         updateInputSender((draft) => {
             draft.value = value
         })
@@ -95,7 +95,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Получатель"
-    const handleInputReceiver = (value: string): void => {
+    const handleInputReceiver = (value?: string): void => {
         updateInputReceiver((draft) => {
             draft.value = value
         })
@@ -112,7 +112,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Выдал МОЛ*"
-    const handleInputSenderSection = (value: string): void => {
+    const handleInputSenderSection = (value?: string): void => {
         updateInputSenderSection((draft) => {
             draft.value = value
         })
@@ -120,7 +120,7 @@ const CreateVznConsumption: React.FC = () => {
     }
 
     // Ввод данных в поле "Принял МОЛ"
-    const handleInputReceiverSection = (value: string): void => {
+    const handleInputReceiverSection = (value?: string): void => {
         updateInputReceiverSection((draft) => {
             draft.value = value
         })
@@ -234,7 +234,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Отправитель */
-        if (inputSender.value?.length >= 100) {
+        if (inputSender.value && inputSender.value?.length >= 100) {
             updateInputSender((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -251,7 +251,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля "Принял МОЛ" */
-        if (inputReceiver.value?.length >= 100) {
+        if (inputReceiver.value && inputReceiver.value?.length >= 100) {
             updateInputReceiver((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -268,7 +268,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля "Выдал МОЛ*" */
-        if (inputSenderSection.value?.length >= 50) {
+        if (inputSenderSection.value && inputSenderSection.value?.length >= 50) {
             updateInputSenderSection((draft) => {
                 draft.errorField = true
                 draft.isNull = false
@@ -285,7 +285,7 @@ const CreateVznConsumption: React.FC = () => {
     useEffect(() => {
 
         /* Валидация поля Получатель */
-        if (inputReceiverSection.value?.length >= 50) {
+        if (inputReceiverSection.value && inputReceiverSection.value?.length >= 50) {
             updateInputReceiverSection((draft) => {
                 draft.errorField = true
                 draft.isNull = false
